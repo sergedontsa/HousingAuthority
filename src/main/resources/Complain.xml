@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Complain">
+        <table name="complain" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="complainid">
+                <column name="complainid" length="50"/>
+            </id>
+            <basic name="personid">
+                <column name="personid" length="50"/>
+            </basic>
+            <basic name="type">
+                <column name="type" length="50"/>
+            </basic>
+            <basic name="title">
+                <column name="title" length="50"/>
+            </basic>
+            <basic name="body">
+                <column name="body" length="500"/>
+            </basic>
+            <basic name="phonenumber">
+                <column name="phonenumber" length="20"/>
+            </basic>
+            <basic name="severity">
+                <column name="severity" length="20"/>
+            </basic>
+            <basic name="address">
+                <column name="address" length="200"/>
+            </basic>
+            <basic name="status">
+                <column name="status" length="20"/>
+            </basic>
+            <basic name="assignto">
+                <column name="assignto" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" length="50"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

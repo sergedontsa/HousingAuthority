@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Complaindone">
+        <table name="complaindone" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="confirmationid">
+                <column name="confirmationid" length="50"/>
+            </basic>
+            <basic name="timespend">
+                <column name="timespend" length="50"/>
+            </basic>
+            <basic name="cost">
+                <column name="cost" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" length="50"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Personinformation">
+        <table name="personinformation" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="dataid">
+                <column name="dataid" length="50"/>
+            </id>
+            <basic name="personid">
+                <column name="personid" length="50"/>
+            </basic>
+            <basic name="personstatus">
+                <column name="personstatus" length="50"/>
+            </basic>
+            <basic name="phonenumber">
+                <column name="phonenumber" length="50"/>
+            </basic>
+            <basic name="email">
+                <column name="email"/>
+            </basic>
+            <basic name="idtype">
+                <column name="idtype" length="50"/>
+            </basic>
+            <basic name="idnumber">
+                <column name="idnumber" length="50"/>
+            </basic>
+            <basic name="idissuedate">
+                <column name="idissuedate" length="50"/>
+            </basic>
+            <basic name="idexpireddate">
+                <column name="idexpireddate" length="50"/>
+            </basic>
+            <basic name="address">
+                <column name="address"/>
+            </basic>
+            <basic name="country">
+                <column name="country" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" length="50"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
