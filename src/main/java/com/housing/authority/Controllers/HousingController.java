@@ -301,6 +301,7 @@ public class HousingController {
         apartment.setApartmentID(ID_Utils.APARTMENT_ID());
         apartment.setRegisterdate(Constant.getCurrentDateAsString());
         apartment.setLastupdate(Constant.getCurrentDateAsString());
+        apartment.setStatus("Available");
         EntityModel<Apartment> entityModel = this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
         assert entityModel != null;
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -327,7 +328,7 @@ public class HousingController {
             Apartment existingApartment = this.apartmentTupleRepository.findById(id).get();
 
             existingApartment.setNumBedRoom(apartment.getNumBedRoom());
-            existingApartment.setBuildingId(apartment.getBuildingId());
+            existingApartment.setBuildingid(apartment.getBuildingid());
             existingApartment.setNumLivingRoom(apartment.getNumLivingRoom());
             existingApartment.setNumBathRoom(apartment.getNumBathRoom());
             existingApartment.setNumKitchen(apartment.getNumKitchen());
@@ -336,6 +337,11 @@ public class HousingController {
             existingApartment.setWithBath(apartment.isWithBath());
             existingApartment.setWithWaterBoiler(apartment.isWithWaterBoiler());
             existingApartment.setLastupdate(Constant.getCurrentDateAsString());
+            if (apartment.getStatus() == null){
+                existingApartment.setStatus("Available");
+            }else {
+                existingApartment.setStatus(apartment.getStatus());
+            }
 
             this.apartmentTupleRepository.save(existingApartment);
 

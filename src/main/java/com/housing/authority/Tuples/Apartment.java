@@ -45,10 +45,12 @@ public class Apartment implements Serializable {
     private boolean isWithBath;
     @Column(name = "iswithwaterboiler", nullable = false)
     private boolean isWithWaterBoiler;
+    @Column(name = "status")
+    private String status;
     @Column(name = "registerdate")
     private String registerdate;
     @Column(name = "buildingid")
-    private String buildingId;
+    private String buildingid;
     @Column(name = "lastupdate")
     private String lastupdate;
 
