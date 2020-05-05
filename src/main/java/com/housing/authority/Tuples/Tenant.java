@@ -1,6 +1,10 @@
 package com.housing.authority.Tuples;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -41,11 +45,17 @@ public class Tenant {
     @Column(name = "phonenumber", nullable = false, length = 50)
     private String phonenumber;
     @Basic
+    @Column(name = "price")
+    private String price;
+    @Basic
     @Column(name = "profession", nullable = false, length = 50)
     private String profession;
     @Basic
     @Column(name = "deposite", nullable = false, length = 50)
     private String deposite;
+    @Basic
+    @Column(name = "status")
+    private String status;
     @Basic
     @Column(name = "registerdate", nullable = true, length = 50)
     private String registerdate;
