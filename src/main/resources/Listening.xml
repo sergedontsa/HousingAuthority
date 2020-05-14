@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Listening">
+        <table name="listening" schema="housingauthority" catalog=""/>
+        <attributes>
+            <basic name="apartmentId">
+                <column name="apartmentId"/>
+            </basic>
+            <basic name="buildingid">
+                <column name="buildingid" length="50"/>
+            </basic>
+            <basic name="numBathRoom">
+                <column name="numBathRoom" precision="11"/>
+            </basic>
+            <basic name="numBedRoom">
+                <column name="numBedRoom" precision="11"/>
+            </basic>
+            <basic name="numCloset">
+                <column name="numCloset" precision="11"/>
+            </basic>
+            <basic name="numKitchen">
+                <column name="numKitchen" precision="11"/>
+            </basic>
+            <basic name="numLivingRoom">
+                <column name="numLivingRoom" precision="11"/>
+            </basic>
+            <basic name="numWindows">
+                <column name="numWindows" nullable="false" precision="11"/>
+            </basic>
+            <basic name="isWithBath">
+                <column name="isWithBath" precision="1"/>
+            </basic>
+            <basic name="isWithWaterBoiler">
+                <column name="isWithWaterBoiler" precision="1"/>
+            </basic>
+            <basic name="status">
+                <column name="status" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" nullable="false" length="50"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" nullable="false" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

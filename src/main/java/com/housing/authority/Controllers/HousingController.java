@@ -5,6 +5,7 @@ import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.ComplainDoneRepository;
 import com.housing.authority.Repository.ComplainRepository;
 import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.ListeningRepository;
 import com.housing.authority.Repository.TenantRepository;
 import com.housing.authority.Repository.UserRepository;
 import com.housing.authority.Resources.Constant;
@@ -14,6 +15,7 @@ import com.housing.authority.TupleAssembler.BuildingModelAssembler;
 import com.housing.authority.TupleAssembler.ComplainDoneModelAssembler;
 import com.housing.authority.TupleAssembler.ComplainModelAssembler;
 import com.housing.authority.TupleAssembler.EmployeeModelAssembler;
+import com.housing.authority.TupleAssembler.ListeningAssembler;
 import com.housing.authority.TupleAssembler.TenantModelAssembler;
 import com.housing.authority.TupleAssembler.UserModelAssembler;
 import com.housing.authority.Tuples.Apartment;
@@ -21,6 +23,7 @@ import com.housing.authority.Tuples.Building;
 import com.housing.authority.Tuples.Complain;
 import com.housing.authority.Tuples.Complaindone;
 import com.housing.authority.Tuples.Employees;
+import com.housing.authority.Tuples.Listening;
 import com.housing.authority.Tuples.Tenant;
 import com.housing.authority.Tuples.Users;
 import lombok.RequiredArgsConstructor;
@@ -65,6 +68,7 @@ public class HousingController {
     private final TenantRepository tenantRepository;
     private final ComplainRepository complainRepository;
     private final ComplainDoneRepository complainDoneRepository;
+    private final ListeningRepository listeningRepository;
     private final EmployeeModelAssembler employeeModelAssembler;
     private final BuildingModelAssembler buildingModelAssembler;
     private final UserModelAssembler userModelAssembler;
@@ -72,6 +76,7 @@ public class HousingController {
     private final TenantModelAssembler tenantModelAssembler;
     private final ComplainModelAssembler complainModelAssembler;
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
+    private final ListeningAssembler listeningAssembler;
 
 
     @GetMapping(value = Constant.EMPLOYEE_GET_ALL, produces = Constant.PRODUCE)
@@ -558,6 +563,27 @@ public class HousingController {
             Complain complain = this.complainRepository.findById(complainid).get();
             complain.setStatus(status);
             this.complainRepository.save(complain);
+        }
+    }
+
+    //listening
+    @GetMapping(value = Constant.LISTENING_GET_ALL, produces = Constant.PRODUCE)
+    @CrossOrigin
+    public CollectionModel<EntityModel<Listening>> readAllListening(){
+
+       List<EntityModel<Listening>> listening = this.listeningRepository.findAll().stream()
+               .map(this.listeningAssembler::toModel).collect(Collectors.toList());
+
+       return new CollectionModel<>(listening, linkTo(methodOn(HousingController.class).readAllListening()).withSelfRel());
+
+
+    }
+    @GetMapping(value = Constant.LISTENING_GET_WITH_ID, produces = Constant.PRODUCE)
+    public EntityModel<Listening> readOneListening(@PathVariable String id){
+        if (this.listeningRepository.findById(id).isPresent()){
+            return this.listeningAssembler.toModel(this.listeningRepository.findById(id).get());
+        }else {
+            return null;
         }
     }
 

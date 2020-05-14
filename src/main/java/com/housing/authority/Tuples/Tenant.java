@@ -3,7 +3,9 @@ package com.housing.authority.Tuples;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Basic;
@@ -17,6 +19,8 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Getter
+@Setter
 public class Tenant {
 
     @Id

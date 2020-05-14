@@ -34,6 +34,10 @@ public class Users implements Comparable {
     @Column(name = "password")
     private String password;
     @Basic
+    @Column(name = "role")
+    private String role;
+
+    @Basic
     @Column(name = "registerdate")
     private String registerDate;
     @Basic
