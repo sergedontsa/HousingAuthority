@@ -2,7 +2,7 @@ package com.housing.authority.Tuples;
 
 
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.Resources.ID_Utils;
+import com.housing.authority.Resources.IDGenerator;
 import lombok.Data;
 
 
@@ -45,10 +45,10 @@ public class Users implements Comparable {
     private String lastUpdate;
 
     public Users(){
-        this.userId = ID_Utils.USER_ID();
+        this.userId = IDGenerator.USER_ID();
     }
     public Users(String username, String email, String password){
-        this.userId = ID_Utils.USER_ID();
+        this.userId = IDGenerator.USER_ID();
         this.registerDate = Constant.getCurrentDateAsString();
         this.username = username;
         this.email = email;

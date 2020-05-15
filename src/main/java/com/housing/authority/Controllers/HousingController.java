@@ -9,7 +9,7 @@ import com.housing.authority.Repository.ListeningRepository;
 import com.housing.authority.Repository.TenantRepository;
 import com.housing.authority.Repository.UserRepository;
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.Resources.ID_Utils;
+import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
 import com.housing.authority.TupleAssembler.BuildingModelAssembler;
 import com.housing.authority.TupleAssembler.ComplainDoneModelAssembler;
@@ -105,7 +105,7 @@ public class HousingController {
     @PostMapping(value = Constant.EMPLOYEE_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> createEmployee(@RequestBody Employees newEmployee) {
-        newEmployee.setEmployeeId(ID_Utils.EMPLOYEE_ID());
+        newEmployee.setEmployeeId(IDGenerator.EMPLOYEE_ID());
         newEmployee.setRegisterDate(Constant.getCurrentDateAsString());
         newEmployee.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Employees> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(newEmployee));
@@ -167,7 +167,7 @@ public class HousingController {
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
     ResponseEntity<?> createBuilding(@RequestBody Building newBuilding){
-        newBuilding.setBuildingId(ID_Utils.BUILDING_ID());
+        newBuilding.setBuildingId(IDGenerator.BUILDING_ID());
         return ResponseEntity.created(this.buildingModelAssembler.toModel(this.buildingRepository.save(newBuilding))
                 .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(newBuilding);
 
@@ -303,7 +303,7 @@ public class HousingController {
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
     public ResponseEntity<?> createApartment(@RequestBody Apartment apartment){
-        apartment.setApartmentID(ID_Utils.APARTMENT_ID());
+        apartment.setApartmentID(IDGenerator.APARTMENT_ID());
         apartment.setRegisterdate(Constant.getCurrentDateAsString());
         apartment.setLastupdate(Constant.getCurrentDateAsString());
         apartment.setStatus("Available");
@@ -374,7 +374,7 @@ public class HousingController {
     @PostMapping(value = Constant.TENANT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> createTenant(@RequestBody Tenant tenant){
-        tenant.setTenantid(ID_Utils.TENANT_ID());
+        tenant.setTenantid(IDGenerator.TENANT_ID());
         tenant.setRegisterdate(Constant.getCurrentDateAsString());
         tenant.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Tenant> entityModel = this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant));
@@ -445,7 +445,7 @@ public class HousingController {
         complain.setRegisterdate(Constant.getCurrentDateAsString());
         complain.setLastupdate(Constant.getCurrentDateAsString());
         complain.setStatus("Under Review");
-        complain.setComplainid(ID_Utils.COMPLAIN_ID());
+        complain.setComplainid(IDGenerator.COMPLAIN_ID());
         EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(complain));
         assert entityModel != null;
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -517,7 +517,7 @@ public class HousingController {
     public ResponseEntity<?> createComplainDone(@RequestBody Complaindone complaindone){
 
         if (this.employeeRepository.findById(complaindone.getEmployeeid()).isPresent() && this.complainRepository.findById(complaindone.getComplainId()).isPresent()){
-            complaindone.setConfirmationid(ID_Utils.COMPLAIN_DONE_CONFIRMATION());
+            complaindone.setConfirmationid(IDGenerator.COMPLAIN_DONE_CONFIRMATION());
             complaindone.setRegisterdate(Constant.getCurrentDateAsString());
             complaindone.setLastupdate(Constant.getCurrentDateAsString());
             setComplainStatus("DONE", complaindone.getComplainId());
