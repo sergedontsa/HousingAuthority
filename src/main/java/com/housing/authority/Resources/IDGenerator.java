@@ -3,7 +3,7 @@ package com.housing.authority.Resources;
 import java.util.Calendar;
 import java.util.Random;
 
-public class ID_Utils {
+public class IDGenerator {
 
     public static  String COMPLAIN_ID(){
         try {

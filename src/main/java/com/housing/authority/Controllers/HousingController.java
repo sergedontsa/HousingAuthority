@@ -5,15 +5,17 @@ import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.ComplainDoneRepository;
 import com.housing.authority.Repository.ComplainRepository;
 import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.ListeningRepository;
 import com.housing.authority.Repository.TenantRepository;
 import com.housing.authority.Repository.UserRepository;
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.Resources.ID_Utils;
+import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
 import com.housing.authority.TupleAssembler.BuildingModelAssembler;
 import com.housing.authority.TupleAssembler.ComplainDoneModelAssembler;
 import com.housing.authority.TupleAssembler.ComplainModelAssembler;
 import com.housing.authority.TupleAssembler.EmployeeModelAssembler;
+import com.housing.authority.TupleAssembler.ListeningAssembler;
 import com.housing.authority.TupleAssembler.TenantModelAssembler;
 import com.housing.authority.TupleAssembler.UserModelAssembler;
 import com.housing.authority.Tuples.Apartment;
@@ -21,6 +23,7 @@ import com.housing.authority.Tuples.Building;
 import com.housing.authority.Tuples.Complain;
 import com.housing.authority.Tuples.Complaindone;
 import com.housing.authority.Tuples.Employees;
+import com.housing.authority.Tuples.Listening;
 import com.housing.authority.Tuples.Tenant;
 import com.housing.authority.Tuples.Users;
 import lombok.RequiredArgsConstructor;
@@ -65,6 +68,7 @@ public class HousingController {
     private final TenantRepository tenantRepository;
     private final ComplainRepository complainRepository;
     private final ComplainDoneRepository complainDoneRepository;
+    private final ListeningRepository listeningRepository;
     private final EmployeeModelAssembler employeeModelAssembler;
     private final BuildingModelAssembler buildingModelAssembler;
     private final UserModelAssembler userModelAssembler;
@@ -72,6 +76,7 @@ public class HousingController {
     private final TenantModelAssembler tenantModelAssembler;
     private final ComplainModelAssembler complainModelAssembler;
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
+    private final ListeningAssembler listeningAssembler;
 
 
     @GetMapping(value = Constant.EMPLOYEE_GET_ALL, produces = Constant.PRODUCE)
@@ -100,7 +105,7 @@ public class HousingController {
     @PostMapping(value = Constant.EMPLOYEE_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> createEmployee(@RequestBody Employees newEmployee) {
-        newEmployee.setEmployeeId(ID_Utils.EMPLOYEE_ID());
+        newEmployee.setEmployeeId(IDGenerator.EMPLOYEE_ID());
         newEmployee.setRegisterDate(Constant.getCurrentDateAsString());
         newEmployee.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Employees> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(newEmployee));
@@ -162,7 +167,7 @@ public class HousingController {
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
     ResponseEntity<?> createBuilding(@RequestBody Building newBuilding){
-        newBuilding.setBuildingId(ID_Utils.BUILDING_ID());
+        newBuilding.setBuildingId(IDGenerator.BUILDING_ID());
         return ResponseEntity.created(this.buildingModelAssembler.toModel(this.buildingRepository.save(newBuilding))
                 .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(newBuilding);
 
@@ -298,9 +303,10 @@ public class HousingController {
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
     public ResponseEntity<?> createApartment(@RequestBody Apartment apartment){
-        apartment.setApartmentID(ID_Utils.APARTMENT_ID());
+        apartment.setApartmentID(IDGenerator.APARTMENT_ID());
         apartment.setRegisterdate(Constant.getCurrentDateAsString());
         apartment.setLastupdate(Constant.getCurrentDateAsString());
+        apartment.setStatus("Available");
         EntityModel<Apartment> entityModel = this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
         assert entityModel != null;
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -327,7 +333,7 @@ public class HousingController {
             Apartment existingApartment = this.apartmentTupleRepository.findById(id).get();
 
             existingApartment.setNumBedRoom(apartment.getNumBedRoom());
-            existingApartment.setBuildingId(apartment.getBuildingId());
+            existingApartment.setBuildingid(apartment.getBuildingid());
             existingApartment.setNumLivingRoom(apartment.getNumLivingRoom());
             existingApartment.setNumBathRoom(apartment.getNumBathRoom());
             existingApartment.setNumKitchen(apartment.getNumKitchen());
@@ -336,6 +342,11 @@ public class HousingController {
             existingApartment.setWithBath(apartment.isWithBath());
             existingApartment.setWithWaterBoiler(apartment.isWithWaterBoiler());
             existingApartment.setLastupdate(Constant.getCurrentDateAsString());
+            if (apartment.getStatus() == null){
+                existingApartment.setStatus("Available");
+            }else {
+                existingApartment.setStatus(apartment.getStatus());
+            }
 
             this.apartmentTupleRepository.save(existingApartment);
 
@@ -363,7 +374,7 @@ public class HousingController {
     @PostMapping(value = Constant.TENANT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> createTenant(@RequestBody Tenant tenant){
-        tenant.setTenantid(ID_Utils.TENANT_ID());
+        tenant.setTenantid(IDGenerator.TENANT_ID());
         tenant.setRegisterdate(Constant.getCurrentDateAsString());
         tenant.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Tenant> entityModel = this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant));
@@ -434,7 +445,7 @@ public class HousingController {
         complain.setRegisterdate(Constant.getCurrentDateAsString());
         complain.setLastupdate(Constant.getCurrentDateAsString());
         complain.setStatus("Under Review");
-        complain.setComplainid(ID_Utils.COMPLAIN_ID());
+        complain.setComplainid(IDGenerator.COMPLAIN_ID());
         EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(complain));
         assert entityModel != null;
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -506,7 +517,7 @@ public class HousingController {
     public ResponseEntity<?> createComplainDone(@RequestBody Complaindone complaindone){
 
         if (this.employeeRepository.findById(complaindone.getEmployeeid()).isPresent() && this.complainRepository.findById(complaindone.getComplainId()).isPresent()){
-            complaindone.setConfirmationid(ID_Utils.COMPLAIN_DONE_CONFIRMATION());
+            complaindone.setConfirmationid(IDGenerator.COMPLAIN_DONE_CONFIRMATION());
             complaindone.setRegisterdate(Constant.getCurrentDateAsString());
             complaindone.setLastupdate(Constant.getCurrentDateAsString());
             setComplainStatus("DONE", complaindone.getComplainId());
@@ -552,6 +563,27 @@ public class HousingController {
             Complain complain = this.complainRepository.findById(complainid).get();
             complain.setStatus(status);
             this.complainRepository.save(complain);
+        }
+    }
+
+    //listening
+    @GetMapping(value = Constant.LISTENING_GET_ALL, produces = Constant.PRODUCE)
+    @CrossOrigin
+    public CollectionModel<EntityModel<Listening>> readAllListening(){
+
+       List<EntityModel<Listening>> listening = this.listeningRepository.findAll().stream()
+               .map(this.listeningAssembler::toModel).collect(Collectors.toList());
+
+       return new CollectionModel<>(listening, linkTo(methodOn(HousingController.class).readAllListening()).withSelfRel());
+
+
+    }
+    @GetMapping(value = Constant.LISTENING_GET_WITH_ID, produces = Constant.PRODUCE)
+    public EntityModel<Listening> readOneListening(@PathVariable String id){
+        if (this.listeningRepository.findById(id).isPresent()){
+            return this.listeningAssembler.toModel(this.listeningRepository.findById(id).get());
+        }else {
+            return null;
         }
     }
 

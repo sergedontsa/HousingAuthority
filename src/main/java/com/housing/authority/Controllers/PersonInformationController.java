@@ -2,7 +2,7 @@ package com.housing.authority.Controllers;
 
 import com.housing.authority.Repository.PersonInformationRepository;
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.Resources.ID_Utils;
+import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.PersonInformationModelAssembler;
 import com.housing.authority.Tuples.Personinformation;
 import lombok.RequiredArgsConstructor;
@@ -88,7 +88,7 @@ public class PersonInformationController {
     @PostMapping(value = Constant.PERSONAL_INFORMATION_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> createRecord(@RequestBody Personinformation personinformation){
-        personinformation.setDataid(ID_Utils.RECORD_ID());
+        personinformation.setDataid(IDGenerator.RECORD_ID());
         personinformation.setRegisterdate(Constant.getCurrentDateAsString());
         personinformation.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Personinformation> entityModel = this.personInformationModelAssembler.toModel(this.personInformationRepository.save(personinformation));
