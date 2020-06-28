@@ -22,7 +22,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString
 @DynamicUpdate
-public class Complain implements Serializable {
+public class Complain implements Comparable, Serializable {
     @Id
     @Column(name = "complainid", nullable = false, length = 50)
     private String complainid;
@@ -60,4 +60,8 @@ public class Complain implements Serializable {
     @Column(name = "lastupdate", nullable = false, length = 50)
     private String lastupdate;
 
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }
