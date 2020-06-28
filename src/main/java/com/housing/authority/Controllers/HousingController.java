@@ -26,6 +26,7 @@ import com.housing.authority.Tuples.Employees;
 import com.housing.authority.Tuples.Listening;
 import com.housing.authority.Tuples.Tenant;
 import com.housing.authority.Tuples.Users;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
@@ -77,6 +78,11 @@ public class HousingController {
     private final ComplainModelAssembler complainModelAssembler;
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
     private final ListeningAssembler listeningAssembler;
+
+
+    public double add(double a, double b){
+        return a+b;
+    }
 
 
     @GetMapping(value = Constant.EMPLOYEE_GET_ALL, produces = Constant.PRODUCE)
