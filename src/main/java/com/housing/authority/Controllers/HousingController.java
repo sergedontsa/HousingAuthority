@@ -79,12 +79,6 @@ public class HousingController {
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
     private final ListeningAssembler listeningAssembler;
 
-
-    public double add(double a, double b){
-        return a+b;
-    }
-
-
     @GetMapping(value = Constant.EMPLOYEE_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Employees>> readAllEmployees(){
