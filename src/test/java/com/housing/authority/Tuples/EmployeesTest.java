@@ -3,14 +3,16 @@ package com.housing.authority.Tuples;
 import com.housing.authority.Repository.EmployeeRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
-import org.junit.jupiter.api.*;
+import com.housing.authority.Services.Service;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class EmployeesTest {
+class EmployeesTest implements Service {
+
     private String employeeIdForTest;
     private String employeeIDForCreate;
     private String firstName;
@@ -29,7 +32,6 @@ class EmployeesTest {
     private String status;
     private String registerDate;
     private String lastUpdate;
-
 
     @BeforeEach
     void init(){
@@ -47,29 +49,29 @@ class EmployeesTest {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @Test
+    @Override
     @Order(1)
-    void readAllEmployeesTest(){
+    @Test
+    public void readAllTest() {
         List<Employees> employeesList = this.employeeRepository.findAll();
         assertThat(employeesList).size().isGreaterThan(0);
-        //print all employees
-        for (Employees employees : employeesList) {
-            System.out.println(employees);
-        }
+
     }
-    @Test
+
+    @Override
     @Order(2)
-    void readOneEmployee(){
+    @Test
+    public void readOneTest() {
         boolean employeeIsPresent = this.employeeRepository.findById(this.employeeIdForTest).isPresent();
         assertTrue(employeeIsPresent);
         Employees existingEmployees = this.employeeRepository.findById(this.employeeIdForTest).get();
         assertNotNull(existingEmployees);
     }
 
-    @Test
-    @Rollback(true)
+    @Override
     @Order(3)
-    void createEmployee(){
+    @Test
+    public void createTest() {
         Employees employees = new Employees();
         assertNotNull(this.employeeIDForCreate);
         employees.setEmployeeId(this.employeeIDForCreate);
@@ -83,8 +85,11 @@ class EmployeesTest {
         Employees newEmployee = this.employeeRepository.save(employees);
         assertNotNull(newEmployee);
     }
+
+    @Override
+    @Order(4)
     @Test
-    void updateEmployee(){
+    public void updateTest() {
         Employees existingEmployee = this.employeeRepository.getOne(this.employeeIdForTest);
         assertNotNull(existingEmployee);
         assertNotEquals(existingEmployee.getFirstName(), this.firstName);
@@ -104,9 +109,21 @@ class EmployeesTest {
         existingEmployee.setLastupdate(this.lastUpdate);
         Employees updatedEmployee = this.employeeRepository.save(existingEmployee);
         assertNotNull(updatedEmployee);
-
-
-
     }
 
+    @Override
+    @Order(5)
+    @Test
+    public void deleteTest() {
+        boolean isPresent = this.employeeRepository.findById(this.employeeIdForTest).isPresent();
+        if (isPresent){
+            assertTrue(isPresent);
+            this.employeeRepository.delete(this.employeeRepository.findById(this.employeeIdForTest).get());
+            boolean isAbsent = this.employeeRepository.findById(this.employeeIdForTest).isPresent();
+            assertFalse(isAbsent);
+        }else {
+            assertFalse(isPresent);
+            fail("Could not find the entity to test");
+        }
+    }
 }
