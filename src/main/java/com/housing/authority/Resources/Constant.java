@@ -3,7 +3,9 @@ package com.housing.authority.Resources;
 import java.util.Calendar;
 
 /**
- *
+ * This class provide all implemented endpoint
+ * By: Serge Dontsa
+ * Montreal, Canada
  */
 
 public class Constant {
