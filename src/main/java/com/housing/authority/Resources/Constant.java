@@ -31,7 +31,7 @@ public class Constant {
     //Employee
     public final static String EMPLOYEE_CONTROLLER = "/housing/authority/v1/employee";
     public final static String EMPLOYEE_GET_ALL = "/all";
-    public final static String EMPLOYEE_GET_WITH_ID = "/{id}";
+    public final static String EMPLOYEE_GET_WITH_ID = "get/{id}";
     public final static String EMPLOYEE_DELETE_WITH_ID = "/delete/{id}";
     public final static String EMPLOYEE_UPDATE_WITH_ID = "/update/{id}";
     public final static String EMPLOYEE_SAVE = "/save";
@@ -39,7 +39,7 @@ public class Constant {
     //Building
     public final static String BUILDING_CONTROLLER = "/housing/authority/v1/building";
     public final static String BUILDING_GET_ALL = "/all";
-    public final static String BUILDING_GET_WITH_ID = "/{id}";
+    public final static String BUILDING_GET_WITH_ID = "get/{id}";
     public final static String BUILDING_DELETE_WITH_ID = "/delete/{id}";
     public final static String BUILDING_UPDATE_WITH_ID = "/update/{id}";
     public final static String BUILDING_SAVE = "/save";
@@ -47,31 +47,34 @@ public class Constant {
     //Users
     public final static String USER_CONTROLLER = "/housing/authority/v1/user";
     public final static String USER_GET_ALL = "/all";
-    public final static String USER_GET_WITH_ID = "/{id}";
+    public final static String USER_GET_WITH_ID = "get/{id}";
     public final static String USER_DELETE_WITH_ID = "/delete/{id}";
     public final static String USER_UPDATE_WITH_ID = "/update/{id}";
     public final static String USER_SAVE = "/save";
 
     //Apartment
-    public final static String APARTMENT_GET_ALL = "apartment/all";
-    public final static String APARTMENT_GET_WITH_ID = "apartment/{id}";
-    public final static String APARTMENT_DELETE_WITH_ID = "apartment/delete/{id}";
-    public final static String APARTMENT_UPDATE_WITH_ID = "apartment/update/{id}";
-    public final static String APARTMENT_SAVE = "apartment/save";
+    public final static String APARTMENT_CONTROLLER = "/housing/authority/v1/apartment";
+    public final static String APARTMENT_GET_ALL = "/all";
+    public final static String APARTMENT_GET_WITH_ID = "/{id}";
+    public final static String APARTMENT_DELETE_WITH_ID = "/delete/{id}";
+    public final static String APARTMENT_UPDATE_WITH_ID = "/update/{id}";
+    public final static String APARTMENT_SAVE = "/save";
 
-    //Lender
-    public final static String TENANT_GET_ALL = "tenant/all";
-    public final static String TENANT_GET_WITH_ID = "tenant/{id}";
-    public final static String TENANT_DELETE_WITH_ID = "tenant/delete/{id}";
-    public final static String TENANT_UPDATE_WITH_ID = "tenant/update/{id}";
-    public final static String TENANT_SAVE = "tenant/save";
+    //Tenant
+    public final static String TENANT_CONTROLLER = "/housing/authority/v1/tenant";
+    public final static String TENANT_GET_ALL = "/all";
+    public final static String TENANT_GET_WITH_ID = "/{id}";
+    public final static String TENANT_DELETE_WITH_ID = "/delete/{id}";
+    public final static String TENANT_UPDATE_WITH_ID = "/update/{id}";
+    public final static String TENANT_SAVE = "/save";
 
     //Complain
-    public final static String COMPLAIN_GET_ALL = "complain/all";
-    public final static String COMPLAIN_GET_WITH_ID = "complain/{id}";
-    public final static String COMPLAIN_DELETE_WITH_ID = "complain/delete/{id}";
-    public final static String COMPLAIN_UPDATE_WITH_ID = "complain/update/{id}";
-    public final static String COMPLAIN_SAVE = "complain/save";
+    public final static String COMPLAIN_CONTROLLER = "/housing/authority/v1/complain";
+    public final static String COMPLAIN_GET_ALL = "/all";
+    public final static String COMPLAIN_GET_WITH_ID = "get/{id}";
+    public final static String COMPLAIN_DELETE_WITH_ID = "/delete/{id}";
+    public final static String COMPLAIN_UPDATE_WITH_ID = "/update/{id}";
+    public final static String COMPLAIN_SAVE = "/save";
 
     //Complain Done
     public final static String COMPLAIN_DONE_GET_ALL = "complaindone/all";
