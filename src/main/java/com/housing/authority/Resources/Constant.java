@@ -45,11 +45,12 @@ public class Constant {
     public final static String BUILDING_SAVE = "/save";
 
     //Users
-    public final static String USER_GET_ALL = "user/all";
-    public final static String USER_GET_WITH_ID = "user/{id}";
-    public final static String USER_DELETE_WITH_ID = "user/delete/{id}";
-    public final static String USER_UPDATE_WITH_ID = "user/update";
-    public final static String USER_SAVE = "user/save";
+    public final static String USER_CONTROLLER = "/housing/authority/v1/user";
+    public final static String USER_GET_ALL = "/all";
+    public final static String USER_GET_WITH_ID = "/{id}";
+    public final static String USER_DELETE_WITH_ID = "/delete/{id}";
+    public final static String USER_UPDATE_WITH_ID = "/update/{id}";
+    public final static String USER_SAVE = "/save";
 
     //Apartment
     public final static String APARTMENT_GET_ALL = "apartment/all";

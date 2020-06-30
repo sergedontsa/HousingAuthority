@@ -1,6 +1,6 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.HousingController;
+import com.housing.authority.Controllers.UsersController;
 import com.housing.authority.Tuples.Users;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -17,8 +17,8 @@ public class UserModelAssembler implements RepresentationModelAssembler<Users, E
     @Override
     public EntityModel<Users> toModel(Users entity) {
         return new EntityModel<>(entity,
-                linkTo(methodOn(HousingController.class).readOneUser(entity.getUserId())).withSelfRel(),
-                linkTo(methodOn(HousingController.class).readAllUsers()).withRel("users"));
+                linkTo(methodOn(UsersController.class).readOne(entity.getUserId())).withSelfRel(),
+                linkTo(methodOn(UsersController.class).readAll()).withRel("users"));
     }
 
     @Override

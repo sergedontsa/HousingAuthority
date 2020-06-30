@@ -79,66 +79,6 @@ public class HousingController {
     private final ListeningAssembler listeningAssembler;
 
 
-//    ----------------USERS--------
-    @GetMapping(value = Constant.USER_GET_ALL, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public CollectionModel<EntityModel<Users>> readAllUsers(){
-        List<EntityModel<Users>> users = this.userRepository.findAll().stream().map(this.userModelAssembler::toModel)
-                .collect(Collectors.toList());
-       return new CollectionModel<>(users, linkTo(methodOn(HousingController.class).readAllUsers()).withSelfRel());
-    }
-    @GetMapping(value = Constant.USER_GET_WITH_ID, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public EntityModel<Users> readOneUser(@PathVariable String id){
-
-        if(this.userRepository.findById(id).isPresent()) {
-           return this.userModelAssembler.toModel(this.userRepository.findById(id).get());
-        }else {
-            return null;
-        }
-    }
-
-    @PostMapping(value = Constant.USER_SAVE, consumes = Constant.CONSUMES)
-    @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin
-    public ResponseEntity<?> createUser(@RequestBody Users newUser){
-        if (!this.userRepository.isUserExist(newUser.getUsername(), newUser.getEmail(), newUser.getPhonenumber())) {
-            EntityModel<Users> entityModel = null;
-            BCryptPasswordEncoder hasPasswordProvider = new BCryptPasswordEncoder();
-            newUser.setPassword(hasPasswordProvider.encode(newUser.getPassword()));
-            newUser.setLastUpdate(Constant.getCurrentDateAsString());
-            newUser.setRegisterDate(Constant.getCurrentDateAsString());
-            entityModel = this.userModelAssembler.toModel(this.userRepository.save(newUser));
-            assert entityModel != null;
-            return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-        }else {
-            return null;
-        }
-    }
-
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @DeleteMapping(value = Constant.USER_DELETE_WITH_ID)
-    @CrossOrigin
-    public HttpStatus deleteUser(@PathVariable String id){
-        if(this.userRepository.findById(id).isPresent()) {
-            this.userRepository.delete(this.userRepository.findById(id).get());
-            return HttpStatus.OK;
-        }else {
-            return HttpStatus.NOT_FOUND;
-        }
-
-    }
-    @PatchMapping(path = Constant.USER_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
-    @ResponseStatus(code = HttpStatus.OK)
-    @CrossOrigin
-    public void updateUser(@RequestBody Users users){
-        users.setLastUpdate(Constant.getCurrentDateAsString());
-        if(this.userRepository.findById(users.getUserId()).isPresent()) {
-
-            this.userRepository.save(users);
-        }
-
-    }
 
     //-------------------------------APARTMENT
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
