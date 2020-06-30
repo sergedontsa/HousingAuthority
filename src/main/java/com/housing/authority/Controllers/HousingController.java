@@ -1,13 +1,6 @@
 package com.housing.authority.Controllers;
 
-import com.housing.authority.Repository.ApartmentRepository;
-import com.housing.authority.Repository.BuildingRepository;
-import com.housing.authority.Repository.ComplainDoneRepository;
-import com.housing.authority.Repository.ComplainRepository;
-import com.housing.authority.Repository.EmployeeRepository;
-import com.housing.authority.Repository.ListeningRepository;
-import com.housing.authority.Repository.TenantRepository;
-import com.housing.authority.Repository.UserRepository;
+import com.housing.authority.Repository.*;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
@@ -18,24 +11,16 @@ import com.housing.authority.TupleAssembler.EmployeeModelAssembler;
 import com.housing.authority.TupleAssembler.ListeningAssembler;
 import com.housing.authority.TupleAssembler.TenantModelAssembler;
 import com.housing.authority.TupleAssembler.UserModelAssembler;
-import com.housing.authority.Tuples.Apartment;
-import com.housing.authority.Tuples.Building;
 import com.housing.authority.Tuples.Complain;
 import com.housing.authority.Tuples.Complaindone;
-import com.housing.authority.Tuples.Employees;
 import com.housing.authority.Tuples.Listening;
-import com.housing.authority.Tuples.Tenant;
-import com.housing.authority.Tuples.Users;
 import lombok.RequiredArgsConstructor;
-
-
 import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,149 +63,6 @@ public class HousingController {
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
     private final ListeningAssembler listeningAssembler;
 
-
-
-    //-------------------------------APARTMENT
-    @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public CollectionModel<EntityModel<Apartment>> readAllApartment(){
-        List<EntityModel<Apartment>> apartments = this.apartmentTupleRepository.findAll().stream().map(this.apartmentModelAssembler::toModel)
-                .collect(Collectors.toList());
-        return new CollectionModel<>(apartments, linkTo(methodOn(HousingController.class).readAllApartment()).withSelfRel());
-    }
-
-    @GetMapping(value = Constant.APARTMENT_GET_WITH_ID, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public EntityModel<Apartment> readOneApartment(@PathVariable String id){
-
-        if (this.apartmentTupleRepository.findById(id).isPresent()) {
-            return this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.findById(id).get());
-        }else {
-            return null;
-        }
-    }
-    @PostMapping(value = Constant.APARTMENT_SAVE, consumes = Constant.CONSUMES)
-    @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin
-    public ResponseEntity<?> createApartment(@RequestBody Apartment apartment){
-        apartment.setApartmentID(IDGenerator.APARTMENT_ID());
-        apartment.setRegisterdate(Constant.getCurrentDateAsString());
-        apartment.setLastupdate(Constant.getCurrentDateAsString());
-        apartment.setStatus("Available");
-        EntityModel<Apartment> entityModel = this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
-        assert entityModel != null;
-        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-
-    }
-    @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID)
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @CrossOrigin
-    public HttpStatus deleteApartment(@PathVariable String id){
-        if (this.apartmentTupleRepository.findById(id).isPresent()){
-            this.apartmentTupleRepository.delete(this.apartmentTupleRepository.findById(id).get());
-            return HttpStatus.OK;
-        }else {
-            return HttpStatus.NOT_FOUND;
-        }
-
-    }
-    @PatchMapping(path = Constant.APARTMENT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
-    @ResponseStatus(code = HttpStatus.OK)
-    @CrossOrigin
-    public void updateApartment(@PathVariable String id, @RequestBody Apartment apartment){
-        if (this.apartmentTupleRepository.findById(id).isPresent()){
-
-            Apartment existingApartment = this.apartmentTupleRepository.findById(id).get();
-
-            existingApartment.setNumBedRoom(apartment.getNumBedRoom());
-            existingApartment.setBuildingid(apartment.getBuildingid());
-            existingApartment.setNumLivingRoom(apartment.getNumLivingRoom());
-            existingApartment.setNumBathRoom(apartment.getNumBathRoom());
-            existingApartment.setNumKitchen(apartment.getNumKitchen());
-            existingApartment.setNumCloset(apartment.getNumCloset());
-            existingApartment.setNumWindows(apartment.getNumWindows());
-            existingApartment.setWithBath(apartment.isWithBath());
-            existingApartment.setWithWaterBoiler(apartment.isWithWaterBoiler());
-            existingApartment.setLastupdate(Constant.getCurrentDateAsString());
-            if (apartment.getStatus() == null){
-                existingApartment.setStatus("Available");
-            }else {
-                existingApartment.setStatus(apartment.getStatus());
-            }
-
-            this.apartmentTupleRepository.save(existingApartment);
-
-
-        }
-    }
-//.................................TENANT
-    @GetMapping(value = Constant.TENANT_GET_ALL, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public CollectionModel<EntityModel<Tenant>> readAllTenant(){
-        List<EntityModel<Tenant>> tenants = this.tenantRepository.findAll().stream()
-                .map(this.tenantModelAssembler::toModel).collect(Collectors.toList());
-        return new CollectionModel<>(tenants, linkTo(methodOn(HousingController.class).readAllTenant()).withSelfRel());
-    }
-
-    @GetMapping(value = Constant.TENANT_GET_WITH_ID, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public Object readOneTenant(@PathVariable String id){
-        if (this.tenantRepository.findById(id).isPresent()){
-            return this.tenantModelAssembler.toModel(this.tenantRepository.findById(id).get());
-        }else {
-            return HttpStatus.NOT_FOUND;
-        }
-    }
-    @PostMapping(value = Constant.TENANT_SAVE, consumes = Constant.CONSUMES)
-    @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<?> createTenant(@RequestBody Tenant tenant){
-        tenant.setTenantid(IDGenerator.TENANT_ID());
-        tenant.setRegisterdate(Constant.getCurrentDateAsString());
-        tenant.setLastupdate(Constant.getCurrentDateAsString());
-        EntityModel<Tenant> entityModel = this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant));
-        return ResponseEntity.created(this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant)).getRequiredLink(IanaLinkRelations.SELF)
-        .toUri()).body(entityModel);
-    }
-    @DeleteMapping(value = Constant.TENANT_DELETE_WITH_ID)
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @CrossOrigin
-    public HttpStatus deleteTenant(@PathVariable String id){
-        if (this.tenantRepository.findById(id).isPresent()){
-            this.tenantRepository.delete(this.tenantRepository.findById(id).get());
-            return HttpStatus.OK;
-        }else {
-            return HttpStatus.NOT_FOUND;
-        }
-    }
-
-    @PatchMapping(path = Constant.TENANT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
-    @ResponseStatus(code = HttpStatus.OK)
-    @CrossOrigin
-    public HttpStatus updateTenant(@PathVariable String id, @RequestBody Tenant tenant){
-        if (this.tenantRepository.findById(id).isPresent()){
-
-            if (!this.buildingRepository.findById(tenant.getBuildingid()).isPresent() || !this.apartmentTupleRepository.findById(tenant.getApartmentid()).isPresent()){
-                return HttpStatus.NOT_FOUND;
-            }else {
-                Tenant existingTenant = this.tenantRepository.findById(id).get();
-                existingTenant.setApartmentid(tenant.getApartmentid());
-                existingTenant.setBuildingid(tenant.getBuildingid());
-                existingTenant.setFirstname(tenant.getFirstname());
-                existingTenant.setMiddlename(tenant.getMiddlename());
-                existingTenant.setLastname(tenant.getLastname());
-                existingTenant.setEmail(tenant.getEmail());
-                existingTenant.setPhonenumber(tenant.getPhonenumber());
-                existingTenant.setProfession(tenant.getProfession());
-                existingTenant.setDeposite(tenant.getDeposite());
-                existingTenant.setLastupdate(Constant.getCurrentDateAsString());
-                this.tenantRepository.save(existingTenant);
-                return HttpStatus.OK;
-            }
-
-        }else {
-            return HttpStatus.NOT_FOUND;
-        }
-   }
     //.................................COMPLAIN
     @GetMapping(value = Constant.COMPLAIN_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
