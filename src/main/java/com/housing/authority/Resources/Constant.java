@@ -15,6 +15,9 @@ public class Constant {
     public static final String EMAIL_API_KEY = "4379295234684f1cf23543d6d288ba3";
     public static final String EMAIL_API_SECURITY_KEY = "3a0c7b17780f4cd6f22d0cd114205326";
 
+    public static final String GMAIL_CLIENT_ID = "718352573405-4s729kdebhdujddv3pjd693tte0klq5l.apps.googleusercontent.com";
+    public static final String CLIENT_SECRET = "uOE_p0Eihp2QkyWkVNcb_Yib";
+
     //get current date as String
     public static String getCurrentDateAsString(){
         return    String.valueOf(Calendar.getInstance().getTime());
@@ -26,18 +29,20 @@ public class Constant {
     public final static String PRODUCE = "application/json";
 
     //Employee
-    public final static String EMPLOYEE_GET_ALL = "employee/all";
-    public final static String EMPLOYEE_GET_WITH_ID = "employee/{id}";
-    public final static String EMPLOYEE_DELETE_WITH_ID = "employee/delete/{id}";
-    public final static String EMPLOYEE_UPDATE_WITH_ID = "employee/update/{id}";
-    public final static String EMPLOYEE_SAVE = "employee/save";
+    public final static String EMPLOYEE_CONTROLLER = "/housing/authority/v1/employee";
+    public final static String EMPLOYEE_GET_ALL = "/all";
+    public final static String EMPLOYEE_GET_WITH_ID = "/{id}";
+    public final static String EMPLOYEE_DELETE_WITH_ID = "/delete/{id}";
+    public final static String EMPLOYEE_UPDATE_WITH_ID = "/update/{id}";
+    public final static String EMPLOYEE_SAVE = "/save";
 
     //Building
-    public final static String BUILDING_GET_ALL = "building/all";
-    public final static String BUILDING_GET_WITH_ID = "building/{id}";
-    public final static String BUILDING_DELETE_WITH_ID = "building/delete/{id}";
-    public final static String BUILDING_UPDATE_WITH_ID = "building/update/{id}";
-    public final static String BUILDING_SAVE = "building/save";
+    public final static String BUILDING_CONTROLLER = "/housing/authority/v1/building";
+    public final static String BUILDING_GET_ALL = "/all";
+    public final static String BUILDING_GET_WITH_ID = "/{id}";
+    public final static String BUILDING_DELETE_WITH_ID = "/delete/{id}";
+    public final static String BUILDING_UPDATE_WITH_ID = "/update/{id}";
+    public final static String BUILDING_SAVE = "/save";
 
     //Users
     public final static String USER_GET_ALL = "user/all";
@@ -87,4 +92,9 @@ public class Constant {
     public final static String LISTENING_DELETE_WITH_ID = "listening/delete/{id}";
     public final static String LISTENING_UPDATE_WITH_ID = "listening/update/{id}";
 
+    //Subscriber
+    public final static String SUBSCRIBER_GET_ALL = "subscriber/all";
+    public final static String SUBSCRIBER_GET_WITH_ID = "subscriber/{id}";
+    public final static String SUBSCRIBER_DELETE_WITH_ID = "subscriber/delete/{id}";
+    public final static String SUBSCRIBER_UPDATE_WITH_ID = "subscriber/update/{id}";
 }

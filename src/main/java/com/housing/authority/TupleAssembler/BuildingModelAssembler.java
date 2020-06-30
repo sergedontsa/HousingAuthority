@@ -1,5 +1,6 @@
 package com.housing.authority.TupleAssembler;
 
+import com.housing.authority.Controllers.BuildingController;
 import com.housing.authority.Controllers.HousingController;
 import com.housing.authority.Tuples.Building;
 import org.springframework.hateoas.CollectionModel;
@@ -15,8 +16,8 @@ public class BuildingModelAssembler implements RepresentationModelAssembler<Buil
     @Override
     public EntityModel<Building> toModel(Building building) {
         return new EntityModel<>(building,
-                linkTo(methodOn(HousingController.class).readOneBuilding(building.getBuildingId())).withSelfRel(),
-                linkTo(methodOn(HousingController.class).readAllBuilding()).withRel("buildings")
+                linkTo(methodOn(BuildingController.class).readOne(building.getBuildingId())).withSelfRel(),
+                linkTo(methodOn(BuildingController.class).readAll()).withRel("buildings")
                 );
     }
 
