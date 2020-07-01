@@ -10,6 +10,10 @@ import java.util.Calendar;
 
 public class Constant {
 
+    //SendGrid
+    public static final String emailApi = "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";
+
+
     public static final int REGULAR_USER_ROLE_CODE = 1;
     public static final int ADMINISTRATOR_ROLE_CODE = 1;
     public static final String EMAIL_API_KEY = "4379295234684f1cf23543d6d288ba3";

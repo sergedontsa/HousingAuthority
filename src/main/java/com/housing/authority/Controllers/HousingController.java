@@ -14,6 +14,13 @@ import com.housing.authority.TupleAssembler.UserModelAssembler;
 import com.housing.authority.Tuples.Complain;
 import com.housing.authority.Tuples.Complaindone;
 import com.housing.authority.Tuples.Listening;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.CollectionModel;
@@ -32,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +70,31 @@ public class HousingController {
     private final ComplainModelAssembler complainModelAssembler;
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
     private final ListeningAssembler listeningAssembler;
+
+    @CrossOrigin
+    @GetMapping(value = "/email")
+    public static void sendEmail(){
+        //need to fix the domaine email
+        Email from = new Email("dontsa00serge@gmail.com");
+        String subject = "Sending with Twilio SendGrid is fun";
+        Email to = new Email("dontsaserge@gmail.com");
+        Content content = new Content("text/plain", "and easy to do anywhere even with java");
+        Mail mail = new Mail(from, subject, to, content);
+        SendGrid sendGrid = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+        Request request = new Request();
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sendGrid.api(request);
+            System.out.println("+ "+response.getStatusCode());
+            System.out.println("+ "+response.getBody());
+            System.out.println("+ "+response.getHeaders());
+
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
 
     //.................................COMPLAIN
     @GetMapping(value = Constant.COMPLAIN_GET_ALL, produces = Constant.PRODUCE)
