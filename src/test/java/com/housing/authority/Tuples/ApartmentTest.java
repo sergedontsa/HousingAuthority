@@ -56,7 +56,7 @@ class ApartmentTest implements Service {
         this.isWithWaterBoiler = true;
         this.status = "Avail Test";
         this.registerDate = Constant.getCurrentDateAsString();
-        this.registerDate = Constant.getCurrentDateAsString();
+        this.lastUpdate = Constant.getCurrentDateAsString();
     }
     @Autowired
     ApartmentRepository apartmentRepository;

@@ -39,6 +39,10 @@ public class Subscriber {
     private String lastupdate;
 
 
-
-
+    public Subscriber(String name, String email, String registerDate, String lastUpdate) {
+        this.name = name;
+        this.email = email;
+        this.registerdate = registerDate;
+        this.lastupdate = lastUpdate;
+    }
 }
