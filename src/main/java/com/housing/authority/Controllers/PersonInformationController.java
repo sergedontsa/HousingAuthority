@@ -1,6 +1,7 @@
 package com.housing.authority.Controllers;
 
 import com.housing.authority.Repository.PersonInformationRepository;
+import com.housing.authority.Repository.ServiceController;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.PersonInformationModelAssembler;
@@ -31,40 +32,57 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = Constant.HOUSING_CONTROLLER)
-public class PersonInformationController {
+public class PersonInformationController implements ServiceController<Personinformation> {
     private final PersonInformationRepository personInformationRepository;
     private final PersonInformationModelAssembler personInformationModelAssembler;
 
     @GetMapping(value = Constant.PERSONAL_INFORMATION_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
-    public CollectionModel<EntityModel<Personinformation>> readAllRecord(){
-        List<EntityModel<Personinformation>> personalInformation = this.personInformationRepository.findAll().stream().map(
-                this.personInformationModelAssembler::toModel).collect(Collectors.toList());
-
-        return new CollectionModel<>(personalInformation, linkTo(methodOn(PersonInformationController.class).readAllRecord()).withSelfRel());
+    @Override
+    public CollectionModel<EntityModel<Personinformation>> readAll(){
+       List<EntityModel<Personinformation>> personInformations = this.personInformationRepository.findAll().stream()
+               .map(this.personInformationModelAssembler::toModel)
+               .collect(Collectors.toList());
+       return new CollectionModel<>(personInformations, linkTo(methodOn(PersonInformationController.class).readAll()).withSelfRel());
     }
 
+    @Override
     @GetMapping(value = Constant.PERSONAL_INFORMATION_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
-    public EntityModel<?> readOneRecord(@PathVariable String id) {
+    public EntityModel<Personinformation> readOne(@PathVariable String id) {
         if (this.personInformationRepository.findById(id).isPresent()){
             return this.personInformationModelAssembler.toModel(this.personInformationRepository.findById(id).get());
         }else {
             return null;
         }
     }
+
+    /**
+     * In case the entity is referred with the id with type integer
+     * Return the entity with id if found in the  server
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    public EntityModel<Personinformation> readOne(int id) {
+        return null;
+    }
+
+    @Override
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.PERSONAL_INFORMATION_DELETE_WITH_ID)
     @CrossOrigin
-    public void deleteRecord(@PathVariable String id){
+    public void delete(@PathVariable String id){
         if (this.personInformationRepository.findById(id).isPresent()){
             this.personInformationRepository.delete(this.personInformationRepository.findById(id).get());
         }
     }
+    @Override
     @PatchMapping(path = Constant.PERSONAL_INFORMATION_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
-    public Object updateRecord(@PathVariable String id, @RequestBody Personinformation personinformation){
+    public Object update(@PathVariable String id, @RequestBody Personinformation personinformation){
         if (this.personInformationRepository.findById(id).isPresent()){
             Personinformation existingRecord = this.personInformationRepository.findById(id).get();
             existingRecord.setPersonid(personinformation.getPersonid());
@@ -85,9 +103,10 @@ public class PersonInformationController {
             return HttpStatus.NOT_FOUND;
         }
     }
+    @Override
     @PostMapping(value = Constant.PERSONAL_INFORMATION_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<?> createRecord(@RequestBody Personinformation personinformation){
+    public ResponseEntity<?> create(@RequestBody Personinformation personinformation){
         personinformation.setDataid(IDGenerator.RECORD_ID());
         personinformation.setRegisterdate(Constant.getCurrentDateAsString());
         personinformation.setLastupdate(Constant.getCurrentDateAsString());
