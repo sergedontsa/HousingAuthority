@@ -14,6 +14,8 @@ import com.housing.authority.TupleAssembler.UserModelAssembler;
 import com.housing.authority.Tuples.Complain;
 import com.housing.authority.Tuples.Complaindone;
 import com.housing.authority.Tuples.Listening;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -39,6 +41,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,6 +98,18 @@ public class HousingController {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    }
+    @CrossOrigin
+    @GetMapping(value = "/bill")
+    public static void createPdf() throws FileNotFoundException, DocumentException {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("output.pdf"));
+
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Hello World", font);
+        document.add(chunk);
+        document.close();
     }
 
 
