@@ -1,8 +1,8 @@
 package com.housing.authority.TupleAssembler;
 
 import com.housing.authority.Controllers.BuildingController;
-import com.housing.authority.Controllers.HousingController;
 import com.housing.authority.Tuples.Building;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class BuildingModelAssembler implements RepresentationModelAssembler<Building, EntityModel<Building>> {
     @Override
-    public EntityModel<Building> toModel(Building building) {
+    public @NotNull EntityModel<Building> toModel(@NotNull Building building) {
         return new EntityModel<>(building,
                 linkTo(methodOn(BuildingController.class).readOne(building.getBuildingId())).withSelfRel(),
                 linkTo(methodOn(BuildingController.class).readAll()).withRel("buildings")
@@ -22,7 +22,7 @@ public class BuildingModelAssembler implements RepresentationModelAssembler<Buil
     }
 
     @Override
-    public CollectionModel<EntityModel<Building>> toCollectionModel(Iterable<? extends Building> entities) {
+    public @NotNull CollectionModel<EntityModel<Building>> toCollectionModel(@NotNull Iterable<? extends Building> entities) {
         return null;
     }
 }

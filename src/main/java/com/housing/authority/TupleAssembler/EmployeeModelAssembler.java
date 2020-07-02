@@ -2,6 +2,7 @@ package com.housing.authority.TupleAssembler;
 
 import com.housing.authority.Controllers.EmployeeController;
 import com.housing.authority.Tuples.Employees;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -16,14 +17,14 @@ public class EmployeeModelAssembler implements RepresentationModelAssembler<Empl
 
 
     @Override
-    public EntityModel<Employees> toModel(Employees employees) {
+    public @NotNull EntityModel<Employees> toModel(@NotNull Employees employees) {
       return new EntityModel<>(employees,
               linkTo(methodOn(EmployeeController.class).readOne(employees.getEmployeeId())).withSelfRel(),
               linkTo(methodOn(EmployeeController.class).readAll()).withRel("employees"));
     }
 
     @Override
-    public CollectionModel<EntityModel<Employees>> toCollectionModel(Iterable<? extends Employees> entities) {
+    public @NotNull CollectionModel<EntityModel<Employees>> toCollectionModel(@NotNull Iterable<? extends Employees> entities) {
         return null;
     }
 }

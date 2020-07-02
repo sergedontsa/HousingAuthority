@@ -2,6 +2,7 @@ package com.housing.authority.TupleAssembler;
 
 import com.housing.authority.Controllers.PersonInformationController;
 import com.housing.authority.Tuples.Personinformation;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -13,14 +14,14 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class PersonInformationModelAssembler implements RepresentationModelAssembler<Personinformation, EntityModel<Personinformation>> {
     @Override
-    public EntityModel<Personinformation> toModel(Personinformation personinformation) {
+    public @NotNull EntityModel<Personinformation> toModel(@NotNull Personinformation personinformation) {
         return new EntityModel<>(personinformation,
-                linkTo(methodOn(PersonInformationController.class).readOneRecord(personinformation.getDataid())).withSelfRel(),
-                linkTo(methodOn(PersonInformationController.class).readAllRecord()).withRel("Record"));
+                linkTo(methodOn(PersonInformationController.class).readOne(personinformation.getDataid())).withSelfRel(),
+                linkTo(methodOn(PersonInformationController.class).readAll()).withRel("Record"));
     }
 
     @Override
-    public CollectionModel<EntityModel<Personinformation>> toCollectionModel(Iterable<? extends Personinformation> entities) {
+    public @NotNull CollectionModel<EntityModel<Personinformation>> toCollectionModel(@NotNull Iterable<? extends Personinformation> entities) {
         return null;
     }
 }
