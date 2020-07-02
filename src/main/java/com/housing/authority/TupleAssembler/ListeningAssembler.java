@@ -1,6 +1,6 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.HousingController;
+import com.housing.authority.Controllers.ListeningController;
 import com.housing.authority.Tuples.Listening;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
@@ -16,8 +16,8 @@ public class ListeningAssembler implements RepresentationModelAssembler<Listenin
     @Override
     public @NotNull EntityModel<Listening> toModel(@NotNull Listening entity) {
         return new EntityModel<>(entity,
-                linkTo(methodOn(HousingController.class).readOneListening(entity.getApartmentId())).withSelfRel(),
-                linkTo(methodOn(HousingController.class).readAllListening()).withRel("Listening")
+                linkTo(methodOn(ListeningController.class).readOne(entity.getApartmentId())).withSelfRel(),
+                linkTo(methodOn(ListeningController.class).readAll()).withRel("Listening")
                 );
     }
 

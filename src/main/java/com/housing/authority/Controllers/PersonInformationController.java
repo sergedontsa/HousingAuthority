@@ -31,11 +31,16 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = Constant.HOUSING_CONTROLLER)
+@RequestMapping(value = Constant.PERSONAL_INFORMATION_CONTROLLER)
 public class PersonInformationController implements ServiceController<Personinformation> {
+
     private final PersonInformationRepository personInformationRepository;
     private final PersonInformationModelAssembler personInformationModelAssembler;
 
+    /**
+     * This method return the collection of all entity
+     * @return the collection
+     */
     @GetMapping(value = Constant.PERSONAL_INFORMATION_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     @Override
@@ -45,7 +50,11 @@ public class PersonInformationController implements ServiceController<Personinfo
                .collect(Collectors.toList());
        return new CollectionModel<>(personInformations, linkTo(methodOn(PersonInformationController.class).readAll()).withSelfRel());
     }
-
+    /**
+     * Return the entity with id if found in the  server
+     * @param id the id of the entity
+     * @return the entity
+     */
     @Override
     @GetMapping(value = Constant.PERSONAL_INFORMATION_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
@@ -69,6 +78,11 @@ public class PersonInformationController implements ServiceController<Personinfo
         return null;
     }
 
+
+    /**
+     * Delete the value in the database
+     * @param id the id of the entity to updated
+     */
     @Override
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.PERSONAL_INFORMATION_DELETE_WITH_ID)
@@ -78,6 +92,14 @@ public class PersonInformationController implements ServiceController<Personinfo
             this.personInformationRepository.delete(this.personInformationRepository.findById(id).get());
         }
     }
+
+
+    /**
+     * Update the entity in the server
+     * @param id the id of the entity
+     * @param personinformation the updated data
+     * @return the updated one
+     */
     @Override
     @PatchMapping(path = Constant.PERSONAL_INFORMATION_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
@@ -103,6 +125,12 @@ public class PersonInformationController implements ServiceController<Personinfo
             return HttpStatus.NOT_FOUND;
         }
     }
+
+    /**
+     * Create the new entity in server
+     * @param personinformation the entity
+     * @return the create entity
+     */
     @Override
     @PostMapping(value = Constant.PERSONAL_INFORMATION_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
