@@ -2,6 +2,7 @@ package com.housing.authority.TupleAssembler;
 
 import com.housing.authority.Controllers.HousingController;
 import com.housing.authority.Tuples.Complaindone;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -13,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class ComplainDoneModelAssembler implements RepresentationModelAssembler<Complaindone, EntityModel<Complaindone>> {
     @Override
-    public EntityModel<Complaindone> toModel(Complaindone entity) {
+    public @NotNull EntityModel<Complaindone> toModel(@NotNull Complaindone entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(HousingController.class).readOneComplainDone(entity.getId())).withSelfRel(),
                 linkTo(methodOn(HousingController.class).readAllComplainDone()).withRel("Completed"));
@@ -21,7 +22,7 @@ public class ComplainDoneModelAssembler implements RepresentationModelAssembler<
     }
 
     @Override
-    public CollectionModel<EntityModel<Complaindone>> toCollectionModel(Iterable<? extends Complaindone> entities) {
+    public @NotNull CollectionModel<EntityModel<Complaindone>> toCollectionModel(@NotNull Iterable<? extends Complaindone> entities) {
         return null;
     }
 }

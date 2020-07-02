@@ -106,7 +106,7 @@ public class PersonInformationController implements ServiceController<Personinfo
     @Override
     @PostMapping(value = Constant.PERSONAL_INFORMATION_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody Personinformation personinformation){
+    public ResponseEntity<?> create(@org.jetbrains.annotations.NotNull @RequestBody Personinformation personinformation){
         personinformation.setDataid(IDGenerator.RECORD_ID());
         personinformation.setRegisterdate(Constant.getCurrentDateAsString());
         personinformation.setLastupdate(Constant.getCurrentDateAsString());
