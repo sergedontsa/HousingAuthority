@@ -14,6 +14,12 @@
             <basic name="email">
                 <column name="email" length="50"/>
             </basic>
+            <basic name="registerdate">
+                <column name="registerdate" nullable="false" length="50"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" nullable="false" length="50"/>
+            </basic>
         </attributes>
     </entity>
 </entity-mappings>

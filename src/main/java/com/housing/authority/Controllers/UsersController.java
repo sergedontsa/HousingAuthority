@@ -82,7 +82,6 @@ public class UsersController implements ServiceController<Users> {
             newUser.setLastUpdate(Constant.getCurrentDateAsString());
             newUser.setRegisterDate(Constant.getCurrentDateAsString());
             entityModel = this.userModelAssembler.toModel(this.userRepository.save(newUser));
-            assert entityModel != null;
             return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
         }else {
             return null;
