@@ -89,11 +89,12 @@ public class Constant {
     public final static String COMPLAIN_DONE_SAVE = "/save";
 
     //Personal Information
-    public final static String PERSONAL_INFORMATION_GET_ALL = "record/all";
-    public final static String PERSONAL_INFORMATION_GET_WITH_ID = "record/{id}";
-    public final static String PERSONAL_INFORMATION_DELETE_WITH_ID = "record/delete/{id}";
-    public final static String PERSONAL_INFORMATION_UPDATE_WITH_ID = "record/update/{id}";
-    public final static String PERSONAL_INFORMATION_SAVE = "record/save";
+    public final static String PERSONAL_INFORMATION_CONTROLLER = "/housing/authority/v1/record/";
+    public final static String PERSONAL_INFORMATION_GET_ALL = "/all";
+    public final static String PERSONAL_INFORMATION_GET_WITH_ID = "get/{id}";
+    public final static String PERSONAL_INFORMATION_DELETE_WITH_ID = "/delete/{id}";
+    public final static String PERSONAL_INFORMATION_UPDATE_WITH_ID = "/update/{id}";
+    public final static String PERSONAL_INFORMATION_SAVE = "/save";
 
     //Listening
     public final static String LISTENING_GET_ALL = "listening/all";

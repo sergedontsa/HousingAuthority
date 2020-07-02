@@ -11,15 +11,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +61,8 @@ public class SubscriberController implements ServiceController<Subscriber> {
         if (object.getName() == null || object.getEmail() == null){
             return null;
         }else {
-
+            object.setLastupdate(Constant.getCurrentDateAsString());
+            object.setRegisterdate(Constant.getCurrentDateAsString());
          EntityModel<Subscriber> entityModel = subscriberModelAssembler.toModel(this.subscriberRepository.save(object));
          return ResponseEntity.created(subscriberModelAssembler.toModel(this.subscriberRepository.save(object))
          .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -80,15 +73,21 @@ public class SubscriberController implements ServiceController<Subscriber> {
     @CrossOrigin
     @PatchMapping(path = Constant.SUBSCRIBER_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
-    public Object update(@PathVariable String id, Subscriber subscriber) {
+    public Object update(@PathVariable String id, @RequestBody Subscriber subscriber) {
         int idInt = Integer.parseInt(id);
         if (this.subscriberRepository.findById(idInt).isPresent()){
-            subscriber.setId(idInt);
-            if (subscriber.getEmail() != null && subscriber.getName() != null){
-                EntityModel<Subscriber> entityModel = this.subscriberModelAssembler.toModel(this.subscriberRepository.save(subscriber));
-                return ResponseEntity.created(subscriberModelAssembler.toModel(this.subscriberRepository.save(subscriber)).getRequiredLink(IanaLinkRelations.SELF)
-                .toUri()).body(entityModel);
+            Subscriber existingSubscriber = this.subscriberRepository.findById(idInt).get();
+            existingSubscriber.setLastupdate(Constant.getCurrentDateAsString());
+            if (subscriber.getEmail() != null) {
+                existingSubscriber.setEmail(subscriber.getEmail());
             }
+            if (subscriber.getName() != null) {
+                existingSubscriber.setName(subscriber.getName());
+            }
+           EntityModel<Subscriber> entityModel = this.subscriberModelAssembler.toModel(this.subscriberRepository.save(existingSubscriber));
+                return ResponseEntity.created(subscriberModelAssembler.toModel(this.subscriberRepository.save(existingSubscriber)).getRequiredLink(IanaLinkRelations.SELF)
+                .toUri()).body(entityModel);
+
         }
         return null;
     }
