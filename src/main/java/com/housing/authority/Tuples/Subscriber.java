@@ -1,6 +1,12 @@
 package com.housing.authority.Tuples;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -8,13 +14,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "subscriber")
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class Subscriber {
     @Id
     @Column(name = "id", nullable = false)
@@ -25,32 +31,14 @@ public class Subscriber {
     @Basic
     @Column(name = "email", nullable = false, length = 50)
     private String email;
+    @Basic
+    @Column(name = "registerdate", nullable = true, length = 50)
+    private String registerdate;
+    @Basic
+    @Column(name = "lastupdate", nullable = true, length = 50)
+    private String lastupdate;
 
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 }

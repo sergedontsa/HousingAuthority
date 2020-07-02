@@ -102,8 +102,10 @@ public class Constant {
     public final static String LISTENING_UPDATE_WITH_ID = "listening/update/{id}";
 
     //Subscriber
-    public final static String SUBSCRIBER_GET_ALL = "subscriber/all";
-    public final static String SUBSCRIBER_GET_WITH_ID = "subscriber/{id}";
-    public final static String SUBSCRIBER_DELETE_WITH_ID = "subscriber/delete/{id}";
-    public final static String SUBSCRIBER_UPDATE_WITH_ID = "subscriber/update/{id}";
+    public final static String SUBSCRIBER_CONTROLLER = "/housing/authority/v1/subscriber";
+    public final static String SUBSCRIBER_GET_ALL = "/all";
+    public final static String SUBSCRIBER_GET_WITH_ID = "get/{id}";
+    public final static String SUBSCRIBER_DELETE_WITH_ID = "/delete/{id}";
+    public final static String SUBSCRIBER_UPDATE_WITH_ID = "/update/{id}";
+    public final static String SUBSCRIBER_SAVE = "/save";
 }
