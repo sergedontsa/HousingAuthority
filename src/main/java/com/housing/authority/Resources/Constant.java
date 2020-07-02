@@ -59,7 +59,7 @@ public class Constant {
     //Apartment
     public final static String APARTMENT_CONTROLLER = "/housing/authority/v1/apartment";
     public final static String APARTMENT_GET_ALL = "/all";
-    public final static String APARTMENT_GET_WITH_ID = "/{id}";
+    public final static String APARTMENT_GET_WITH_ID = "get/{id}";
     public final static String APARTMENT_DELETE_WITH_ID = "/delete/{id}";
     public final static String APARTMENT_UPDATE_WITH_ID = "/update/{id}";
     public final static String APARTMENT_SAVE = "/save";
@@ -67,7 +67,7 @@ public class Constant {
     //Tenant
     public final static String TENANT_CONTROLLER = "/housing/authority/v1/tenant";
     public final static String TENANT_GET_ALL = "/all";
-    public final static String TENANT_GET_WITH_ID = "/{id}";
+    public final static String TENANT_GET_WITH_ID = "get/{id}";
     public final static String TENANT_DELETE_WITH_ID = "/delete/{id}";
     public final static String TENANT_UPDATE_WITH_ID = "/update/{id}";
     public final static String TENANT_SAVE = "/save";
@@ -81,11 +81,12 @@ public class Constant {
     public final static String COMPLAIN_SAVE = "/save";
 
     //Complain Done
-    public final static String COMPLAIN_DONE_GET_ALL = "complaindone/all";
-    public final static String COMPLAIN_DONE_GET_WITH_ID = "complaindone/{id}";
-    public final static String COMPLAIN_DONE_DELETE_WITH_ID = "complaindone/delete/{id}";
-    public final static String COMPLAIN_DONE_UPDATE_WITH_ID = "complaindone/update/{id}";
-    public final static String COMPLAIN_DONE_SAVE = "complaindone/save";
+    public final static String COMPLAIN_DONE_CONTROLLER = "/housing/authority/v1/complain/done";
+    public final static String COMPLAIN_DONE_GET_ALL = "/all";
+    public final static String COMPLAIN_DONE_GET_WITH_ID = "get/{id}";
+    public final static String COMPLAIN_DONE_DELETE_WITH_ID = "/delete/{id}";
+    public final static String COMPLAIN_DONE_UPDATE_WITH_ID = "/update/{id}";
+    public final static String COMPLAIN_DONE_SAVE = "/save";
 
     //Personal Information
     public final static String PERSONAL_INFORMATION_GET_ALL = "record/all";

@@ -60,6 +60,19 @@ public class TenantController implements ServiceController<Tenant> {
             return null;
         }
     }
+
+    /**
+     * In case the entity is referred with the id with type integer
+     * Return the entity with id if found in the  server
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    public EntityModel<Tenant> readOne(int id) {
+        return null;
+    }
+
     @Override
     @PostMapping(value = Constant.TENANT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
