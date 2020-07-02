@@ -59,6 +59,18 @@ public class EmployeeController implements ServiceController<Employees> {
         }
     }
 
+    /**
+     * In case the entity is referred with the id with type integer
+     * Return the entity with id if found in the  server
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    public EntityModel<Employees> readOne(int id) {
+        return null;
+    }
+
     @Override
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = Constant.EMPLOYEE_SAVE, consumes = Constant.CONSUMES)

@@ -58,6 +58,11 @@ public class BuildingController implements ServiceController<Building> {
     }
 
     @Override
+    public EntityModel<Building> readOne(int id) {
+        return null;
+    }
+
+    @Override
     @PostMapping(value = Constant.BUILDING_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Building object) {

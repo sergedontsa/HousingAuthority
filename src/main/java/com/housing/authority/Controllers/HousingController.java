@@ -96,86 +96,13 @@ public class HousingController {
         }
     }
 
-    //.................................COMPLAIN
-    @GetMapping(value = Constant.COMPLAIN_GET_ALL, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public CollectionModel<EntityModel<Complain>> readAllComplain(){
-        List<EntityModel<Complain>> complains = this.complainRepository.findAll().stream().map(this.complainModelAssembler::toModel)
-                .collect(Collectors.toList());
-        return new CollectionModel<>(complains, linkTo(methodOn(HousingController.class).readAllComplain()).withSelfRel());
-   }
-    @GetMapping(value = Constant.COMPLAIN_GET_WITH_ID, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public EntityModel<Complain> readOneComplain(@PathVariable String id){
-        if (this.complainRepository.findById(id).isPresent()){
-            return this.complainModelAssembler.toModel(this.complainRepository.findById(id).get());
-        }else {
-            return null;
-        }
-    }
-    @PostMapping(value = Constant.COMPLAIN_SAVE, consumes = Constant.CONSUMES)
-    @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin
-    public ResponseEntity<?> createComplain(@RequestBody Complain complain){
-        complain.setRegisterdate(Constant.getCurrentDateAsString());
-        complain.setLastupdate(Constant.getCurrentDateAsString());
-        complain.setStatus("Under Review");
-        complain.setComplainid(IDGenerator.COMPLAIN_ID());
-        EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(complain));
-        assert entityModel != null;
-        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-    }
-    @PatchMapping(path = Constant.COMPLAIN_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
-    @ResponseStatus(code = HttpStatus.OK)
-    @CrossOrigin
-    public ResponseEntity<?> updateComplain(@PathVariable String id, @RequestBody Complain complain){
-        if (this.complainRepository.findById(id).isPresent()){
-            Complain existingComplain = this.complainRepository.findById(id).get();
-            existingComplain.setPersonid(complain.getPersonid());
-            existingComplain.setType(complain.getType());
-            existingComplain.setTitle(complain.getTitle());
-            existingComplain.setBody(complain.getBody());
-            existingComplain.setPhonenumber(complain.getPhonenumber());
-            existingComplain.setSeverity(complain.getSeverity());
-            existingComplain.setAddress(complain.getAddress());
-            if (complain.getStatus() != null){
-                existingComplain.setStatus(complain.getStatus());
-            }else {
-                existingComplain.setStatus("Pending");
-            }
-            existingComplain.setAssignto(complain.getAssignto());
-            existingComplain.setLastupdate(Constant.getCurrentDateAsString());
-
-            EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(existingComplain));
-            assert entityModel != null;
-            return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-
-
-
-        }else {
-            return null;
-        }
-    }
-
-    @DeleteMapping(value = Constant.COMPLAIN_DELETE_WITH_ID)
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    @CrossOrigin
-    public HttpStatus deleteComplain(@PathVariable String id){
-        if (this.complainRepository.findById(id).isPresent()){
-            this.complainRepository.delete(this.complainRepository.findById(id).get());
-            return HttpStatus.OK;
-        }else {
-            return HttpStatus.NOT_FOUND;
-        }
-    }
-
     //.................................COMPLAIN DONE
     @GetMapping(value = Constant.COMPLAIN_DONE_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Complaindone>> readAllComplainDone(){
         List<EntityModel<Complaindone>> complains = this.complainDoneRepository.findAll().stream().map(this.complainDoneModelAssembler::toModel)
                 .collect(Collectors.toList());
-        return new CollectionModel<>(complains, linkTo(methodOn(HousingController.class).readAllComplain()).withSelfRel());
+        return new CollectionModel<>(complains, linkTo(methodOn(HousingController.class).readAllComplainDone()).withSelfRel());
     }
     @GetMapping(value = Constant.COMPLAIN_DONE_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin

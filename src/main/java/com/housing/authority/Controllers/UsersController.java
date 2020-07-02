@@ -58,6 +58,18 @@ public class UsersController implements ServiceController<Users> {
         }
     }
 
+    /**
+     * In case the entity is referred with the id with type integer
+     * Return the entity with id if found in the  server
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    public EntityModel<Users> readOne(int id) {
+        return null;
+    }
+
     @Override
     @CrossOrigin
     @PostMapping(value = Constant.USER_SAVE, consumes = Constant.CONSUMES)

@@ -58,6 +58,12 @@ public class ApartmentController implements ServiceController<Apartment> {
             return null;
         }
     }
+
+    @Override
+    public EntityModel<Apartment> readOne(int id) {
+        return null;
+    }
+
     @Override
     @PostMapping(value = Constant.APARTMENT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
