@@ -97,10 +97,11 @@ public class Constant {
     public final static String PERSONAL_INFORMATION_SAVE = "/save";
 
     //Listening
-    public final static String LISTENING_GET_ALL = "listening/all";
-    public final static String LISTENING_GET_WITH_ID = "listening/{id}";
-    public final static String LISTENING_DELETE_WITH_ID = "listening/delete/{id}";
-    public final static String LISTENING_UPDATE_WITH_ID = "listening/update/{id}";
+    public final static String LISTENING_CONTROLLER ="/housing/authority/v1/listening/";
+    public final static String LISTENING_GET_ALL = "/all";
+    public final static String LISTENING_GET_WITH_ID = "get/{id}";
+    public final static String LISTENING_DELETE_WITH_ID = "/delete/{id}";
+    public final static String LISTENING_UPDATE_WITH_ID = "/update/{id}";
 
     //Subscriber
     public final static String SUBSCRIBER_CONTROLLER = "/housing/authority/v1/subscriber";

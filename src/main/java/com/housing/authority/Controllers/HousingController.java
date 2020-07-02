@@ -97,25 +97,5 @@ public class HousingController {
     }
 
 
-    //listening
-    @GetMapping(value = Constant.LISTENING_GET_ALL, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public CollectionModel<EntityModel<Listening>> readAllListening(){
-
-       List<EntityModel<Listening>> listening = this.listeningRepository.findAll().stream()
-               .map(this.listeningAssembler::toModel).collect(Collectors.toList());
-
-       return new CollectionModel<>(listening, linkTo(methodOn(HousingController.class).readAllListening()).withSelfRel());
-
-
-    }
-    @GetMapping(value = Constant.LISTENING_GET_WITH_ID, produces = Constant.PRODUCE)
-    public EntityModel<Listening> readOneListening(@PathVariable String id){
-        if (this.listeningRepository.findById(id).isPresent()){
-            return this.listeningAssembler.toModel(this.listeningRepository.findById(id).get());
-        }else {
-            return null;
-        }
-    }
 
 }

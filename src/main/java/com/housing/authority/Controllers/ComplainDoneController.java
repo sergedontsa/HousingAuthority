@@ -75,14 +75,8 @@ public class ComplainDoneController implements ServiceController<Complaindone> {
      * @return the entity
      */
     @Override
-    @GetMapping(value = Constant.COMPLAIN_DONE_GET_WITH_ID, produces = Constant.PRODUCE)
-    @CrossOrigin
     public EntityModel<Complaindone> readOne(int id) {
-        if (this.complainDoneRepository.findById(id).isPresent()){
-            return this.complainDoneModelAssembler.toModel(this.complainDoneRepository.findById(id).get());
-        }else {
-            return null;
-        }
+        return null;
     }
 
     /**

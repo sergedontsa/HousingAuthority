@@ -1,5 +1,6 @@
 package com.housing.authority.TupleAssembler;
 
+import com.housing.authority.Controllers.ComplainDoneController;
 import com.housing.authority.Controllers.HousingController;
 import com.housing.authority.Tuples.Complaindone;
 import org.jetbrains.annotations.NotNull;
@@ -16,8 +17,8 @@ public class ComplainDoneModelAssembler implements RepresentationModelAssembler<
     @Override
     public @NotNull EntityModel<Complaindone> toModel(@NotNull Complaindone entity) {
         return new EntityModel<>(entity,
-                linkTo(methodOn(HousingController.class).readOneComplainDone(entity.getId())).withSelfRel(),
-                linkTo(methodOn(HousingController.class).readAllComplainDone()).withRel("Completed"));
+                linkTo(methodOn(ComplainDoneController.class).readOne(entity.getId())).withSelfRel(),
+                linkTo(methodOn(ComplainDoneController.class).readAll()).withRel("Completed"));
 
     }
 
