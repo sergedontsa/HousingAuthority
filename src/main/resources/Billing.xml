@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Billing">
+        <table name="billing" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="billingid">
+                <column name="billingid" length="50"/>
+            </id>
+            <basic name="tenantid">
+                <column name="tenantid" length="50"/>
+            </basic>
+            <basic name="buildingid">
+                <column name="buildingid" length="50"/>
+            </basic>
+            <basic name="apartmentid">
+                <column name="apartmentid" length="50"/>
+            </basic>
+            <basic name="from">
+                <column name="from" length="50"/>
+            </basic>
+            <basic name="to">
+                <column name="to" length="50"/>
+            </basic>
+            <basic name="period">
+                <column name="period" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" length="50"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" length="50"/>
+            </basic>
+            <basic name="duedate">
+                <column name="duedate" length="50"/>
+            </basic>
+            <basic name="status">
+                <column name="status" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Schedule">
+        <table name="schedule" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="scheduleid">
+                <column name="scheduleid" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" length="50"/>
+            </basic>
+            <basic name="from">
+                <column name="from" length="50"/>
+            </basic>
+            <basic name="to">
+                <column name="to" length="50"/>
+            </basic>
+            <basic name="description">
+                <column name="description" length="500"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
