@@ -110,4 +110,20 @@ public class Constant {
     public final static String SUBSCRIBER_DELETE_WITH_ID = "/delete/{id}";
     public final static String SUBSCRIBER_UPDATE_WITH_ID = "/update/{id}";
     public final static String SUBSCRIBER_SAVE = "/save";
+
+    //Billing
+    public final static String BILLING_CONTROLLER = "/housing/authority/v1/billing";
+    public final static String BILLING_GET_ALL = "/all";
+    public final static String BILLING_GET_WITH_ID = "get/{id}";
+    public final static String BILLING_DELETE_WITH_ID = "/delete/{id}";
+    public final static String BILLING_UPDATE_WITH_ID = "/update/{id}";
+    public final static String BILLING_SAVE = "/save";
+
+    //Schedule
+    public final static String SCHEDULE_CONTROLLER = "/housing/authority/v1/schedule";
+    public final static String SCHEDULE_GET_ALL = "/all";
+    public final static String SCHEDULE_GET_WITH_ID = "get/{id}";
+    public final static String SCHEDULE_DELETE_WITH_ID = "/delete/{id}";
+    public final static String SCHEDULE_UPDATE_WITH_ID = "/update/{id}";
+    public final static String SCHEDULE_SAVE = "/save";
 }
