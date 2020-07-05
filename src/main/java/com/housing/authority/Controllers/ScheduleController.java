@@ -3,6 +3,7 @@ package com.housing.authority.Controllers;
 import com.housing.authority.Repository.ScheduleRepository;
 import com.housing.authority.Repository.ServiceController;
 import com.housing.authority.Resources.Constant;
+import com.housing.authority.Resources.Utilities;
 import com.housing.authority.TupleAssembler.ScheduleModelAssembler;
 import com.housing.authority.Tuples.Schedule;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,14 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
@@ -86,6 +94,12 @@ public class ScheduleController implements ServiceController<Schedule> {
     public ResponseEntity<?> create(@RequestBody Schedule object) {
         object.setLastupdate(Constant.getCurrentDateAsString());
         object.setRegisterdate(Constant.getCurrentDateAsString());
+
+        String numHours = Utilities.getNumHours(object.getFrom(), object.getTo());
+        object.setHours(numHours);
+        System.out.println("Start: " + object.getFrom());
+        System.out.println("End: " + object.getTo());
+        System.out.println("Hours: "+ object.getHours());
 
         return ResponseEntity.created(this.scheduleModelAssembler.toModel(this.scheduleRepository.save(object))
         .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(object);
