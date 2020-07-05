@@ -1,6 +1,7 @@
 package com.housing.authority;
 
 import com.housing.authority.Resources.Constant;
+import com.housing.authority.Resources.Utilities;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -18,8 +19,10 @@ import java.io.IOException;
 public class ToDemoTest {
     public static void main(String[] args) throws UnirestException {
         //tryWithUnirest();
-        sendMail();
+        //sendMail();
         //retrieveKey();
+        String n = Utilities.getNumHours("2020-07-05 06:37:26","2020-07-05 09:30:26");
+        System.out.println("N: " + n);
     }
 
     public static void tryWithUnirest() throws UnirestException {

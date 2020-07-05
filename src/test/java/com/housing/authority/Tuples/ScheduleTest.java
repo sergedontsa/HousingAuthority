@@ -1,19 +1,39 @@
 package com.housing.authority.Tuples;
 
+import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.ScheduleRepository;
 import com.housing.authority.Services.Service;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ScheduleTest implements Service {
+
+    private int idForTest;
+    private String employeeIdForTest;
+    private String date;
+    private String from;
+    private String to;
+    private String description;
+    private String registerDate;
+    private String lastUpdate;
+
+    @BeforeEach
+    void init(){
+        idForTest = 1;
+        employeeIdForTest = "HAE-158031";
+
+    }
+
+    @Autowired
+    ScheduleRepository scheduleRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @Override
     @Order(1)
