@@ -92,8 +92,11 @@ public class BillingController implements ServiceController<Billing> {
         object.setBillingid(IDGenerator.RECORD_ID());
         object.setRegisterdate(Constant.getCurrentDateAsString());
         object.setLastupdate(Constant.getCurrentDateAsString());
+        EntityModel<Billing> entityModel = this.billingModelAssembler.toModel(this.billingRepository.save(object));
         return ResponseEntity.created(this.billingModelAssembler.toModel(this.billingRepository.save(object))
-        .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(object);
+                .getRequiredLink(IanaLinkRelations.SELF)
+                .toUri())
+                .body(entityModel);
     }
 
     /**

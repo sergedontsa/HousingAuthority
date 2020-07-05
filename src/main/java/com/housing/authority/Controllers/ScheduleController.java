@@ -7,6 +7,7 @@ import com.housing.authority.Resources.Utilities;
 import com.housing.authority.TupleAssembler.ScheduleModelAssembler;
 import com.housing.authority.Tuples.Schedule;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.boot.model.source.spi.IdentifierSource;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -97,9 +98,15 @@ public class ScheduleController implements ServiceController<Schedule> {
 
         String numHours = Utilities.getNumHours(object.getFrom(), object.getTo());
         object.setHours(numHours);
+        //System.out.println("Employee ID: " + object.getEmployeeid());
+        System.out.println("Date: " + object.getDate());
         System.out.println("Start: " + object.getFrom());
         System.out.println("End: " + object.getTo());
         System.out.println("Hours: "+ object.getHours());
+        System.out.println("Description: " + object.getDescription());
+        System.out.println("Register date: " + object.getRegisterdate());
+        System.out.println("Last Update: " + object.getLastupdate());
+        this.scheduleRepository.save(object);
 
         return ResponseEntity.created(this.scheduleModelAssembler.toModel(this.scheduleRepository.save(object))
         .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(object);

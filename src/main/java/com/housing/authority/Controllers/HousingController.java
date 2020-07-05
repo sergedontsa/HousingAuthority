@@ -9,6 +9,7 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,15 @@ public class HousingController {
             exception.printStackTrace();
         }
     }
+
+    @CrossOrigin
+    @GetMapping("bill")
+    //@Scheduled(fixedRate = 500)
+    public static void bill(){
+        System.out.println("In this method we will sent the bill everyday after 6 pm");
+    }
+
+
 
 
 

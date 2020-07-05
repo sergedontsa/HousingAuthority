@@ -1,7 +1,6 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Resources.Constant;
-import com.housing.authority.Resources.Utilities;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity(name = "schedule")
 @Data
@@ -28,6 +33,7 @@ public class Schedule {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employeeid", referencedColumnName = "employeeId")
     private Employees employees;
+
     @Basic
     @Column(name = "date", nullable = false, length = 50)
     private String date;

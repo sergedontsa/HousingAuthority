@@ -79,7 +79,10 @@ public class EmployeeController implements ServiceController<Employees> {
         object.setRegisterDate(Constant.getCurrentDateAsString());
         object.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Employees> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(object));
-        return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(object)).getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+        return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(object))
+                .getRequiredLink(IanaLinkRelations.SELF)
+                .toUri())
+                .body(entityModel);
     }
 
     @Override
@@ -94,8 +97,12 @@ public class EmployeeController implements ServiceController<Employees> {
             existingEmployee.setMiddleName(employees.getMiddleName());
             existingEmployee.setLastName(employees.getLastName());
 
-            EntityModel<Employees> entityModel = this.employeeModelAssembler.toModel(this.employeeRepository.save(existingEmployee));
-            return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(existingEmployee)).getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+            EntityModel<Employees> entityModel = this.employeeModelAssembler
+                    .toModel(this.employeeRepository.save(existingEmployee));
+            return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(existingEmployee))
+                    .getRequiredLink(IanaLinkRelations.SELF)
+                    .toUri())
+                    .body(entityModel);
 
 
         }else {

@@ -38,6 +38,18 @@ public class Billing {
     @JoinColumn(name = "apartmentid", referencedColumnName = "apartmentid")
     private Apartment apartment;
 
+    @Basic
+    @Column(name = "apartmentid", insertable = false, updatable = false)
+    private String apartmentId;
+
+    @Basic
+    @Column(name = "buildingid", insertable = false, updatable = false)
+    private String buildingid;
+
+    @Basic
+    @Column(name = "tenantid", insertable = false, updatable = false)
+    private String tenantid;
+
     @Id
     @Column(name = "billingid", nullable = false, length = 50)
     private String billingid;
