@@ -100,12 +100,7 @@ public class TenantController implements ServiceController<Tenant> {
     public Object update(@PathVariable String id, @RequestBody Tenant tenant){
         if (this.tenantRepository.findById(id).isPresent()){
 
-            if (!this.buildingRepository.findById(tenant.getBuildingid()).isPresent() || !this.apartmentRepository.findById(tenant.getApartmentid()).isPresent()){
-                return HttpStatus.NOT_FOUND;
-            }else {
                 Tenant existingTenant = this.tenantRepository.findById(id).get();
-                existingTenant.setApartmentid(tenant.getApartmentid());
-                existingTenant.setBuildingid(tenant.getBuildingid());
                 existingTenant.setFirstname(tenant.getFirstname());
                 existingTenant.setMiddlename(tenant.getMiddlename());
                 existingTenant.setLastname(tenant.getLastname());
@@ -116,7 +111,6 @@ public class TenantController implements ServiceController<Tenant> {
                 existingTenant.setLastupdate(Constant.getCurrentDateAsString());
                 this.tenantRepository.save(existingTenant);
                 return HttpStatus.OK;
-            }
 
         }else {
             return HttpStatus.NOT_FOUND;

@@ -9,9 +9,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 @AllArgsConstructor
@@ -21,18 +24,21 @@ import javax.persistence.Id;
 @ToString
 @Getter
 @Setter
-public class Tenant {
+public class Tenant{
 
     @Id
     @Column(name = "tenantid", nullable = false, length = 50)
     private String tenantid;
-    @Basic
-    @Column(name = "apartmentid", nullable = false, length = 255)
-    private String apartmentid;
 
-    @Basic
-    @Column(name = "buildingid",nullable = false, length = 50)
-    private String buildingid;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "apartmentid", referencedColumnName = "apartmentid")
+    private Apartment apartment;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buildingid", referencedColumnName = "buildingid")
+    private Building building;
+
     @Basic
     @Column(name = "firstname", nullable = false, length = 50)
     private String firstname;
