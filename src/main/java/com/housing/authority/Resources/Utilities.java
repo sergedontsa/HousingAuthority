@@ -38,7 +38,7 @@ public class Utilities {
             long difference = d2.getTime() - d1.getTime();
             long diffHours = difference/(60 * 60 * 1000) % 24;
             long diffMinue = difference /  (60 * 1000) % 60;
-            result = diffHours + "h "+ diffMinue+" min";
+            result = diffHours + "h"+ diffMinue+" min";
 
         } catch (ParseException e) {
             e.printStackTrace();

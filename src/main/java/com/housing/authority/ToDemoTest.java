@@ -53,25 +53,4 @@ public class ToDemoTest {
         }
     }
 
-    public static void sendMail(){
-        Email from = new Email("dontsa00serge@gmail.com");
-        String subject = "Sending with Twilio SendGrid is fun";
-        Email to = new Email("dontsaserge@gmail.com");
-        Content content = new Content("text/plain", "and easy to do anywhere even with java");
-        Mail mail = new Mail(from, subject, to, content);
-        SendGrid sendGrid = new SendGrid(System.getenv("SENDGRID_API_KEY"));
-        Request request = new Request();
-        try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            Response response = sendGrid.api(request);
-            System.out.println("+ "+response.getStatusCode());
-            System.out.println("+ "+response.getBody());
-            System.out.println("+ "+response.getHeaders());
-
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-    }
 }
