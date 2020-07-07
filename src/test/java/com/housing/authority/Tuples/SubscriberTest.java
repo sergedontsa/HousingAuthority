@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,8 +27,8 @@ class SubscriberTest  implements Service {
     private int idForTest;
     private String name;
     private String email;
-    private String registerDate;
-    private String lastUpdate;
+    private Date registerDate;
+    private Date lastUpdate;
 
     @Autowired
     SubscriberRepository subscriberRepository;
@@ -36,8 +38,8 @@ class SubscriberTest  implements Service {
         this.idForTest = 14;
         this.name = "Test";
         this.email = "email@test.com";
-        this.registerDate = Constant.getCurrentDateAsString();
-        this.lastUpdate = Constant.getCurrentDateAsString();
+        this.registerDate = Date.from(Calendar.getInstance().toInstant());
+        this.lastUpdate = Date.from(Calendar.getInstance().toInstant());
     }
 
     @Override
@@ -66,7 +68,7 @@ class SubscriberTest  implements Service {
     @Test
     @Order(3)
     public void createTest() {
-        Subscriber subscriber = new Subscriber(name, email, registerDate, lastUpdate);
+        Subscriber subscriber = new Subscriber(name, email);
         Subscriber saved = this.subscriberRepository.save(subscriber);
         assertNotNull(saved);
         assertEquals(subscriber, saved);
@@ -80,7 +82,6 @@ class SubscriberTest  implements Service {
         assertNotNull(subscriber);
         subscriber.setName(name);
         subscriber.setEmail(email);
-        subscriber.setLastupdate(lastUpdate);
         Subscriber updatedSubscriber = this.subscriberRepository.save(subscriber);
         assertNotNull(updatedSubscriber);
         assertEquals(subscriber.getId(), updatedSubscriber.getId());

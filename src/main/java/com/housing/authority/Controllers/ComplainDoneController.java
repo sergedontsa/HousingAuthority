@@ -92,8 +92,6 @@ public class ComplainDoneController implements ServiceController<Complaindone> {
     public ResponseEntity<?> create(Complaindone complaindone) {
         if (this.employeeRepository.findById(complaindone.getEmployeeid()).isPresent() && this.complainRepository.findById(complaindone.getComplainId()).isPresent()){
             complaindone.setConfirmationid(IDGenerator.COMPLAIN_DONE_CONFIRMATION());
-            complaindone.setRegisterdate(Constant.getCurrentDateAsString());
-            complaindone.setLastupdate(Constant.getCurrentDateAsString());
             setComplainStatus("DONE", complaindone.getComplainId());
             EntityModel<Complaindone> entityModel = this.complainDoneModelAssembler.toModel(this.complainDoneRepository.save(complaindone));
             return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);

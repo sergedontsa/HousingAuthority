@@ -2,33 +2,4 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
 
-    <entity class="com.housing.authority.Tuples.Employees">
-        <table name="employees" schema="housingauthority" catalog=""/>
-        <attributes>
-            <id name="employeeId">
-                <column name="employeeId" length="50"/>
-            </id>
-            <basic name="firstName">
-                <column name="firstName" length="50"/>
-            </basic>
-            <basic name="middleName">
-                <column name="middleName" nullable="false" length="50"/>
-            </basic>
-            <basic name="lastName">
-                <column name="lastName" length="50"/>
-            </basic>
-            <basic name="department">
-                <column name="department" nullable="false" length="50"/>
-            </basic>
-            <basic name="status">
-                <column name="status" length="50"/>
-            </basic>
-            <basic name="registerDate">
-                <column name="registerDate" length="50"/>
-            </basic>
-            <basic name="lastupdate">
-                <column name="lastupdate" nullable="false" length="50"/>
-            </basic>
-        </attributes>
-    </entity>
 </entity-mappings>

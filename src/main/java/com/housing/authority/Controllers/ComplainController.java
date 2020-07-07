@@ -91,12 +91,10 @@ public class ComplainController implements ServiceController<Complain> {
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
     public ResponseEntity<?> create(@RequestBody Complain complain) {
-        complain.setRegisterdate(Constant.getCurrentDateAsString());
-        complain.setLastupdate(Constant.getCurrentDateAsString());
+
         complain.setStatus("Under Review");
         complain.setComplainid(IDGenerator.COMPLAIN_ID());
         EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(complain));
-        assert entityModel != null;
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
 
     }
@@ -128,10 +126,9 @@ public class ComplainController implements ServiceController<Complain> {
                 existingComplain.setStatus("Pending");
             }
             existingComplain.setAssignto(complain.getAssignto());
-            existingComplain.setLastupdate(Constant.getCurrentDateAsString());
+
 
             EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(existingComplain));
-            assert entityModel != null;
             return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
 
 

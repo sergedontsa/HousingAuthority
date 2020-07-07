@@ -70,8 +70,6 @@ public class SubscriberController implements ServiceController<Subscriber> {
         if (object.getName() == null || object.getEmail() == null){
             return null;
         }else {
-            object.setLastupdate(Constant.getCurrentDateAsString());
-            object.setRegisterdate(Constant.getCurrentDateAsString());
          EntityModel<Subscriber> entityModel = subscriberModelAssembler.toModel(this.subscriberRepository.save(object));
          return ResponseEntity.created(subscriberModelAssembler.toModel(this.subscriberRepository.save(object))
          .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -86,7 +84,6 @@ public class SubscriberController implements ServiceController<Subscriber> {
         int idInt = Integer.parseInt(id);
         if (this.subscriberRepository.findById(idInt).isPresent()){
             Subscriber existingSubscriber = this.subscriberRepository.findById(idInt).get();
-            existingSubscriber.setLastupdate(Constant.getCurrentDateAsString());
             if (subscriber.getEmail() != null) {
                 existingSubscriber.setEmail(subscriber.getEmail());
             }

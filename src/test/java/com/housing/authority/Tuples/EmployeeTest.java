@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class EmployeesTest implements Service {
+class EmployeeTest implements Service {
 
     private String employeeIdForTest;
     private String employeeIDForCreate;
@@ -57,8 +57,8 @@ class EmployeesTest implements Service {
     @Order(1)
     @Test
     public void readAllTest() {
-        List<Employees> employeesList = this.employeeRepository.findAll();
-        assertThat(employeesList).size().isGreaterThan(0);
+        List<Employee> employeeList = this.employeeRepository.findAll();
+        assertThat(employeeList).size().isGreaterThan(0);
 
     }
 
@@ -68,25 +68,25 @@ class EmployeesTest implements Service {
     public void readOneTest() {
         boolean employeeIsPresent = this.employeeRepository.findById(this.employeeIdForTest).isPresent();
         assertTrue(employeeIsPresent);
-        Employees existingEmployees = this.employeeRepository.findById(this.employeeIdForTest).get();
-        assertNotNull(existingEmployees);
+        Employee existingEmployee = this.employeeRepository.findById(this.employeeIdForTest).get();
+        assertNotNull(existingEmployee);
     }
 
     @Override
     @Order(3)
     @Test
     public void createTest() {
-        Employees employees = new Employees();
+        Employee employee = new Employee();
         assertNotNull(this.employeeIDForCreate);
-        employees.setEmployeeId(this.employeeIDForCreate);
-        employees.setFirstName(this.firstName);
-        employees.setMiddleName(this.middleName);
-        employees.setLastName(this.lastName);
-        employees.setDepartment(this.department);
-        employees.setStatus(this.status);
-        employees.setRegisterDate(this.registerDate);
-        employees.setLastupdate(this.lastUpdate);
-        Employees newEmployee = this.employeeRepository.save(employees);
+        employee.setEmployeeId(this.employeeIDForCreate);
+        employee.setFirstName(this.firstName);
+        employee.setMiddleName(this.middleName);
+        employee.setLastName(this.lastName);
+        employee.setDepartment(this.department);
+        employee.setStatus(this.status);
+        employee.setRegisterDate(this.registerDate);
+        employee.setLastupdate(this.lastUpdate);
+        Employee newEmployee = this.employeeRepository.save(employee);
         assertNotNull(newEmployee);
     }
 
@@ -94,7 +94,7 @@ class EmployeesTest implements Service {
     @Order(4)
     @Test
     public void updateTest() {
-        Employees existingEmployee = this.employeeRepository.getOne(this.employeeIdForTest);
+        Employee existingEmployee = this.employeeRepository.getOne(this.employeeIdForTest);
         assertNotNull(existingEmployee);
         assertNotEquals(existingEmployee.getFirstName(), this.firstName);
         assertNotEquals(existingEmployee.getMiddleName(), this.middleName);
@@ -111,7 +111,7 @@ class EmployeesTest implements Service {
         existingEmployee.setStatus(this.status);
         existingEmployee.setRegisterDate(this.registerDate);
         existingEmployee.setLastupdate(this.lastUpdate);
-        Employees updatedEmployee = this.employeeRepository.save(existingEmployee);
+        Employee updatedEmployee = this.employeeRepository.save(existingEmployee);
         assertNotNull(updatedEmployee);
     }
 

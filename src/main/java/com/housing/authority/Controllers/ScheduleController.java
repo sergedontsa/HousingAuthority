@@ -1,5 +1,6 @@
 package com.housing.authority.Controllers;
 
+import com.housing.authority.Repository.EmployeeRepository;
 import com.housing.authority.Repository.ScheduleRepository;
 import com.housing.authority.Repository.ServiceController;
 import com.housing.authority.Resources.Constant;
@@ -7,7 +8,6 @@ import com.housing.authority.Resources.Utilities;
 import com.housing.authority.TupleAssembler.ScheduleModelAssembler;
 import com.housing.authority.Tuples.Schedule;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.boot.model.source.spi.IdentifierSource;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -37,6 +37,7 @@ public class ScheduleController implements ServiceController<Schedule> {
 
     private final ScheduleModelAssembler scheduleModelAssembler;
     private final ScheduleRepository scheduleRepository;
+    private final EmployeeRepository employeeRepository;
 
     /**
      * This method return the collection of all entity
@@ -88,17 +89,18 @@ public class ScheduleController implements ServiceController<Schedule> {
      * @param object the entity
      * @return the create entity
      */
+
     @Override
     @CrossOrigin
     @PostMapping(value = Constant.SCHEDULE_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Schedule object) {
-        object.setLastupdate(Constant.getCurrentDateAsString());
-        object.setRegisterdate(Constant.getCurrentDateAsString());
+
 
         String numHours = Utilities.getNumHours(object.getFrom(), object.getTo());
         object.setHours(numHours);
         //System.out.println("Employee ID: " + object.getEmployeeid());
+
         System.out.println("Date: " + object.getDate());
         System.out.println("Start: " + object.getFrom());
         System.out.println("End: " + object.getTo());
@@ -106,11 +108,19 @@ public class ScheduleController implements ServiceController<Schedule> {
         System.out.println("Description: " + object.getDescription());
         System.out.println("Register date: " + object.getRegisterdate());
         System.out.println("Last Update: " + object.getLastupdate());
-        this.scheduleRepository.save(object);
 
-        return ResponseEntity.created(this.scheduleModelAssembler.toModel(this.scheduleRepository.save(object))
-        .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(object);
+        System.out.println();
+        System.out.println(object);
+        System.out.println();
+        EntityModel<Schedule> entityModel = this.scheduleModelAssembler
+                .toModel(this.scheduleRepository.save(object));
+
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF)
+        .toUri()).body(entityModel);
+
+
     }
+
 
     /**
      * Update the entity in the server

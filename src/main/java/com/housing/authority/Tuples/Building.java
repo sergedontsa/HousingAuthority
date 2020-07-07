@@ -8,13 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "Building")
+@Entity
+@Table(name = "building")
 @Data
 @EqualsAndHashCode
 @Setter
@@ -25,8 +23,7 @@ import java.io.Serializable;
 public class Building  implements Comparable, Serializable {
 
     @Id
-    @Basic
-    @Column(name = "buildingid")
+    @Column(name = "buildingid", nullable = false, length = 50)
     private String buildingId;
     @Basic
     @Column(name = "buildingnumber")
@@ -86,6 +83,11 @@ public class Building  implements Comparable, Serializable {
     @Basic
     @Column(name = "lastupdate")
     private String lastUpdate;
+
+//    @OneToOne(mappedBy = "building")
+//    private Billing billing;
+    @ManyToOne
+    private Billing billing;
 
 
     public boolean isWithPool() {

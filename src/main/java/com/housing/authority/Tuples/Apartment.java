@@ -8,15 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "Apartment")
+@Table(name = "apartment")
 @Data
 @EqualsAndHashCode
 @Getter
@@ -27,8 +25,9 @@ import java.io.Serializable;
 public class Apartment implements Serializable {
 
     @Id
-    @Column(name = "apartmentid", nullable = false, unique = true)
+    @Column(name = "apartmentid", nullable = false, length = 50)
     private String apartmentID;
+
     @Column(name = "numbedroom")
     private int numBedRoom;
     @Column(name = "numlivingroom")
@@ -53,6 +52,12 @@ public class Apartment implements Serializable {
     private String buildingid;
     @Column(name = "lastupdate")
     private String lastupdate;
+
+//    @OneToOne(mappedBy = "apartment")
+//    private Billing billing;
+
+    @ManyToOne
+    private Billing billing;
 
 
 

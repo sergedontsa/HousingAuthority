@@ -1,6 +1,7 @@
 package com.housing.authority.Tuples;
 
 
+import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,15 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-@Entity(name = "schedule")
+@Entity
+@Table(name = "schedule")
 @Data
 @EqualsAndHashCode
 @Setter
@@ -25,14 +21,10 @@ import javax.persistence.OneToOne;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Schedule {
+public class Schedule extends AuditModel {
     @Id
     @Column(name = "scheduleid", nullable = false)
     private int scheduleid;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeid", referencedColumnName = "employeeId")
-    private Employees employees;
 
     @Basic
     @Column(name = "date", nullable = false, length = 50)
@@ -52,13 +44,12 @@ public class Schedule {
     @Column(name = "description", nullable = false, length = 500)
     private String description;
 
-    @Basic
-    @Column(name = "registerdate", length = 50, nullable = false)
-    private String registerdate;
 
-    @Basic
-    @Column(name = "lastupdate", length = 50, nullable = false)
-    private String lastupdate;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "employeeid")
+//    private Employee employee;
+
 
 
 }

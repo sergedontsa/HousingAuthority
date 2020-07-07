@@ -1,7 +1,7 @@
 package com.housing.authority.TupleAssembler;
 
 import com.housing.authority.Controllers.EmployeeController;
-import com.housing.authority.Tuples.Employees;
+import com.housing.authority.Tuples.Employee;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -12,19 +12,19 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @Component
-public class EmployeeModelAssembler implements RepresentationModelAssembler<Employees, EntityModel<Employees>> {
+public class EmployeeModelAssembler implements RepresentationModelAssembler<Employee, EntityModel<Employee>> {
 
 
 
     @Override
-    public @NotNull EntityModel<Employees> toModel(@NotNull Employees employees) {
-      return new EntityModel<>(employees,
-              linkTo(methodOn(EmployeeController.class).readOne(employees.getEmployeeId())).withSelfRel(),
-              linkTo(methodOn(EmployeeController.class).readAll()).withRel("employees"));
+    public @NotNull EntityModel<Employee> toModel(@NotNull Employee employee) {
+      return new EntityModel<>(employee,
+              linkTo(methodOn(EmployeeController.class).readOne(employee.getEmployeeId())).withSelfRel(),
+              linkTo(methodOn(EmployeeController.class).readAll()).withRel("employee"));
     }
 
     @Override
-    public @NotNull CollectionModel<EntityModel<Employees>> toCollectionModel(@NotNull Iterable<? extends Employees> entities) {
+    public @NotNull CollectionModel<EntityModel<Employee>> toCollectionModel(@NotNull Iterable<? extends Employee> entities) {
         return null;
     }
 }

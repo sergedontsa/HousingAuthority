@@ -8,12 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
-@Entity
+@Entity(name = "Employee")
+@Table(name = "employee")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,8 +20,9 @@ import javax.persistence.Id;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Employees {
+public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employeeid", nullable = false, length = 50)
     private String employeeId;
     @Basic
@@ -46,5 +46,11 @@ public class Employees {
     @Basic
     @Column(name = "lastupdate", nullable = true, length = 50)
     private String lastupdate;
+
+    @OneToOne(mappedBy = "employee")
+    private EmployeeDetail employeeDetail;
+
+//    @ManyToMany(mappedBy = "employee")
+//    private Set<Schedule> schedule;
 
 }
