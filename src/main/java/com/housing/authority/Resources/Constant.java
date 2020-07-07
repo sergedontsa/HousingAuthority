@@ -126,4 +126,12 @@ public class Constant {
     public final static String SCHEDULE_DELETE_WITH_ID = "/delete/{id}";
     public final static String SCHEDULE_UPDATE_WITH_ID = "/update/{id}";
     public final static String SCHEDULE_SAVE = "/save";
+
+    //Employee Detail
+    public final static String EMPLOYEE_DETAIL_CONTROLLER = "/housing/authority/v1/detail";
+    public final static String EMPLOYEE_DETAIL_GET_ALL = "get/all";
+    public final static String EMPLOYEE_DETAIL_GET_WITH_ID = "/{employeeid}/get/{id}";
+    public final static String EMPLOYEE_DETAIL_DELETE_WITH_ID = "/{employeeid}/delete/{id}";
+    public final static String EMPLOYEE_DETAIL_UPDATE_WITH_ID = "/{employeeid}/update/{id}";
+    public final static String EMPLOYEE_DETAIL_SAVE = "/{employeeid}/save";
 }

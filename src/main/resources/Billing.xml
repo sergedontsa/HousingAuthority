@@ -14,9 +14,6 @@
             <basic name="buildingid">
                 <column name="buildingid" length="50"/>
             </basic>
-            <basic name="apartmentid">
-                <column name="apartmentid" length="50"/>
-            </basic>
             <basic name="from">
                 <column name="from" length="50"/>
             </basic>

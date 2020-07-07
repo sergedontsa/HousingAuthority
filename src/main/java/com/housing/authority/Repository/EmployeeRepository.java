@@ -1,9 +1,9 @@
 package com.housing.authority.Repository;
 
-import com.housing.authority.Tuples.Employees;
+import com.housing.authority.Tuples.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employees, String> {
+public interface EmployeeRepository extends JpaRepository<Employee, String> {
 }

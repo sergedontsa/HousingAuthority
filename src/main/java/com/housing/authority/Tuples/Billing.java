@@ -8,15 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Set;
 
-@Entity(name = "billing")
+@Entity
+@Table(name = "billing")
 @Data
 @EqualsAndHashCode
 @Setter
@@ -26,38 +22,28 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor
 public class Billing {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tenantid", referencedColumnName = "tenantid")
-    private Tenant tenant;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "buildingid", referencedColumnName = "buildingid")
-    private Building building;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "apartmentid", referencedColumnName = "apartmentid")
-    private Apartment apartment;
-
-    @Basic
-    @Column(name = "apartmentid", insertable = false, updatable = false)
-    private String apartmentId;
-
-    @Basic
-    @Column(name = "buildingid", insertable = false, updatable = false)
-    private String buildingid;
-
-    @Basic
-    @Column(name = "tenantid", insertable = false, updatable = false)
-    private String tenantid;
 
     @Id
     @Column(name = "billingid", nullable = false, length = 50)
     private String billingid;
+
+//    @Basic
+//    @Column(name = "apartmentid", insertable = false, updatable = false)
+//    private String apartmentid;
+//
+//    @Basic
+//    @Column(name = "tenantid", insertable = false, updatable = false)
+//    private String tenantid;
+//
+//    @Basic
+//    @Column(name = "buildingid", insertable = false, updatable = false)
+//    private String buildingid;
+
     @Basic
-    @Column(name = "from", nullable = false, length = 50)
+    @Column(name = "start", nullable = false, length = 50)
     private String from;
     @Basic
-    @Column(name = "to", nullable = false, length = 50)
+    @Column(name = "end", nullable = false, length = 50)
     private String to;
     @Basic
     @Column(name = "period", nullable = false, length = 50)
@@ -74,6 +60,31 @@ public class Billing {
     @Basic
     @Column(name = "status", nullable = false, length = 50)
     private String status;
+
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "tenantid")
+//    private Tenant tenant;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "buildingid")
+//    private Building building;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "apartmentid")
+//    private Apartment apartment;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tenantid")
+    private Set<Tenant> tenants;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buildingid")
+    private Set<Building> building;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "apartmentid")
+    private Set<Apartment> apartment;
+
 
 
 }

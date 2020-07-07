@@ -68,8 +68,14 @@ public class BuildingController implements ServiceController<Building> {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Building object) {
         object.setBuildingId(IDGenerator.BUILDING_ID());
-        return ResponseEntity.created(this.buildingModelAssembler.toModel(this.buildingRepository.save(object))
-                .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(object);
+        object.setLastUpdate(Constant.getCurrentDateAsString());
+        object.setRegisterDate(Constant.getCurrentDateAsString());
+
+        return ResponseEntity.created(this.buildingModelAssembler
+                .toModel(this.buildingRepository.save(object))
+                .getRequiredLink(IanaLinkRelations.SELF)
+                .toUri())
+                .body(object);
 
     }
 

@@ -15,6 +15,11 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 
 import java.io.IOException;
+enum Status {
+    IN_PROGRESS,
+    COMPLETED,
+    CANCELLED
+}
 
 public class ToDemoTest {
     public static void main(String[] args) throws UnirestException {
@@ -23,6 +28,10 @@ public class ToDemoTest {
         //retrieveKey();
         String n = Utilities.getNumHours("2020-07-05 06:37:26","2020-07-05 09:30:26");
         System.out.println("N: " + n);
+
+        System.out.println(Status.CANCELLED);
+        System.out.println(Status.IN_PROGRESS);
+        System.out.println(Status.COMPLETED);
     }
 
     public static void tryWithUnirest() throws UnirestException {

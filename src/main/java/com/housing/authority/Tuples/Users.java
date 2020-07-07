@@ -3,7 +3,7 @@ package com.housing.authority.Tuples;
 
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
-import lombok.Data;
+import lombok.*;
 
 
 import javax.persistence.Basic;
@@ -14,7 +14,11 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class Users implements Comparable {
 
     @Id

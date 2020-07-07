@@ -78,8 +78,7 @@ public class TenantController implements ServiceController<Tenant> {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Tenant tenant){
         tenant.setTenantid(IDGenerator.TENANT_ID());
-        tenant.setRegisterdate(Constant.getCurrentDateAsString());
-        tenant.setLastupdate(Constant.getCurrentDateAsString());
+
         EntityModel<Tenant> entityModel = this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant));
         return ResponseEntity.created(this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant)).getRequiredLink(IanaLinkRelations.SELF)
                 .toUri()).body(entityModel);
@@ -108,7 +107,6 @@ public class TenantController implements ServiceController<Tenant> {
                 existingTenant.setPhonenumber(tenant.getPhonenumber());
                 existingTenant.setProfession(tenant.getProfession());
                 existingTenant.setDeposite(tenant.getDeposite());
-                existingTenant.setLastupdate(Constant.getCurrentDateAsString());
                 this.tenantRepository.save(existingTenant);
                 return HttpStatus.OK;
 

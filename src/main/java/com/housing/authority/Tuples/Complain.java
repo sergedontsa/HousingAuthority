@@ -1,5 +1,6 @@
 package com.housing.authority.Tuples;
 
+import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,17 +13,19 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "complain")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @ToString
 @DynamicUpdate
-public class Complain implements Comparable, Serializable {
+public class Complain extends AuditModel implements Comparable, Serializable {
     @Id
     @Column(name = "complainid", nullable = false, length = 50)
     private String complainid;
@@ -53,12 +56,7 @@ public class Complain implements Comparable, Serializable {
     @Basic
     @Column(name = "assignto", nullable = false, length = 50)
     private String assignto;
-    @Basic
-    @Column(name = "registerdate", nullable = false, length = 50)
-    private String registerdate;
-    @Basic
-    @Column(name = "lastupdate", nullable = false, length = 50)
-    private String lastupdate;
+
 
     @Override
     public int compareTo(Object o) {

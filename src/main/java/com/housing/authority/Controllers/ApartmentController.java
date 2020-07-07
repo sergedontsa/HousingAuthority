@@ -73,9 +73,12 @@ public class ApartmentController implements ServiceController<Apartment> {
         apartment.setRegisterdate(Constant.getCurrentDateAsString());
         apartment.setLastupdate(Constant.getCurrentDateAsString());
         apartment.setStatus("Available");
-        EntityModel<Apartment> entityModel = this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
-        assert entityModel != null;
-        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+        EntityModel<Apartment> entityModel = this.apartmentModelAssembler
+                .toModel(this.apartmentTupleRepository.save(apartment));
+
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF)
+                .toUri())
+                .body(entityModel);
 
     }
     @Override

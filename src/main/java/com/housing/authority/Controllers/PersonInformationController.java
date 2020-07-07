@@ -117,7 +117,7 @@ public class PersonInformationController implements ServiceController<Personinfo
             existingRecord.setIdexpireddate(personinformation.getIdexpireddate());
             existingRecord.setAddress(personinformation.getAddress());
             existingRecord.setCountry(personinformation.getCountry());
-            existingRecord.setLastupdate(Constant.getCurrentDateAsString());
+
             EntityModel<Personinformation> entityModel = this.personInformationModelAssembler.toModel(this.personInformationRepository.save(existingRecord));
             return ResponseEntity.created(this.personInformationModelAssembler.toModel(this.personInformationRepository.save(existingRecord))
             .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
@@ -136,8 +136,6 @@ public class PersonInformationController implements ServiceController<Personinfo
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@org.jetbrains.annotations.NotNull @RequestBody Personinformation personinformation){
         personinformation.setDataid(IDGenerator.RECORD_ID());
-        personinformation.setRegisterdate(Constant.getCurrentDateAsString());
-        personinformation.setLastupdate(Constant.getCurrentDateAsString());
         EntityModel<Personinformation> entityModel = this.personInformationModelAssembler.toModel(this.personInformationRepository.save(personinformation));
         return ResponseEntity.created(this.personInformationModelAssembler.toModel(this.personInformationRepository.save(personinformation))
         .getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);

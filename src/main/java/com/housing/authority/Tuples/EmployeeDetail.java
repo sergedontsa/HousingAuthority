@@ -12,25 +12,27 @@ import lombok.ToString;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tenant")
-@AllArgsConstructor
+@Table(name = "employee_detail", schema = "housingauthority", catalog = "")
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ToString
-@Getter
 @Setter
-public class Tenant extends AuditModel {
-
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class EmployeeDetail extends AuditModel {
     @Id
-    @Column(name = "tenantid", nullable = false, length = 50)
-    private String tenantid;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private int id;
 
     @Basic
     @Column(name = "firstname", nullable = false, length = 50)
@@ -48,28 +50,25 @@ public class Tenant extends AuditModel {
     @Column(name = "phonenumber", nullable = false, length = 50)
     private String phonenumber;
     @Basic
-    @Column(name = "price")
-    private String price;
+    @Column(name = "idtype", nullable = false, length = 50)
+    private String idtype;
     @Basic
-    @Column(name = "profession", nullable = false, length = 50)
-    private String profession;
+    @Column(name = "idnumber", nullable = false, length = 50)
+    private String idnumber;
     @Basic
-    @Column(name = "deposite", nullable = false, length = 50)
-    private String deposite;
+    @Column(name = "issuedate", nullable = false, length = 50)
+    private String issuedate;
     @Basic
-    @Column(name = "status")
-    private String status;
-
-//    @OneToOne(mappedBy = "tenant")
-//    private Billing billing;
-
-    @ManyToOne
-    private Billing billing;
+    @Column(name = "expiredate", nullable = false, length = 50)
+    private String expiredate;
+    @Basic
+    @Column(name = "nationality", nullable = false, length = 50)
+    private String nationality;
 
 
-
-
-
+    @OneToOne
+    @JoinColumn(name = "employeeid")
+    private Employee employee;
 
 
 }
