@@ -1,5 +1,6 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity(name = "Employee")
@@ -20,7 +22,7 @@ import java.util.Set;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employeeid", nullable = false, length = 50)
@@ -47,7 +49,10 @@ public class Employee {
     @Column(name = "lastupdate", nullable = true, length = 50)
     private String lastupdate;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "employee")
+    @JsonIgnoreProperties("employee")
     private EmployeeDetail employeeDetail;
 
 //    @ManyToMany(mappedBy = "employee")

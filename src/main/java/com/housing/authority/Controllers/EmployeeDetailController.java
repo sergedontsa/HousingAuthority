@@ -8,6 +8,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.EmployeeDetailModelAssembler;
 import com.housing.authority.Tuples.EmployeeDetail;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
@@ -40,28 +41,26 @@ public class EmployeeDetailController {
     private final EmployeeDetailModelAssembler employeeDetailModelAssembler;
     private final EmployeeRepository employeeRepository;
 
+
     @CrossOrigin
     @GetMapping(value = Constant.EMPLOYEE_DETAIL_GET_ALL, produces = Constant.PRODUCE)
-    public Page<EmployeeDetail> readAll(Pageable pageable){
-        return employeeDetailRepository.findAll(pageable);
-    }
     public CollectionModel<EntityModel<EmployeeDetail>> readAll() {
-        List<EntityModel<EmployeeDetail>> entityModels = this.employeeDetailRepository.findAll().stream()
+        List<EntityModel<EmployeeDetail>> entityModels = this.employeeDetailRepository
+                .findAll()
+                .stream()
                 .map(this.employeeDetailModelAssembler::toModel)
                 .collect(Collectors.toList());
         return new CollectionModel<>(entityModels, linkTo(methodOn(EmployeeDetailController.class).readAll()).withSelfRel());
     }
 
+
     @CrossOrigin
     @GetMapping(value = Constant.EMPLOYEE_DETAIL_GET_WITH_ID, produces = Constant.PRODUCE)
-    public EntityModel<EmployeeDetail> readOne(
-            @PathVariable String employeeid,
-            @PathVariable int id) {
-        if (!employeeRepository.existsById(employeeid)){
-            throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
+    public EntityModel<EmployeeDetail> readOne(@PathVariable int id) {
+        if (!employeeDetailRepository.existsById(id)){
+            throw new ResourceNotFoundException("Employee id: " + id+ " could not be found");
         }
-        return this.employeeDetailModelAssembler.toModel(this.employeeDetailRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Detail: "+ id+ " could not be found")));
+        return this.employeeDetailModelAssembler.toModel(this.employeeDetailRepository.findById(id).get());
 
     }
 
