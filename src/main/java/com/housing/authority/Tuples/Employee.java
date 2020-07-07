@@ -49,9 +49,7 @@ public class Employee implements Serializable {
     @Column(name = "lastupdate", nullable = true, length = 50)
     private String lastupdate;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "employee")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
     @JsonIgnoreProperties("employee")
     private EmployeeDetail employeeDetail;
 

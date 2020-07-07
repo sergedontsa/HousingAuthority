@@ -7,6 +7,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.EmployeeModelAssembler;
 import com.housing.authority.Tuples.Employee;
+import com.housing.authority.Tuples.EmployeeDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -47,9 +48,9 @@ public class EmployeeController implements ServiceController<Employee> {
         List<EntityModel<Employee>> employees = this.employeeRepository.findAll().stream()
                 .map(this.employeeModelAssembler::toModel)
                 .collect(Collectors.toList());
-
         return new CollectionModel<>(employees, linkTo(methodOn(EmployeeController.class).readAll()).withSelfRel());
     }
+
 
     @Override
     @CrossOrigin

@@ -1,6 +1,7 @@
 package com.housing.authority.Controllers;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.EmployeeDetailRepository;
 import com.housing.authority.Repository.EmployeeRepository;
@@ -8,9 +9,6 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.EmployeeDetailModelAssembler;
 import com.housing.authority.Tuples.EmployeeDetail;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -44,6 +42,7 @@ public class EmployeeDetailController {
 
     @CrossOrigin
     @GetMapping(value = Constant.EMPLOYEE_DETAIL_GET_ALL, produces = Constant.PRODUCE)
+    @JsonIgnoreProperties
     public CollectionModel<EntityModel<EmployeeDetail>> readAll() {
         List<EntityModel<EmployeeDetail>> entityModels = this.employeeDetailRepository
                 .findAll()

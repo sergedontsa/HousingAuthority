@@ -1,6 +1,5 @@
 package com.housing.authority.Tuples;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -68,9 +67,8 @@ public class EmployeeDetail extends AuditModel implements Serializable {
     @Column(name = "nationality", nullable = false, length = 50)
     private String nationality;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "employeeid", nullable = false)
-    @JsonIgnoreProperties
     private Employee employee;
 
 
