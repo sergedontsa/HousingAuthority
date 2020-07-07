@@ -1,5 +1,6 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +13,14 @@ import lombok.ToString;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "employee_detail", schema = "housingauthority", catalog = "")
@@ -28,7 +31,7 @@ import javax.persistence.Table;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDetail extends AuditModel {
+public class EmployeeDetail extends AuditModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -65,9 +68,9 @@ public class EmployeeDetail extends AuditModel {
     @Column(name = "nationality", nullable = false, length = 50)
     private String nationality;
 
-
-    @OneToOne
-    @JoinColumn(name = "employeeid")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employeeid", nullable = false)
+    @JsonIgnoreProperties
     private Employee employee;
 
 

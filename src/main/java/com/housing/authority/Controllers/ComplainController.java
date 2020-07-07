@@ -46,8 +46,11 @@ public class ComplainController implements ServiceController<Complain> {
     @GetMapping(value = Constant.COMPLAIN_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Complain>> readAll() {
-         List<EntityModel<Complain>> complains = this.complainRepository.findAll().stream().map(this.complainModelAssembler::toModel)
-                .collect(Collectors.toList());
+         List<EntityModel<Complain>> complains = this.complainRepository
+                 .findAll()
+                 .stream()
+                 .map(this.complainModelAssembler::toModel)
+                 .collect(Collectors.toList());
         return new CollectionModel<>(complains, linkTo(methodOn(ComplainController.class).readAll()).withSelfRel());
     }
 
