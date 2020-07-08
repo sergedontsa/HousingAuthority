@@ -115,7 +115,7 @@ public class Constant {
     public final static String BILLING_CONTROLLER = "/housing/authority/v1/billing";
     public final static String BILLING_GET_ALL = "get/all";
     public final static String BILLING_GET_WITH_ID = "get/{id}";
-    public final static String BILLING_DELETE_WITH_ID = "/delete/{id}";
+    public final static String BILLING_DELETE_WITH_ID = "/delete/{id}/{tenantid}";
     public final static String BILLING_UPDATE_WITH_ID = "/update/{id}";
     public final static String BILLING_SAVE = "/{tenantId}/{apartmentId}/{buildingId}/save";
     public final static String BILLING_BY_TENANT_ID = "/{tenantid}/get";
