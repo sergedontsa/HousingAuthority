@@ -96,9 +96,7 @@ public class EmployeeController implements ServiceController<Employee> {
         if (this.employeeRepository.findById(id).isPresent()){
             Employee existingEmployee = this.employeeRepository.findById(id).get();
 
-            existingEmployee.setFirstName(employee.getFirstName());
-            existingEmployee.setMiddleName(employee.getMiddleName());
-            existingEmployee.setLastName(employee.getLastName());
+
 
             EntityModel<Employee> entityModel = this.employeeModelAssembler
                     .toModel(this.employeeRepository.save(existingEmployee));
