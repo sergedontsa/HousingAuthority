@@ -8,26 +8,20 @@
             <id name="billingid">
                 <column name="billingid" length="50"/>
             </id>
-            <basic name="tenantid">
-                <column name="tenantid" length="50"/>
+            <basic name="start">
+                <column name="start" length="50"/>
             </basic>
-            <basic name="buildingid">
-                <column name="buildingid" length="50"/>
-            </basic>
-            <basic name="from">
-                <column name="from" length="50"/>
-            </basic>
-            <basic name="to">
-                <column name="to" length="50"/>
+            <basic name="end">
+                <column name="end" length="50"/>
             </basic>
             <basic name="period">
                 <column name="period" length="50"/>
             </basic>
             <basic name="registerdate">
-                <column name="registerdate" length="50"/>
+                <column name="registerdate" nullable="false" precision="-1"/>
             </basic>
             <basic name="lastupdate">
-                <column name="lastupdate" length="50"/>
+                <column name="lastupdate" nullable="false" precision="-1"/>
             </basic>
             <basic name="duedate">
                 <column name="duedate" length="50"/>

@@ -9,9 +9,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity(name = "Employee")
 @Table(name = "employee")
@@ -28,15 +36,6 @@ public class Employee implements Serializable {
     @Column(name = "employeeid", nullable = false, length = 50)
     private String employeeId;
     @Basic
-    @Column(name = "firstname", nullable = false, length = 50)
-    private String firstName;
-    @Basic
-    @Column(name = "middlename", nullable = true, length = 50)
-    private String middleName;
-    @Basic
-    @Column(name = "lastname", nullable = false, length = 50)
-    private String lastName;
-    @Basic
     @Column(name = "department", nullable = true, length = 50)
     private String department;
     @Basic
@@ -52,8 +51,5 @@ public class Employee implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
     @JsonIgnoreProperties("employee")
     private EmployeeDetail employeeDetail;
-
-//    @ManyToMany(mappedBy = "employee")
-//    private Set<Schedule> schedule;
 
 }

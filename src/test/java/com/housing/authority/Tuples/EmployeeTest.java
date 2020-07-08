@@ -79,9 +79,7 @@ class EmployeeTest implements Service {
         Employee employee = new Employee();
         assertNotNull(this.employeeIDForCreate);
         employee.setEmployeeId(this.employeeIDForCreate);
-        employee.setFirstName(this.firstName);
-        employee.setMiddleName(this.middleName);
-        employee.setLastName(this.lastName);
+
         employee.setDepartment(this.department);
         employee.setStatus(this.status);
         employee.setRegisterDate(this.registerDate);
@@ -96,17 +94,11 @@ class EmployeeTest implements Service {
     public void updateTest() {
         Employee existingEmployee = this.employeeRepository.getOne(this.employeeIdForTest);
         assertNotNull(existingEmployee);
-        assertNotEquals(existingEmployee.getFirstName(), this.firstName);
-        assertNotEquals(existingEmployee.getMiddleName(), this.middleName);
-        assertNotEquals(existingEmployee.getLastName(), this.lastName);
+
         assertNotEquals(existingEmployee.getDepartment(), this.department);
         assertNotEquals(existingEmployee.getStatus(), this.status);
         assertNotEquals(existingEmployee.getRegisterDate(), this.registerDate);
-        assertNotEquals(existingEmployee.getLastName(), this.lastUpdate);
 
-        existingEmployee.setFirstName(this.firstName);
-        existingEmployee.setMiddleName(this.middleName);
-        existingEmployee.setLastName(this.lastName);
         existingEmployee.setDepartment(this.department);
         existingEmployee.setStatus(this.status);
         existingEmployee.setRegisterDate(this.registerDate);

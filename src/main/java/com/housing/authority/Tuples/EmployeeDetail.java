@@ -52,6 +52,10 @@ public class EmployeeDetail extends AuditModel implements Serializable {
     @Column(name = "phonenumber", nullable = false, length = 50)
     private String phonenumber;
     @Basic
+    @Column(name = "gender", nullable = false, length = 50)
+    private String gender;
+
+    @Basic
     @Column(name = "idtype", nullable = false, length = 50)
     private String idtype;
     @Basic

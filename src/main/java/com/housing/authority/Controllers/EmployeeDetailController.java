@@ -73,6 +73,7 @@ public class EmployeeDetailController {
             throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
         }
         return this.employeeRepository.findById(employeeid).map(employee ->{
+            System.out.println(employee+"........................");
             object.setEmployee(employee);
             return employeeDetailRepository.save(object);
         }).orElseThrow(()-> new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found"));
@@ -94,6 +95,7 @@ public class EmployeeDetailController {
     public void delete(
             @PathVariable String employeeid,
             @PathVariable String id) {
+
 
     }
 
