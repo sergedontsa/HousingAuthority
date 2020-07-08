@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface BillingRepository extends JpaRepository<Billing, String> {
 
-    @Query("SELECT b FROM Billing b WHERE b.tenant.tenantid=:tenantid ")
+    @Query(value = "SELECT b FROM Billing b WHERE b.tenant.tenantid=:tenantid ")
     List<Billing> findByTenantId(@Param("tenantid") String tenantid);
 }

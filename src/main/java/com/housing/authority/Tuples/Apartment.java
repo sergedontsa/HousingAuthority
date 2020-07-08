@@ -1,5 +1,6 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -48,7 +51,7 @@ public class Apartment implements Serializable {
     private String status;
     @Column(name = "registerdate")
     private String registerdate;
-    @Column(name = "buildingid")
+    @Column(name = "buildingid", insertable = false, updatable = false)
     private String buildingid;
     @Column(name = "lastupdate")
     private String lastupdate;
@@ -56,8 +59,14 @@ public class Apartment implements Serializable {
 //    @OneToOne(mappedBy = "apartment")
 //    private Billing billing;
 
-    @ManyToOne
-    private Billing billing;
+//    @ManyToOne
+//    private Billing billing;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "buildingid", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Building building;
 
 
 

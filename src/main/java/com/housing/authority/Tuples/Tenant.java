@@ -31,6 +31,13 @@ public class Tenant extends AuditModel {
     @Column(name = "tenantid", nullable = false, length = 50)
     private String tenantid;
 
+    @Basic
+    @Column(name ="apartmentid", nullable = false, length = 50)
+    private String apartmentid;
+    @Basic
+    @Column(name ="buildingid", nullable = false, length = 50)
+    private String buildingid;
+
 
     @Basic
     @Column(name = "firstname", nullable = false, length = 50)
@@ -60,11 +67,9 @@ public class Tenant extends AuditModel {
     @Column(name = "status")
     private String status;
 
-//    @OneToOne(mappedBy = "tenant")
-//    private Billing billing;
 
-    @ManyToOne
-    private Billing billing;
+//    @ManyToOne
+//    private Billing billing;
 
 
 

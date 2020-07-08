@@ -95,12 +95,10 @@ public class EmployeeController implements ServiceController<Employee> {
     public Object update(@PathVariable String id, @RequestBody Employee employee) {
         if (this.employeeRepository.findById(id).isPresent()){
             Employee existingEmployee = this.employeeRepository.findById(id).get();
-
-
-
             EntityModel<Employee> entityModel = this.employeeModelAssembler
                     .toModel(this.employeeRepository.save(existingEmployee));
-            return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(existingEmployee))
+            return ResponseEntity.created(employeeModelAssembler
+                    .toModel(this.employeeRepository.save(existingEmployee))
                     .getRequiredLink(IanaLinkRelations.SELF)
                     .toUri())
                     .body(entityModel);

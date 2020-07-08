@@ -131,8 +131,8 @@ public class Constant {
     //Employee Detail
     public final static String EMPLOYEE_DETAIL_CONTROLLER = "/housing/authority/v1/employee/detail";
     public final static String EMPLOYEE_DETAIL_GET_ALL = "get/all";
-    public final static String EMPLOYEE_DETAIL_GET_WITH_ID = "/get/{id}";
-    public final static String EMPLOYEE_DETAIL_DELETE_WITH_ID = "/{employeeid}/delete/{id}";
-    public final static String EMPLOYEE_DETAIL_UPDATE_WITH_ID = "/{employeeid}/update/{id}";
+    public final static String EMPLOYEE_DETAIL_GET_WITH_EMPLOYEE_ID = "/get/{employeeid}";
+    public final static String EMPLOYEE_DETAIL_DELETE_WITH_ID = "/{employeeid}/delete";
+    public final static String EMPLOYEE_DETAIL_UPDATE_WITH_ID = "/{employeeid}/update";
     public final static String EMPLOYEE_DETAIL_SAVE = "/{employeeid}/save";
 }
