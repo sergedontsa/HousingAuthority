@@ -12,14 +12,7 @@ import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -39,10 +32,21 @@ public class Billing extends AuditModel implements Serializable {
     @Id
     @Column(name = "billingid", nullable = false, length = 50)
     private String billingid;
+
+    @Basic
+    @Column(name = "tenantid", insertable = false, updatable = false)
+    private String tenantid;
+    @Basic
+    @Column(name = "buildingid", insertable = false, updatable = false)
+    private String buildingid;
+    @Basic
+    @Column(name = "apartmentid", insertable = false, updatable = false)
+    private String apartmentid;
+
+
     @Basic
     @Column(name = "start", nullable = false, length = 50)
     private String start;
-
 
     @Basic
     @Column(name = "end", nullable = false, length = 50)
@@ -69,7 +73,7 @@ public class Billing extends AuditModel implements Serializable {
     @JsonIgnore
 
     private Building building;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "apartmentid")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

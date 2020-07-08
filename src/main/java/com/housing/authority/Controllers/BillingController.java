@@ -1,13 +1,11 @@
 package com.housing.authority.Controllers;
 
 import com.housing.authority.Repository.BillingRepository;
-import com.housing.authority.Repository.ServiceController;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.BillingModelAssembler;
 import com.housing.authority.Tuples.Billing;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -50,7 +48,6 @@ public class BillingController {
     public CollectionModel<EntityModel<Billing>> readByTenantId(@PathVariable String tenantid){
         List<EntityModel<Billing>> entityModels = this.billingRepository.findByTenantId(tenantid).stream().map(this.billingModelAssembler::toModel)
                 .collect(Collectors.toList());
-        //return new CollectionModel<>(entityModels, linkTo(methodOn(BillingController.class).readAll()).withSelfRel());
         return new CollectionModel<>(entityModels, linkTo(methodOn(BillingController.class).readByTenantId(tenantid)).withSelfRel());
 
     }
