@@ -60,7 +60,9 @@ public class EmployeeDetailController {
         if (employeeDetailRepository.findByEmployeeId(employeeid) == null){
             throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
         }
-        return this.employeeDetailModelAssembler.toModel(this.employeeDetailRepository.findByEmployeeId(employeeid));
+        return this.employeeDetailModelAssembler
+                .toModel(this.employeeDetailRepository
+                        .findByEmployeeId(employeeid));
     }
     @CrossOrigin
     @PostMapping(value = Constant.EMPLOYEE_DETAIL_SAVE, produces = Constant.CONSUMES)
