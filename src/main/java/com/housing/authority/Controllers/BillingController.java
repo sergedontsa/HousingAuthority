@@ -15,7 +15,15 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,11 +74,7 @@ public class BillingController {
 
     @PostMapping(value = Constant.BILLING_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    public Billing create(
-            @PathVariable String tenantId,
-            @PathVariable String apartmentId,
-            @PathVariable String buildingId,
-            @RequestBody Billing object) {
+    public ResponseEntity<EntityModel<Billing>> create(@PathVariable String tenantId, @PathVariable String apartmentId,@PathVariable String buildingId, @RequestBody Billing object) {
         object.setBillingid(IDGenerator.RECORD_ID());
         if (!tenantRepository.existsById(tenantId) ){
             throw new ResourceNotFoundException("TENANT ID: " + tenantId+ " could not be found");
@@ -85,12 +89,21 @@ public class BillingController {
             object.setTenant(tenantRepository.getOne(tenantId));
             object.setApartment(apartmentRepository.getOne(apartmentId));
             object.setBuilding(buildingRepository.getOne(buildingId));
-
-            return billingRepository.save(object);
+            EntityModel<Billing> entityModel = billingModelAssembler.toModel(this.billingRepository.save(object));
+            return ResponseEntity.created(billingModelAssembler.toModel(this.billingRepository.save(object))
+            .getRequiredLink(IanaLinkRelations.SELF)
+            .toUri()).body(entityModel);
+            //return billingRepository.save(object);
         }).orElseThrow(()-> new ResourceNotFoundException("TENANT ID: " + tenantId+ " could not be found"));
     }
 
-    public Object update(String id, Billing billing) {
+    public Object update(String id, String tenantId, Billing object) {
+        if (!this.billingRepository.existsById(id)){
+            throw new ResourceNotFoundException("BILLING ID: " + id+ " could not be found");
+        }else {
+            Billing existing = billingRepository.getOne(id);
+
+        }
         return null;
     }
 

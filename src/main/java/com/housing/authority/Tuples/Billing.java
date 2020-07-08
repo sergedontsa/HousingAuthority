@@ -1,5 +1,6 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
@@ -66,12 +67,12 @@ public class Billing extends AuditModel implements Serializable {
     private String duedate;
     @Basic
     @Column(name = "status", nullable = false, length = 50)
-
     private String status;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "tenantid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
     private Tenant tenant;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -80,10 +81,10 @@ public class Billing extends AuditModel implements Serializable {
     @JsonIgnore
     private Building building;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "apartmentid")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
     private Apartment apartment;
 
 
