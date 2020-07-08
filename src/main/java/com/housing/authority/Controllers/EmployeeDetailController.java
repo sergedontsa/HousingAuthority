@@ -54,8 +54,6 @@ public class EmployeeDetailController {
                 .collect(Collectors.toList());
         return new CollectionModel<>(entityModels, linkTo(methodOn(EmployeeDetailController.class).readAll()).withSelfRel());
     }
-
-
     @CrossOrigin
     @GetMapping(value = Constant.EMPLOYEE_DETAIL_GET_WITH_EMPLOYEE_ID, produces = Constant.PRODUCE)
     public EntityModel<EmployeeDetail> readOne(@PathVariable String employeeid) {
@@ -63,15 +61,11 @@ public class EmployeeDetailController {
             throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
         }
         return this.employeeDetailModelAssembler.toModel(this.employeeDetailRepository.findByEmployeeId(employeeid));
-
     }
-
     @CrossOrigin
     @PostMapping(value = Constant.EMPLOYEE_DETAIL_SAVE, produces = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDetail create(
-            @PathVariable String employeeid,
-            @RequestBody EmployeeDetail object) {
+    public EmployeeDetail create(@PathVariable String employeeid, @RequestBody EmployeeDetail object) {
         if (!employeeRepository.existsById(employeeid)){
             throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
         }
