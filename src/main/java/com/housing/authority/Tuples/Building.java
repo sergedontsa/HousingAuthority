@@ -1,5 +1,9 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,9 +11,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "building")
@@ -83,6 +91,13 @@ public class Building  implements Comparable, Serializable {
     @Basic
     @Column(name = "lastupdate")
     private String lastUpdate;
+
+    //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Apartment.class)
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Apartment.class)
+    @JoinColumn(name = "apartmentid")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<Apartment> apartments;
 
 
 
