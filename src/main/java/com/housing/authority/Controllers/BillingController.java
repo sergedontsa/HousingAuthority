@@ -47,7 +47,6 @@ public class BillingController {
     public CollectionModel<EntityModel<Billing>> readAll() {
         List<EntityModel<Billing>> billings = this.billingRepository.findAll().stream().map(this.billingModelAssembler::toModel)
                 .collect(Collectors.toList());
-
         return new CollectionModel<>(billings, linkTo(methodOn(BillingController.class).readAll()).withSelfRel());
     }
 
