@@ -4,7 +4,6 @@ import com.housing.authority.Enum.ApartmentStatus;
 import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Repository.BuildingRepository;
-import com.housing.authority.Repository.ServiceController;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
@@ -15,22 +14,18 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
+
+/**
+ * Note: still check delete request
+ * the request work but does not delete the entity
+ */
 
 @RestController
 @RequestMapping(value = Constant.APARTMENT_CONTROLLER)
@@ -68,13 +63,15 @@ public class ApartmentController{
         if (!this.buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
         }
+
         return this.buildingRepository.findById(buildingId).map(building -> {
             apartment.setApartmentID(IDGenerator.APARTMENT_ID());
-            apartment.setBuilding(buildingRepository.getOne(buildingId));
-            apartment.setStatus(String.valueOf(ApartmentStatus.Aavilable));
+            apartment.setBuilding(building);
+            apartment.setStatus(String.valueOf(ApartmentStatus.Available));
             EntityModel<Apartment> entityModel = apartmentModelAssembler
                     .toModel(this.apartmentTupleRepository.save(apartment));
-            return ResponseEntity.created(apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment))
+            return ResponseEntity.created(apartmentModelAssembler
+                    .toModel(this.apartmentTupleRepository.save(apartment))
             .getRequiredLink(IanaLinkRelations.SELF)
             .toUri()).body(entityModel);
         }).orElseThrow(()-> new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found"));
@@ -82,24 +79,23 @@ public class ApartmentController{
 
     }
 
-    @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID)
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
-    public void delete(@PathVariable String id){
-        if (this.apartmentTupleRepository.findById(id).isPresent()) {
-            this.apartmentTupleRepository.delete(this.apartmentTupleRepository.findById(id).get());
+    public ResponseEntity<?> delete(@PathVariable String id){
+        if (!apartmentTupleRepository.existsById(id)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        this.apartmentTupleRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
     @PatchMapping(path = Constant.APARTMENT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
-    public Object update(@PathVariable String id, @RequestBody Apartment apartment){
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody Apartment apartment){
         if (this.apartmentTupleRepository.findById(id).isPresent()){
-
             Apartment existingApartment = this.apartmentTupleRepository.findById(id).get();
-
             existingApartment.setNumBedRoom(apartment.getNumBedRoom());
             existingApartment.setBuildingid(apartment.getBuildingid());
             existingApartment.setNumLivingRoom(apartment.getNumLivingRoom());
@@ -109,8 +105,6 @@ public class ApartmentController{
             existingApartment.setNumWindows(apartment.getNumWindows());
             existingApartment.setWithBath(apartment.isWithBath());
             existingApartment.setWithWaterBoiler(apartment.isWithWaterBoiler());
-
-
             if (apartment.getStatus() == null){
                 existingApartment.setStatus("Available");
             }else {
@@ -118,9 +112,9 @@ public class ApartmentController{
             }
 
             this.apartmentTupleRepository.save(existingApartment);
-            return HttpStatus.OK;
+            return new ResponseEntity<Apartment>(HttpStatus.OK);
         }else {
-            return HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

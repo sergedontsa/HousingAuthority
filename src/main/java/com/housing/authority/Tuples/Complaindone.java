@@ -10,11 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -41,12 +37,16 @@ public class Complaindone extends AuditModel implements Serializable {
     private String employeeid;
 
     @Basic
-    @Column(name = "complainid")
+    @Column(name = "complainid", insertable = false, updatable = false)
     private String complainId;
 
     @Basic
     @Column(name = "cost", nullable = false, length = 50)
     private String cost;
+
+    @OneToOne(targetEntity = Complain.class)
+    @JoinColumn(name = "complainid")
+    private Complain complain;
 
 
 

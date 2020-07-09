@@ -1,5 +1,7 @@
 package com.housing.authority.Controllers;
 
+import com.housing.authority.Enum.ApartmentStatus;
+import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.ServiceController;
@@ -7,6 +9,7 @@ import com.housing.authority.Repository.TenantRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.TenantModelAssembler;
+import com.housing.authority.Tuples.Apartment;
 import com.housing.authority.Tuples.Tenant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
@@ -34,14 +37,14 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RestController
 @RequestMapping(value = Constant.TENANT_CONTROLLER)
 @RequiredArgsConstructor
-public class TenantController implements ServiceController<Tenant> {
+public class TenantController {
 
     private final TenantRepository tenantRepository;
     private final TenantModelAssembler tenantModelAssembler;
     private final BuildingRepository buildingRepository;
     private final ApartmentRepository apartmentRepository;
 
-    @Override
+
     @GetMapping(value = Constant.TENANT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Tenant>> readAll(){
@@ -50,7 +53,7 @@ public class TenantController implements ServiceController<Tenant> {
         return new CollectionModel<>(tenants, linkTo(methodOn(TenantController.class).readAll()).withSelfRel());
     }
 
-    @Override
+
     @GetMapping(value = Constant.TENANT_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Tenant> readOne(@PathVariable String id){
@@ -61,29 +64,39 @@ public class TenantController implements ServiceController<Tenant> {
         }
     }
 
-    /**
-     * In case the entity is referred with the id with type integer
-     * Return the entity with id if found in the  server
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Override
-    public EntityModel<Tenant> readOne(int id) {
-        return null;
-    }
 
-    @Override
+
     @PostMapping(value = Constant.TENANT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody Tenant tenant){
-        tenant.setTenantid(IDGenerator.TENANT_ID());
+    public ResponseEntity<?> create(@PathVariable String buildingId, @PathVariable String apartmentid,@RequestBody Tenant tenant){
+        if (!this.buildingRepository.existsById(buildingId)){
+            throw new ResourceNotFoundException("BUILDING ID" + buildingId + " could not be found");
+        }
+        if (!this.apartmentRepository.existsById(apartmentid)){
+            throw new ResourceNotFoundException("APARTMENT ID" + apartmentid + " could not be found");
+        }
 
-        EntityModel<Tenant> entityModel = this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant));
-        return ResponseEntity.created(this.tenantModelAssembler.toModel(this.tenantRepository.save(tenant)).getRequiredLink(IanaLinkRelations.SELF)
-                .toUri()).body(entityModel);
+
+        return this.apartmentRepository.findById(apartmentid).map(apartment -> {
+            if (apartment.getStatus().equals(String.valueOf(ApartmentStatus.Occupied))){
+                throw new ResourceNotFoundException("APARTMENT ID: "+ apartmentid + " is occupied");
+            }
+            tenant.setTenantid(IDGenerator.TENANT_ID());
+            tenant.setApartment(this.apartmentRepository.getOne(apartmentid));
+            tenant.setBuildingid(buildingId);
+            apartment.setStatus(String.valueOf(ApartmentStatus.Occupied));
+            apartmentRepository.save(apartment);
+
+
+            EntityModel<Tenant> entityModel = tenantModelAssembler
+                    .toModel(this.tenantRepository.save(tenant));
+            return ResponseEntity.created(tenantModelAssembler.toModel(this.tenantRepository.save(tenant))
+            .getRequiredLink(IanaLinkRelations.SELF)
+            .toUri()).body(entityModel);
+        }).orElseThrow(()-> new ResourceNotFoundException("APARTMENT ID " + apartmentid+ " could not be found"));
+
     }
-    @Override
+
     @DeleteMapping(value = Constant.TENANT_DELETE_WITH_ID)
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @CrossOrigin
@@ -92,7 +105,7 @@ public class TenantController implements ServiceController<Tenant> {
             this.tenantRepository.delete(this.tenantRepository.findById(id).get());
         }
     }
-    @Override
+
     @PatchMapping(path = Constant.TENANT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
