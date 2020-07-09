@@ -3,14 +3,7 @@ package com.housing.authority.Tuples;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 

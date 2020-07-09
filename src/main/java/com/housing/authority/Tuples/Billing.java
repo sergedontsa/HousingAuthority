@@ -48,9 +48,8 @@ public class Billing extends AuditModel implements Serializable {
     @Column(name = "buildingid", insertable = false, updatable = false)
     private String buildingid;
     @Basic
-    @Column(name = "apartmentid", insertable = false, updatable = false)
+    @Column(name = "apartmentid", nullable = false, length = 50)
     private String apartmentid;
-
 
     @Basic
     @Column(name = "start", nullable = false, length = 50)
@@ -75,17 +74,17 @@ public class Billing extends AuditModel implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private Tenant tenant;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "buildingid")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
     private Building building;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "apartmentid")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityReference(alwaysAsId = true)
-    private Apartment apartment;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "apartmentid")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIdentityReference(alwaysAsId = true)
+//    private Tenant tenant;
 
 
 

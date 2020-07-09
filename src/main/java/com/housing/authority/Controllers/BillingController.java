@@ -62,19 +62,27 @@ public class BillingController {
     @CrossOrigin
     @GetMapping(value = Constant.BILLING_GET_WITH_ID, produces = Constant.PRODUCE)
     public EntityModel<Billing> readOne(@PathVariable String id) {
-        if (this.billingRepository.findById(id).isPresent()){
-            return this.billingModelAssembler.toModel(this.billingRepository.findById(id).get());
-        }else {
-            return null;
+        if (!this.billingRepository.existsById(id)){
+            throw new ResourceNotFoundException("Billing id: " + id + " could not be found");
+        }else{
+            return this.billingModelAssembler.toModel(this.billingRepository.getOne(id));
         }
     }
 
-
-
     @PostMapping(value = Constant.BILLING_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<EntityModel<Billing>> create(@PathVariable String tenantId, @PathVariable String apartmentId,@PathVariable String buildingId, @RequestBody Billing object) {
-        object.setBillingid(IDGenerator.RECORD_ID());
+    @CrossOrigin
+    public ResponseEntity<EntityModel<Billing>> create(
+            @PathVariable String tenantId,
+            @PathVariable String apartmentId,
+            @PathVariable String buildingId,
+            @RequestBody Billing object) {
+
+
+
+        if (!this.tenantRepository.findByIdAndApartmentIdAndBuildingId(tenantId, apartmentId, buildingId).isPresent()){
+            throw new ResourceNotFoundException("Error resource could not be found check IDs");
+        }
         if (!tenantRepository.existsById(tenantId) ){
             throw new ResourceNotFoundException("TENANT ID: " + tenantId+ " could not be found");
         }
@@ -85,9 +93,10 @@ public class BillingController {
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
         }
         return tenantRepository.findById(tenantId).map(tenant -> {
+            object.setBillingid(IDGenerator.RECORD_ID());
             object.setTenant(tenantRepository.getOne(tenantId));
-            object.setApartment(apartmentRepository.getOne(apartmentId));
             object.setBuilding(buildingRepository.getOne(buildingId));
+
             EntityModel<Billing> entityModel = billingModelAssembler.toModel(this.billingRepository.save(object));
             return ResponseEntity.created(billingModelAssembler.toModel(this.billingRepository.save(object))
             .getRequiredLink(IanaLinkRelations.SELF)
@@ -107,11 +116,12 @@ public class BillingController {
     }
 
     @DeleteMapping(value = Constant.BILLING_DELETE_WITH_ID)
+    @CrossOrigin
     public ResponseEntity<?> delete(@PathVariable String id, @PathVariable String tenantid) {
         return billingRepository.findByIdAndTenantId(tenantid, id).map(billing -> {
             billingRepository.delete(billing);
             return ResponseEntity.ok().build();
-        }).orElseThrow(()-> new ResourceNotFoundException("Billing id" + id + " could not be found"));
+        }).orElseThrow(()-> new ResourceNotFoundException("BILLING ID:  " + id + " or TENANT ID: "+ tenantid  +" could not be found"));
 
     }
 }

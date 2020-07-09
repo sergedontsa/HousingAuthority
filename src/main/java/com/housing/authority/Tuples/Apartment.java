@@ -5,6 +5,7 @@ import com.housing.authority.AuditModel.AuditModel;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -25,23 +26,32 @@ public class Apartment extends AuditModel implements Serializable {
 
     @Column(name = "buildingid", insertable = false, updatable = false)
     private String buildingid;
-
+    @NotNull
     @Column(name = "numbedroom")
     private int numBedRoom;
+    @NotNull
     @Column(name = "numlivingroom")
     private int numLivingRoom;
+    @NotNull
     @Column(name = "numbathroom")
     private int numBathRoom;
+    @NotNull
     @Column(name = "numkitchen")
     private int numKitchen;
+    @NotNull
     @Column(name = "numcloset")
     private int numCloset;
+    @NotNull
     @Column(name = "numwindows")
     private int numWindows;
+    @NotNull
     @Column(name = "iswithbath", nullable = false)
     private boolean isWithBath;
+    @NotNull
     @Column(name = "iswithwaterboiler", nullable = false)
+    @NotNull
     private boolean isWithWaterBoiler;
+    @NotNull
     @Column(name = "status")
     private String status;
 
@@ -49,6 +59,7 @@ public class Apartment extends AuditModel implements Serializable {
     @JoinColumn(name = "buildingid", nullable = false)
     @JsonBackReference("apartment")
     private Building building;
+
 
 
 
