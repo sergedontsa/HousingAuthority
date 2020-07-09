@@ -21,6 +21,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * By Serge Dontsa
+ */
+
 @Entity
 @Table(name = "employee_detail", schema = "housingauthority", catalog = "")
 @Data
