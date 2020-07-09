@@ -1,6 +1,9 @@
 package com.housing.authority.Controllers;
 
+import com.housing.authority.Enum.ApartmentStatus;
+import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.ApartmentRepository;
+import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.ServiceController;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
@@ -32,13 +35,11 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RestController
 @RequestMapping(value = Constant.APARTMENT_CONTROLLER)
 @RequiredArgsConstructor
-public class ApartmentController implements ServiceController<Apartment> {
+public class ApartmentController{
     private final ApartmentRepository apartmentTupleRepository;
     private final ApartmentModelAssembler apartmentModelAssembler;
+    private final BuildingRepository buildingRepository;
 
-
-    //-------------------------------APARTMENT
-    @Override
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Apartment>> readAll(){
@@ -47,7 +48,7 @@ public class ApartmentController implements ServiceController<Apartment> {
         return new CollectionModel<>(apartments, linkTo(methodOn(ApartmentController.class).readAll()).withSelfRel());
     }
 
-    @Override
+
     @GetMapping(value = Constant.APARTMENT_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Apartment> readOne(@PathVariable String id){
@@ -59,29 +60,28 @@ public class ApartmentController implements ServiceController<Apartment> {
         }
     }
 
-    @Override
-    public EntityModel<Apartment> readOne(int id) {
-        return null;
-    }
-
-    @Override
     @PostMapping(value = Constant.APARTMENT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
-    public ResponseEntity<?> create(@RequestBody Apartment apartment){
-        apartment.setApartmentID(IDGenerator.APARTMENT_ID());
-        apartment.setRegisterdate(Constant.getCurrentDateAsString());
-        apartment.setLastupdate(Constant.getCurrentDateAsString());
-        apartment.setStatus("Available");
-        EntityModel<Apartment> entityModel = this.apartmentModelAssembler
-                .toModel(this.apartmentTupleRepository.save(apartment));
+    public ResponseEntity<?> create(@PathVariable String buildingId,@RequestBody Apartment apartment){
 
-        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF)
-                .toUri())
-                .body(entityModel);
+        if (!this.buildingRepository.existsById(buildingId)){
+            throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
+        }
+        return this.buildingRepository.findById(buildingId).map(building -> {
+            apartment.setApartmentID(IDGenerator.APARTMENT_ID());
+            apartment.setBuilding(buildingRepository.getOne(buildingId));
+            apartment.setStatus(String.valueOf(ApartmentStatus.Aavilable));
+            EntityModel<Apartment> entityModel = apartmentModelAssembler
+                    .toModel(this.apartmentTupleRepository.save(apartment));
+            return ResponseEntity.created(apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment))
+            .getRequiredLink(IanaLinkRelations.SELF)
+            .toUri()).body(entityModel);
+        }).orElseThrow(()-> new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found"));
+
 
     }
-    @Override
+
     @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID)
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @CrossOrigin
@@ -91,7 +91,7 @@ public class ApartmentController implements ServiceController<Apartment> {
         }
 
     }
-    @Override
+
     @PatchMapping(path = Constant.APARTMENT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
@@ -109,7 +109,7 @@ public class ApartmentController implements ServiceController<Apartment> {
             existingApartment.setNumWindows(apartment.getNumWindows());
             existingApartment.setWithBath(apartment.isWithBath());
             existingApartment.setWithWaterBoiler(apartment.isWithWaterBoiler());
-            existingApartment.setLastupdate(Constant.getCurrentDateAsString());
+
 
             if (apartment.getStatus() == null){
                 existingApartment.setStatus("Available");

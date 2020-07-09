@@ -1,6 +1,7 @@
 package com.housing.authority.Tuples;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,25 +12,33 @@ import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
 
 
 @Entity
 @Table(name = "apartment")
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Apartment implements Serializable {
+public class Apartment extends AuditModel implements Serializable {
 
     @Id
     @Column(name = "apartmentid", nullable = false, length = 50)
     private String apartmentID;
+
+    @Column(name = "buildingid", insertable = false, updatable = false)
+    private String buildingid;
 
     @Column(name = "numbedroom")
     private int numBedRoom;
@@ -49,23 +58,11 @@ public class Apartment implements Serializable {
     private boolean isWithWaterBoiler;
     @Column(name = "status")
     private String status;
-    @Column(name = "registerdate")
-    private String registerdate;
-    @Column(name = "buildingid", insertable = false, updatable = false)
-    private String buildingid;
-    @Column(name = "lastupdate")
-    private String lastupdate;
 
-//    @OneToOne(mappedBy = "apartment")
-//    private Billing billing;
-
-//    @ManyToOne
-//    private Billing billing;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "buildingid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
     private Building building;
 
 

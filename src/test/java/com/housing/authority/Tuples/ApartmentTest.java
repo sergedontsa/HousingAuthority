@@ -38,8 +38,7 @@ class ApartmentTest implements Service {
     private boolean isWithBath;
     private boolean isWithWaterBoiler;
     private String status;
-    private String registerDate;
-    private String lastUpdate;
+
 
     @BeforeEach
     void init(){
@@ -55,8 +54,7 @@ class ApartmentTest implements Service {
         this.isWithBath = true;
         this.isWithWaterBoiler = true;
         this.status = "Avail Test";
-        this.registerDate = Constant.getCurrentDateAsString();
-        this.lastUpdate = Constant.getCurrentDateAsString();
+
     }
     @Autowired
     ApartmentRepository apartmentRepository;
@@ -103,8 +101,7 @@ class ApartmentTest implements Service {
         apartment.setWithBath(this.isWithBath);
         apartment.setWithWaterBoiler(this.isWithWaterBoiler);
         apartment.setStatus(this.status);
-        apartment.setRegisterdate(this.registerDate);
-        apartment.setLastupdate(this.lastUpdate);
+
 
         Apartment newApartment = this.apartmentRepository.save(apartment);
         assertNotNull(newApartment);
@@ -128,8 +125,7 @@ class ApartmentTest implements Service {
         apartment.setWithBath(this.isWithBath);
         apartment.setWithWaterBoiler(this.isWithWaterBoiler);
         apartment.setStatus(this.status);
-        apartment.setRegisterdate(this.registerDate);
-        apartment.setLastupdate(this.lastUpdate);
+
         Apartment updatedApartment = this.apartmentRepository.save(apartment);
         assertNotNull(updatedApartment);
     }

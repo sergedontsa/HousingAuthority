@@ -1,5 +1,7 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,7 +51,7 @@ public class Employee implements Serializable {
     private String lastupdate;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
-    @JsonIgnoreProperties("employee")
+    @JsonIgnore
     private EmployeeDetail employeeDetail;
 
 }
