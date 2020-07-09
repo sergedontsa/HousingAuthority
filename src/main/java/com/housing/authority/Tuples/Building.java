@@ -1,23 +1,18 @@
 package com.housing.authority.Tuples;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "building")
@@ -92,11 +87,8 @@ public class Building  implements Comparable, Serializable {
     @Column(name = "lastupdate")
     private String lastUpdate;
 
-    //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Apartment.class)
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Apartment.class)
-    @JoinColumn(name = "apartmentid")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonManagedReference("apartment")
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Apartment> apartments;
 
 
