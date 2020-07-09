@@ -84,10 +84,6 @@ public class Building  implements Comparable, Serializable {
     @Column(name = "lastupdate")
     private String lastUpdate;
 
-//    @OneToOne(mappedBy = "building")
-//    private Billing billing;
-    @ManyToOne
-    private Billing billing;
 
 
     public boolean isWithPool() {

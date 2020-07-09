@@ -84,7 +84,7 @@ public class Billing extends AuditModel implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "apartmentid")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference
     private Apartment apartment;
 
 

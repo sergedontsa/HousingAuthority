@@ -62,7 +62,7 @@ public class Constant {
     public final static String APARTMENT_GET_WITH_ID = "get/{id}";
     public final static String APARTMENT_DELETE_WITH_ID = "/delete/{id}";
     public final static String APARTMENT_UPDATE_WITH_ID = "/update/{id}";
-    public final static String APARTMENT_SAVE = "/save";
+    public final static String APARTMENT_SAVE = "/{buildingId}/save";
 
     //Tenant
     public final static String TENANT_CONTROLLER = "/housing/authority/v1/tenant";

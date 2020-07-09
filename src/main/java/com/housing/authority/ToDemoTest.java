@@ -29,7 +29,7 @@ public class ToDemoTest {
         String n = Utilities.getNumHours("2020-07-05 06:37:26","2020-07-05 09:30:26");
         System.out.println("N: " + n);
 
-        System.out.println(Status.CANCELLED);
+        System.out.println(String.valueOf(Status.CANCELLED));
         System.out.println(Status.IN_PROGRESS);
         System.out.println(Status.COMPLETED);
     }

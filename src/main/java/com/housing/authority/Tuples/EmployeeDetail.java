@@ -1,5 +1,6 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
