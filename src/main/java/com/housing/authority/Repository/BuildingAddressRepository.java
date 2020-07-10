@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface BuildingAddressRepository extends JpaRepository<BuildingAddress, Integer>
+public interface BuildingAddressRepository extends JpaRepository<BuildingAddress, String>
 {
 
 }

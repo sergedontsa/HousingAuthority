@@ -16,7 +16,7 @@ public class BuildingAddressModelAssembler implements RepresentationModelAssembl
     @Override
     public @NotNull EntityModel<BuildingAddress> toModel(@NotNull BuildingAddress entity) {
         return new EntityModel<>(entity,
-                linkTo(methodOn(BuildingAddressController.class).readOne(entity.getId())).withSelfRel(),
+                linkTo(methodOn(BuildingAddressController.class).readOne(entity.getBuildingid())).withSelfRel(),
                 linkTo(methodOn(BuildingAddressController.class).readAll()).withRel("buildingAddress"));
     }
 
