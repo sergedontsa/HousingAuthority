@@ -23,8 +23,8 @@ public class Tenant extends AuditModel {
 
     @Basic
     @Column(name ="apartmentid", insertable = false, updatable = false)
-    //@Column(name ="apartmentid", nullable = false, length = 50)
     private String apartmentid;
+
     @Basic
     @Column(name ="buildingid", nullable = false, length = 50)
     private String buildingid;

@@ -135,4 +135,12 @@ public class Constant {
     public final static String EMPLOYEE_DETAIL_DELETE_WITH_ID = "/{employeeid}/delete";
     public final static String EMPLOYEE_DETAIL_UPDATE_WITH_ID = "/{employeeid}/update";
     public final static String EMPLOYEE_DETAIL_SAVE = "/{employeeid}/save";
+
+    //Building address
+    public final static String BUILDING_ADDRESS_CONTROLLER = "/housing/authority/v1/building/address";
+    public final static String BUILDING_ADDRESS_GET_ALL = "get/all";
+    public final static String BUILDING_ADDRESS_GET_WITH_PROFILE_ID = "/get/{id}/";
+    public final static String BUILDING_ADDRESS_DELETE_WITH_PROFILE_ID = "/{id}/delete";
+    public final static String BUILDING_ADDRESS_UPDATE_WITH_PROFILE_ID = "/{id}/update";
+    public final static String BUILDING_ADDRESS_SAVE_WITH_PROFILE_ID = "/{id}//save";
 }

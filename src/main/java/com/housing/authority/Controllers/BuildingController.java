@@ -40,7 +40,9 @@ public class BuildingController implements ServiceController<Building> {
     @CrossOrigin
     @GetMapping(value = Constant.BUILDING_GET_ALL, produces = Constant.PRODUCE)
     public CollectionModel<EntityModel<Building>> readAll() {
-        List<EntityModel<Building>> buildings = this.buildingRepository.findAll().stream().map(this.buildingModelAssembler::toModel)
+        List<EntityModel<Building>> buildings = this.buildingRepository.findAll()
+                .stream()
+                .map(this.buildingModelAssembler::toModel)
                 .collect(Collectors.toList());
 
         return new CollectionModel<>(buildings, linkTo(methodOn(BuildingController.class).readAll()).withSelfRel());
@@ -68,8 +70,7 @@ public class BuildingController implements ServiceController<Building> {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Building object) {
         object.setBuildingId(IDGenerator.BUILDING_ID());
-        object.setLastUpdate(Constant.getCurrentDateAsString());
-        object.setRegisterDate(Constant.getCurrentDateAsString());
+
 
         return ResponseEntity.created(this.buildingModelAssembler
                 .toModel(this.buildingRepository.save(object))
@@ -86,11 +87,7 @@ public class BuildingController implements ServiceController<Building> {
     public Object update(@PathVariable String id, @RequestBody Building building) {
         if (this.buildingRepository.findById(id).isPresent()){
             Building existingBuilding = this.buildingRepository.findById(id).get();
-            existingBuilding.setBuildingNumber(building.getBuildingNumber());
-            existingBuilding.setCity(building.getCity());
-            existingBuilding.setProvince(building.getProvince());
-            existingBuilding.setZipCode(building.getZipCode());
-            existingBuilding.setCountry(building.getCountry());
+
             existingBuilding.setNumLevel(building.getNumLevel());
             existingBuilding.setNumBedRoom(building.getNumBedRoom());
             existingBuilding.setNumBathRoom(building.getNumBathRoom());

@@ -1,7 +1,6 @@
 package com.housing.authority.Tuples;
 
 import com.housing.authority.Repository.BuildingRepository;
-import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.Services.Service;
 import org.junit.jupiter.api.*;
@@ -24,11 +23,7 @@ class BuildingTest implements Service {
 
     private String idForTest;
     private String idForCreate;
-    private int buildingNumber;
-    private String city;
-    private String province;
-    private String zipCode;
-    private String country;
+
     private int numLevel;
     private int numBedRoom;
     private int numBathRoom;
@@ -41,18 +36,13 @@ class BuildingTest implements Service {
     private int numParking;
     private boolean isWithPool;
     private boolean isWithElevator;
-    private String registerDate;
-    private String lastUpdate;
+
 
     @BeforeEach
     void init(){
         this.idForTest = "IMAH-47091-7";
         this.idForCreate = IDGenerator.BUILDING_ID();
-        this.buildingNumber = 2020;
-        this.city = "Douala Test";
-        this.province = "Littoral Test";
-        this.zipCode = "237 Test";
-        this.country = "Cameroon Test";
+
         this.numLevel = 5;
         this.numBedRoom = 50;
         this.numBathRoom = 50;
@@ -65,8 +55,7 @@ class BuildingTest implements Service {
         this.numParking = 50;
         this.isWithPool = true;
         this.isWithElevator = true;
-        this.registerDate = Constant.getCurrentDateAsString();
-        this.lastUpdate = Constant.getCurrentDateAsString();
+
     }
 
     @Autowired
@@ -95,11 +84,7 @@ class BuildingTest implements Service {
      public void createTest() {
         Building building = new Building();
         building.setBuildingId(this.idForCreate);
-        building.setBuildingNumber(this.buildingNumber);
-        building.setCity(this.city);
-        building.setProvince(this.province);
-        building.setZipCode(zipCode);
-        building.setCountry(country);
+
         building.setNumLevel(numLevel);
         building.setNumBedRoom(numBedRoom);
         building.setNumBathRoom(numBathRoom);
@@ -112,8 +97,7 @@ class BuildingTest implements Service {
         building.setNumParkingSpace(numParking);
         building.setWithPool(isWithPool);
         building.setWithElevator(isWithElevator);
-        building.setRegisterDate(registerDate);
-        building.setLastUpdate(lastUpdate);
+
         assertNotNull(building);
         Building newBuilding = this.buildingRepository.save(building);
         assertNotNull(newBuilding);
@@ -124,11 +108,7 @@ class BuildingTest implements Service {
     @Test
     public void updateTest() {
         Building building = this.buildingRepository.getOne(idForTest);
-        building.setBuildingNumber(this.buildingNumber);
-        building.setCity(this.city);
-        building.setProvince(this.province);
-        building.setZipCode(zipCode);
-        building.setCountry(country);
+
         building.setNumLevel(numLevel);
         building.setNumBedRoom(numBedRoom);
         building.setNumBathRoom(numBathRoom);
@@ -141,8 +121,7 @@ class BuildingTest implements Service {
         building.setNumParkingSpace(numParking);
         building.setWithPool(isWithPool);
         building.setWithElevator(isWithElevator);
-        building.setRegisterDate(registerDate);
-        building.setLastUpdate(lastUpdate);
+
         Building updatedBuilding = this.buildingRepository.save(building);
         assertNotNull(updatedBuilding);
     }

@@ -22,6 +22,7 @@ public class Apartment extends AuditModel implements Serializable {
 
     @Id
     @Column(name = "apartmentid", nullable = false, length = 50)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String apartmentID;
 
     @Column(name = "buildingid", insertable = false, updatable = false)
