@@ -1,41 +1,42 @@
 package com.housing.authority.Tuples;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.housing.authority.AuditModel.AuditModel;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "building")
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Setter
 @Getter
 @ToString(includeFieldNames = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Building  implements Comparable, Serializable {
+public class Building extends AuditModel implements Comparable, Serializable {
 
     @Id
     @Column(name = "buildingid", nullable = false, length = 50)
     private String buildingId;
+
     @Basic
-    @Column(name = "buildingnumber")
-    private int buildingNumber;
-    @Basic
-    @Column(name = "city")
-    private String city;
-    @Basic
-    @Column(name = "province")
-    private String province;
-    @Basic
-    @Column(name = "zipcode")
-    private String zipCode;
-    @Basic
-    @Column(name = "country")
-    private String country;
+    @Column(name = "addressid", insertable = false, updatable = false)
+    private int addressid;
+
     @Basic
     @Column(name = "numlevel")
     private int numLevel;
@@ -72,13 +73,11 @@ public class Building  implements Comparable, Serializable {
     @Basic
     @Column(name = "iswithelevator")
     private boolean isWithElevator;
-    @Basic
-    @Column(name = "registerdate")
-    private String registerDate;
 
-    @Basic
-    @Column(name = "lastupdate")
-    private String lastUpdate;
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "addressid")
+     private BuildingAddress buildingAddress;
+
 
     @JsonManagedReference("apartment")
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
