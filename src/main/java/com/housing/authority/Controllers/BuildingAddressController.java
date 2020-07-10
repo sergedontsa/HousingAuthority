@@ -47,13 +47,13 @@ public class BuildingAddressController {
 
     @CrossOrigin
     @GetMapping(value = Constant.BUILDING_ADDRESS_GET_WITH_PROFILE_ID, produces = Constant.PRODUCE)
-    public EntityModel<BuildingAddress> readOne(@PathVariable int id) {
+    public EntityModel<BuildingAddress> readOne(@PathVariable String id) {
 
         return null;
     }
     @CrossOrigin
     @PostMapping(value = Constant.BUILDING_ADDRESS_SAVE_WITH_PROFILE_ID, consumes = Constant.CONSUMES)
-    public ResponseEntity<?> create(@PathVariable int id, @RequestBody BuildingAddress object) {
+    public ResponseEntity<?> create(@PathVariable String id, @RequestBody BuildingAddress object) {
 
         return null;
     }

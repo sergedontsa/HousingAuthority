@@ -10,12 +10,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "schedule")
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Setter
 @Getter
 @ToString
@@ -45,10 +49,6 @@ public class Schedule extends AuditModel {
     private String description;
 
 
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "employeeid")
-//    private Employee employee;
 
 
 

@@ -1,7 +1,12 @@
 package com.housing.authority.Tuples;
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,20 +18,16 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "employee_address", schema = "housingauthority", catalog = "")
-@AllArgsConstructor
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ToString
-@Getter
 @Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeAddress extends AuditModel implements Serializable {
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
-    @Basic
     @Column(name = "employeeid", nullable = false, length = 50)
-    private String employeeid;
+    private String employeeId;
     @Basic
     @Column(name = "number", nullable = true)
     private Integer number;
@@ -42,7 +43,6 @@ public class EmployeeAddress extends AuditModel implements Serializable {
     @Basic
     @Column(name = "country", nullable = false, length = 50)
     private String country;
-
 
 
 }

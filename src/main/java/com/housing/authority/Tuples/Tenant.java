@@ -1,10 +1,23 @@
 package com.housing.authority.Tuples;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.housing.authority.AuditModel.AuditModel;
-import lombok.*;
 
-import javax.persistence.*;
+import com.housing.authority.AuditModel.AuditModel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tenant")

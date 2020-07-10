@@ -27,8 +27,6 @@ import java.io.Serializable;
 public class BuildingAddress extends AuditModel implements Serializable {
 
     @Id
-    @Column(name = "addressid", nullable = false)
-    private int id;
     @Basic
     @Column(name = "buildingid", nullable = false, length = 50)
     private String buildingid;

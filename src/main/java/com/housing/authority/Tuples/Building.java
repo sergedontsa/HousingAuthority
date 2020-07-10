@@ -1,9 +1,15 @@
 package com.housing.authority.Tuples;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -35,7 +41,7 @@ public class Building extends AuditModel implements Comparable, Serializable {
 
     @Basic
     @Column(name = "addressid", insertable = false, updatable = false)
-    private int addressid;
+    private String addressid;
 
     @Basic
     @Column(name = "numlevel")
