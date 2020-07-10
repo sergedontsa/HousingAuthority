@@ -46,25 +46,25 @@ public class BuildingAddressController {
     }
 
     @CrossOrigin
-    @GetMapping(value = Constant.BUILDING_ADDRESS_GET_WITH_PROFILE_ID, produces = Constant.PRODUCE)
-    public EntityModel<BuildingAddress> readOne(@PathVariable String id) {
+    @GetMapping(value = Constant.BUILDING_ADDRESS_GET_WITH_BUILDING_ID, produces = Constant.PRODUCE)
+    public EntityModel<BuildingAddress> readOne(@PathVariable String buildingId) {
 
         return null;
     }
     @CrossOrigin
-    @PostMapping(value = Constant.BUILDING_ADDRESS_SAVE_WITH_PROFILE_ID, consumes = Constant.CONSUMES)
-    public ResponseEntity<?> create(@PathVariable String id, @RequestBody BuildingAddress object) {
+    @PostMapping(value = Constant.BUILDING_ADDRESS_SAVE_WITH_BUILDING_ID, consumes = Constant.CONSUMES)
+    public ResponseEntity<?> create(@PathVariable String buildingId, @RequestBody BuildingAddress object) {
 
         return null;
     }
     @CrossOrigin
-    @PutMapping(value = Constant.BUILDING_ADDRESS_UPDATE_WITH_PROFILE_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
-    public Object update(@PathVariable int id, @RequestBody BuildingAddress address) {
+    @PutMapping(value = Constant.BUILDING_ADDRESS_UPDATE_WITH_BUILDING_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
+    public Object update(@PathVariable int buildingId, @RequestBody BuildingAddress address) {
         return null;
     }
     @CrossOrigin
-    @DeleteMapping(value = Constant.BUILDING_ADDRESS_DELETE_WITH_PROFILE_ID)
-    public void delete(@PathVariable String id) {
+    @DeleteMapping(value = Constant.BUILDING_ADDRESS_DELETE_WITH_BUILDING_ID)
+    public void delete(@PathVariable String buildingId) {
 
     }
 
