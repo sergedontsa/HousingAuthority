@@ -10,6 +10,7 @@ import com.housing.authority.TupleAssembler.EmployeeDetailModelAssembler;
 import com.housing.authority.Tuples.Employee;
 import com.housing.authority.Tuples.EmployeeDetail;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -37,6 +38,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @AllArgsConstructor
 @RequestMapping(value = Constant.EMPLOYEE_DETAIL_CONTROLLER)
 public class EmployeeDetailController {
+
 
     private final EmployeeDetailRepository employeeDetailRepository;
     private final EmployeeDetailModelAssembler employeeDetailModelAssembler;

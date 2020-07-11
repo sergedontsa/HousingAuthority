@@ -28,8 +28,6 @@ import java.util.List;
 @Table(name = "building")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
 @ToString(includeFieldNames = true)
 @AllArgsConstructor
 @NoArgsConstructor

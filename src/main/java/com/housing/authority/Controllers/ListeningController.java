@@ -6,6 +6,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.ListeningAssembler;
 import com.housing.authority.Tuples.Listening;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;

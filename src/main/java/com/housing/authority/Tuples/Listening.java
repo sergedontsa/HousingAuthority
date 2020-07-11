@@ -1,10 +1,6 @@
 package com.housing.authority.Tuples;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +15,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Getter
+@Setter
 public class Listening {
     @Id
     @Basic

@@ -21,10 +21,10 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class Subscriber extends AuditModel {
     @Id
     @Column(name = "id", nullable = false)

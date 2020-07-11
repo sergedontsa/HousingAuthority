@@ -33,6 +33,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequestMapping(value = Constant.BUILDING_CONTROLLER)
 @RequiredArgsConstructor
 public class BuildingController implements ServiceController<Building> {
+
     private final BuildingRepository buildingRepository;
     private final BuildingModelAssembler buildingModelAssembler;
 

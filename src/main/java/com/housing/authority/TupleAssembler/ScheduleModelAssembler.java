@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class ScheduleModelAssembler implements RepresentationModelAssembler<Schedule, EntityModel<Schedule>> {
     @Override
-    public @NotNull EntityModel<Schedule> toModel(@NotNull Schedule entity) {
+    public  EntityModel<Schedule> toModel( Schedule entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(ScheduleController.class).readOne(entity.getScheduleid())).withSelfRel(),
                 linkTo(methodOn(ScheduleController.class).readAll()).withRel("schedule"));

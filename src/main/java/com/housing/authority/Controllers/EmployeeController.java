@@ -8,6 +8,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.EmployeeModelAssembler;
 import com.housing.authority.Tuples.Employee;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -30,12 +31,11 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
-
-
 @RestController
 @RequestMapping(value = Constant.EMPLOYEE_CONTROLLER)
 @RequiredArgsConstructor
 public class EmployeeController implements ServiceController<Employee> {
+
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeModelAssembler employeeModelAssembler;
@@ -78,8 +78,7 @@ public class EmployeeController implements ServiceController<Employee> {
     @PostMapping(value = Constant.EMPLOYEE_SAVE, consumes = Constant.CONSUMES)
     public ResponseEntity<?> create(@RequestBody Employee object) {
         object.setEmployeeId(IDGenerator.EMPLOYEE_ID());
-        object.setRegisterDate(Constant.getCurrentDateAsString());
-        object.setLastupdate(Constant.getCurrentDateAsString());
+
         EntityModel<Employee> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(object));
         return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(object))
                 .getRequiredLink(IanaLinkRelations.SELF)

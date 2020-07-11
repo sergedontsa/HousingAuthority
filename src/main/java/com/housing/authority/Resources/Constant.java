@@ -139,8 +139,16 @@ public class Constant {
     //Building address
     public final static String BUILDING_ADDRESS_CONTROLLER = "/housing/authority/v1/building/address";
     public final static String BUILDING_ADDRESS_GET_ALL = "get/all";
-    public final static String BUILDING_ADDRESS_GET_WITH_PROFILE_ID = "/get/{id}/";
-    public final static String BUILDING_ADDRESS_DELETE_WITH_PROFILE_ID = "/{id}/delete";
-    public final static String BUILDING_ADDRESS_UPDATE_WITH_PROFILE_ID = "/{id}/update";
-    public final static String BUILDING_ADDRESS_SAVE_WITH_PROFILE_ID = "/{id}//save";
+    public final static String BUILDING_ADDRESS_GET_WITH_BUILDING_ID = "/get/{buildingId}/";
+    public final static String BUILDING_ADDRESS_DELETE_WITH_BUILDING_ID = "/{buildingId}/delete";
+    public final static String BUILDING_ADDRESS_UPDATE_WITH_BUILDING_ID = "/{buildingId}/update";
+    public final static String BUILDING_ADDRESS_SAVE_WITH_BUILDING_ID = "/{buildingId}//save";
+
+    //Employee address
+    public final static String EMPLOYEE_ADDRESS_CONTROLLER = "/housing/authority/v1/employee/address";
+    public final static String EMPLOYEE_ADDRESS_GET_ALL = "get/all";
+    public final static String EMPLOYEE_ADDRESS_GET_WITH_EMPLOYEE_ID = "/get/{employeeId}/";
+    public final static String EMPLOYEE_ADDRESS_DELETE_WITH_EMPLOYEE_ID = "/{employeeId}/delete";
+    public final static String EMPLOYEE_ADDRESS_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
+    public final static String EMPLOYEE_ADDRESS_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}//save";
 }

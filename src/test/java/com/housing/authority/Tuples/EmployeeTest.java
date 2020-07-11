@@ -29,25 +29,17 @@ class EmployeeTest implements Service {
 
     private String employeeIdForTest;
     private String employeeIDForCreate;
-    private String firstName;
-    private String middleName;
-    private String lastName;
     private String department;
     private String status;
-    private String registerDate;
-    private String lastUpdate;
+
 
     @BeforeEach
     void init(){
         this.employeeIdForTest = "HAE-158031";
         this.employeeIDForCreate = IDGenerator.EMPLOYEE_ID();
-        this.firstName = "Doncfack Test";
-        this.middleName = "Awoutsa Test";
-        this.lastName = "Jacqueline Test";
-        this.department = "Accounting Test";
+         this.department = "Accounting Test";
         this.status = "Manager Test";
-        this.registerDate = Constant.getCurrentDateAsString();
-        this.lastUpdate = Constant.getCurrentDateAsString();
+
     }
 
     @Autowired
@@ -82,8 +74,7 @@ class EmployeeTest implements Service {
 
         employee.setDepartment(this.department);
         employee.setStatus(this.status);
-        employee.setRegisterDate(this.registerDate);
-        employee.setLastupdate(this.lastUpdate);
+
         Employee newEmployee = this.employeeRepository.save(employee);
         assertNotNull(newEmployee);
     }
@@ -97,12 +88,11 @@ class EmployeeTest implements Service {
 
         assertNotEquals(existingEmployee.getDepartment(), this.department);
         assertNotEquals(existingEmployee.getStatus(), this.status);
-        assertNotEquals(existingEmployee.getRegisterDate(), this.registerDate);
+
 
         existingEmployee.setDepartment(this.department);
         existingEmployee.setStatus(this.status);
-        existingEmployee.setRegisterDate(this.registerDate);
-        existingEmployee.setLastupdate(this.lastUpdate);
+
         Employee updatedEmployee = this.employeeRepository.save(existingEmployee);
         assertNotNull(updatedEmployee);
     }

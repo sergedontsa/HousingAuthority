@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class ComplainModelAssembler implements RepresentationModelAssembler<Complain, EntityModel<Complain>> {
     @Override
-    public @NotNull EntityModel<Complain> toModel(@NotNull Complain entity) {
+    public   EntityModel<Complain> toModel( Complain entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(ComplainController.class).readOne(entity.getComplainid())).withSelfRel(),
                 linkTo(methodOn(ComplainController.class).readAll()).withRel("Complain"));

@@ -20,11 +20,11 @@ import javax.persistence.Table;
 @Table(name = "schedule")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Schedule extends AuditModel {
     @Id
     @Column(name = "scheduleid", nullable = false)

@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class BuildingModelAssembler implements RepresentationModelAssembler<Building, EntityModel<Building>> {
     @Override
-    public @NotNull EntityModel<Building> toModel(@NotNull Building building) {
+    public  EntityModel<Building> toModel( Building building) {
         return new EntityModel<>(building,
                 linkTo(methodOn(BuildingController.class).readOne(building.getBuildingId())).withSelfRel(),
                 linkTo(methodOn(BuildingController.class).readAll()).withRel("buildings")
