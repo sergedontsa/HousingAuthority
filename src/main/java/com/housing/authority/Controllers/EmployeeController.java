@@ -78,8 +78,7 @@ public class EmployeeController implements ServiceController<Employee> {
     @PostMapping(value = Constant.EMPLOYEE_SAVE, consumes = Constant.CONSUMES)
     public ResponseEntity<?> create(@RequestBody Employee object) {
         object.setEmployeeId(IDGenerator.EMPLOYEE_ID());
-        object.setRegisterDate(Constant.getCurrentDateAsString());
-        object.setLastupdate(Constant.getCurrentDateAsString());
+
         EntityModel<Employee> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(object));
         return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(object))
                 .getRequiredLink(IanaLinkRelations.SELF)

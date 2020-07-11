@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class BillingModelAssembler implements RepresentationModelAssembler<Billing, EntityModel<Billing>> {
     @Override
-    public @NotNull EntityModel<Billing> toModel(@NotNull Billing entity) {
+    public @NotNull  EntityModel<Billing> toModel(@NotNull Billing entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(BillingController.class).readOne(entity.getBillingid())).withSelfRel(),
                 linkTo(methodOn(BillingController.class).readAll()).withRel("billing")

@@ -24,8 +24,6 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = false)
 @ToString
 public class Complaindone extends AuditModel implements Serializable {

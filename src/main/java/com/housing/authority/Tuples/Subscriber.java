@@ -21,8 +21,6 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class Subscriber extends AuditModel {

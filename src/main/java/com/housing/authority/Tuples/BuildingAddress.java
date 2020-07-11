@@ -20,8 +20,6 @@ import java.io.Serializable;
 @Table(name = "building_address", schema = "housingauthority", catalog = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BuildingAddress extends AuditModel implements Serializable {

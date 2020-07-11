@@ -36,8 +36,6 @@ uniqueConstraints = {
 })
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor

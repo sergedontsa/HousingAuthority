@@ -1,6 +1,7 @@
 package com.housing.authority.Tuples;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.housing.authority.AuditModel.AuditModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,11 +28,9 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @ToString
-@EqualsAndHashCode
-public class Employee implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class Employee extends AuditModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employeeid", nullable = false, length = 50)
@@ -47,12 +46,7 @@ public class Employee implements Serializable {
     @Basic
     @Column(name = "status", nullable = false, length = 50)
     private String status;
-    @Basic
-    @Column(name = "registerdate", nullable = false, length = 50)
-    private String registerDate;
-    @Basic
-    @Column(name = "lastupdate", nullable = true, length = 50)
-    private String lastupdate;
+
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "addressid")

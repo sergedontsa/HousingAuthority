@@ -13,8 +13,9 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @Component
 public class BuildingAddressModelAssembler implements RepresentationModelAssembler<BuildingAddress, EntityModel<BuildingAddress>> {
+    @SuppressWarnings("uncheck")
     @Override
-    public @NotNull EntityModel<BuildingAddress> toModel(@NotNull BuildingAddress entity) {
+    public @NotNull  EntityModel<BuildingAddress> toModel(@NotNull BuildingAddress entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(BuildingAddressController.class).readOne(entity.getBuildingid())).withSelfRel(),
                 linkTo(methodOn(BuildingAddressController.class).readAll()).withRel("buildingAddress"));

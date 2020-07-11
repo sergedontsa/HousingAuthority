@@ -26,8 +26,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
-@Getter
-@Setter
 public class Tenant extends AuditModel {
 
     @Id

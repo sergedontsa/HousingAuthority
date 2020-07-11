@@ -20,8 +20,6 @@ import javax.persistence.Table;
 @Table(name = "schedule")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor

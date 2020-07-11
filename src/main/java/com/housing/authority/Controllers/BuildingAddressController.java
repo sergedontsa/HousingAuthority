@@ -1,6 +1,7 @@
 package com.housing.authority.Controllers;
 
 
+import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.BuildingAddressRepository;
 import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.EmployeeRepository;
@@ -10,6 +11,7 @@ import com.housing.authority.Tuples.BuildingAddress;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +36,6 @@ public class BuildingAddressController {
 
     private final BuildingAddressRepository buildingAddressRepository;
     private final BuildingAddressModelAssembler buildingAddressModelAssembler;
-    private final EmployeeRepository employeeRepository;
     private final BuildingRepository buildingRepository;
 
     @CrossOrigin
@@ -49,11 +50,25 @@ public class BuildingAddressController {
     @GetMapping(value = Constant.BUILDING_ADDRESS_GET_WITH_BUILDING_ID, produces = Constant.PRODUCE)
     public EntityModel<BuildingAddress> readOne(@PathVariable String buildingId) {
 
-        return null;
+        if (isBuildingExist(buildingId)) {
+            return this.buildingAddressModelAssembler.toModel(this.buildingAddressRepository.getOne(buildingId));
+        }else {
+            throw new ResourceNotFoundException("Resource Id: " + buildingId + " could not be found");
+        }
+
+
     }
     @CrossOrigin
     @PostMapping(value = Constant.BUILDING_ADDRESS_SAVE_WITH_BUILDING_ID, consumes = Constant.CONSUMES)
     public ResponseEntity<?> create(@PathVariable String buildingId, @RequestBody BuildingAddress object) {
+        if (isBuildingExist(buildingId)){
+            return this.buildingRepository.findById(buildingId).map(building -> {
+                object.setBuildingid(building.getBuildingId());
+                EntityModel<BuildingAddress> entityModel = buildingAddressModelAssembler.toModel(this.buildingAddressRepository.save(object));
+                return ResponseEntity.created(buildingAddressModelAssembler.toModel(this.buildingAddressRepository.save(object)).getRequiredLink(IanaLinkRelations.SELF)
+                .toUri()).body(entityModel);
+            }).orElseThrow(()-> new ResourceNotFoundException("Resource Id: " + buildingId + " could not be found"));
+        }
 
         return null;
     }
@@ -66,6 +81,12 @@ public class BuildingAddressController {
     @DeleteMapping(value = Constant.BUILDING_ADDRESS_DELETE_WITH_BUILDING_ID)
     public void delete(@PathVariable String buildingId) {
 
+    }
+    private boolean isBuildingExist(String buildingId){
+        if (!this.buildingRepository.existsById(buildingId)){
+            throw new ResourceNotFoundException("Resource Id: " + buildingId + " could not be found");
+        }
+        return true;
     }
 
 

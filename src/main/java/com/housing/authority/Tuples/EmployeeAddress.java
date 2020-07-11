@@ -20,12 +20,11 @@ import java.sql.Timestamp;
 @Table(name = "employee_address", schema = "housingauthority", catalog = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeAddress extends AuditModel implements Serializable {
     @Id
+    @Basic
     @Column(name = "employeeid", nullable = false, length = 50)
     private String employeeId;
     @Basic

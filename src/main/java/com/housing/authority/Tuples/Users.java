@@ -23,8 +23,6 @@ import javax.persistence.UniqueConstraint;
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "phonenumber")
 })
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode
 
