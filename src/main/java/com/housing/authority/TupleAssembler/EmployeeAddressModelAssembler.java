@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class EmployeeAddressModelAssembler implements RepresentationModelAssembler<EmployeeAddress, EntityModel<EmployeeAddress>> {
     @Override
-    public @NotNull EntityModel<EmployeeAddress> toModel(@NotNull EmployeeAddress entity) {
+    public  EntityModel<EmployeeAddress> toModel( EmployeeAddress entity) {
         return new EntityModel<>(entity, linkTo(methodOn(EmployeeAddressController.class).readOne(entity.getEmployeeId())).withSelfRel(),
                 linkTo(methodOn(EmployeeAddressController.class).readAll()).withRel("Address"));
     }

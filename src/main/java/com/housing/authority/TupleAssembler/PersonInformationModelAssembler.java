@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class PersonInformationModelAssembler implements RepresentationModelAssembler<Personinformation, EntityModel<Personinformation>> {
     @Override
-    public @NotNull EntityModel<Personinformation> toModel(@NotNull Personinformation personinformation) {
+    public  EntityModel<Personinformation> toModel( Personinformation personinformation) {
         return new EntityModel<>(personinformation,
                 linkTo(methodOn(PersonInformationController.class).readOne(personinformation.getDataid())).withSelfRel(),
                 linkTo(methodOn(PersonInformationController.class).readAll()).withRel("Record"));

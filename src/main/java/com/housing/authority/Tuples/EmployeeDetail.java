@@ -39,6 +39,8 @@ uniqueConstraints = {
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class EmployeeDetail extends AuditModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

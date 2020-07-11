@@ -27,9 +27,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequestMapping(value = Constant.LISTENING_CONTROLLER)
 public class ListeningController implements ServiceController<Listening> {
 
-    @Autowired
     private final ListeningRepository listeningRepository;
-    @Autowired
     private final ListeningAssembler listeningAssembler;
 
     /**

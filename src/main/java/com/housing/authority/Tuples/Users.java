@@ -25,7 +25,8 @@ import javax.persistence.UniqueConstraint;
 })
 @ToString
 @EqualsAndHashCode
-
+@Getter
+@Setter
 public class Users implements Comparable {
 
     @Id

@@ -23,6 +23,8 @@ import javax.persistence.Table;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Schedule extends AuditModel {
     @Id
     @Column(name = "scheduleid", nullable = false)

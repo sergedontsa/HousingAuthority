@@ -19,6 +19,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @DynamicUpdate
 @Data
+@Getter
+@Setter
 public class Personinformation extends AuditModel implements Comparable, Serializable {
     @Id
     @Column(name = "dataid", nullable = false, length = 50)

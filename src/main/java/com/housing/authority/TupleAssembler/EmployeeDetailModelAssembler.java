@@ -13,7 +13,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class EmployeeDetailModelAssembler implements RepresentationModelAssembler<EmployeeDetail, EntityModel<EmployeeDetail>> {
     @Override
-    public@NotNull EntityModel<EmployeeDetail> toModel(@NotNull EmployeeDetail entity) {
+    public  EntityModel<EmployeeDetail> toModel( EmployeeDetail entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(EmployeeDetailController.class).readOne(entity.getEmployee().getEmployeeId())).withSelfRel(),
                 linkTo(methodOn(EmployeeDetailController.class).readAll()).withRel("detail"));

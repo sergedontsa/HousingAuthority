@@ -22,6 +22,8 @@ import java.sql.Timestamp;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class EmployeeAddress extends AuditModel implements Serializable {
     @Id
     @Basic

@@ -14,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class SubscriberModelAssembler implements RepresentationModelAssembler<Subscriber, EntityModel<Subscriber>> {
     @Override
-    public @NotNull EntityModel<Subscriber> toModel(@NotNull Subscriber entity) {
+    public  EntityModel<Subscriber> toModel( Subscriber entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(SubscriberController.class).readOne(entity.getId())).withSelfRel(),
                 linkTo(methodOn(SubscriberController.class).readAll()).withRel("subscriber"));

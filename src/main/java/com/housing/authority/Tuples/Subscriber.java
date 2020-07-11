@@ -23,6 +23,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class Subscriber extends AuditModel {
     @Id
     @Column(name = "id", nullable = false)

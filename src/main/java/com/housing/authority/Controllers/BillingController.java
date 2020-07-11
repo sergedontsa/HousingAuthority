@@ -10,6 +10,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.BillingModelAssembler;
 import com.housing.authority.Tuples.Billing;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -35,6 +36,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @AllArgsConstructor
 @RequestMapping(value = Constant.BILLING_CONTROLLER)
 public class BillingController {
+
 
     private final BillingRepository billingRepository;
     private final BillingModelAssembler billingModelAssembler;
