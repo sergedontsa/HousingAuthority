@@ -8,7 +8,9 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
 import com.housing.authority.Tuples.Apartment;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -40,16 +42,24 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequestMapping(value = Constant.APARTMENT_CONTROLLER)
 @RequiredArgsConstructor
 public class ApartmentController{
+    @Autowired
     private final ApartmentRepository apartmentTupleRepository;
+    @Autowired
     private final ApartmentModelAssembler apartmentModelAssembler;
+    @Autowired
     private final BuildingRepository buildingRepository;
 
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Apartment>> readAll(){
-        List<EntityModel<Apartment>> apartments = this.apartmentTupleRepository.findAll().stream().map(this.apartmentModelAssembler::toModel)
-                .collect(Collectors.toList());
-        return new CollectionModel<>(apartments, linkTo(methodOn(ApartmentController.class).readAll()).withSelfRel());
+        List<EntityModel<Apartment>> apartments = this.apartmentTupleRepository
+                .findAll()
+                .stream()
+                .map(this.apartmentModelAssembler::toModel).collect(Collectors.toList());
+
+        return new CollectionModel<>(apartments, linkTo(methodOn(ApartmentController.class)
+                .readAll())
+                .withSelfRel());
     }
 
 
@@ -77,8 +87,10 @@ public class ApartmentController{
             apartment.setApartmentID(IDGenerator.APARTMENT_ID());
             apartment.setBuilding(building);
             apartment.setStatus(String.valueOf(ApartmentStatus.Available));
-            EntityModel<Apartment> entityModel = apartmentModelAssembler
-                    .toModel(this.apartmentTupleRepository.save(apartment));
+            apartment.setBuildingid(buildingId);
+            System.out.println(".........");
+            System.out.println(apartment);
+            EntityModel<Apartment> entityModel = apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
             return ResponseEntity.created(apartmentModelAssembler
                     .toModel(this.apartmentTupleRepository.save(apartment))
             .getRequiredLink(IanaLinkRelations.SELF)

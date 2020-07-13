@@ -22,6 +22,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
+@Primary
 public class SwaggerConfig
 {
     @Bean
@@ -42,7 +43,7 @@ public class SwaggerConfig
     }
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("Housing Autority Api")
+                .title("Housing API")
                 .description("description")
                 .version("1.0-SNAPSHOT")
                 .build();

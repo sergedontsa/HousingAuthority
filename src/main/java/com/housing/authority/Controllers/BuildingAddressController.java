@@ -9,6 +9,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.BuildingAddressModelAssembler;
 import com.housing.authority.Tuples.BuildingAddress;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -34,16 +35,23 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequiredArgsConstructor
 public class BuildingAddressController {
 
+    @Autowired
     private final BuildingAddressRepository buildingAddressRepository;
+    @Autowired
     private final BuildingAddressModelAssembler buildingAddressModelAssembler;
+    @Autowired
     private final BuildingRepository buildingRepository;
 
     @CrossOrigin
     @GetMapping(value = Constant.BUILDING_ADDRESS_GET_ALL, produces = Constant.PRODUCE)
     public CollectionModel<EntityModel<BuildingAddress>> readAll() {
-        List<EntityModel<BuildingAddress>> entityModels = this.buildingAddressRepository.findAll().stream().map(
-                this.buildingAddressModelAssembler::toModel).collect(Collectors.toList());
-        return new CollectionModel<>(entityModels, linkTo(methodOn(BuildingAddressController.class).readAll()).withSelfRel());
+        List<EntityModel<BuildingAddress>> entityModels = this.buildingAddressRepository
+                .findAll()
+                .stream()
+                .map(this.buildingAddressModelAssembler::toModel).collect(Collectors.toList());
+        return new CollectionModel<>(entityModels, linkTo(methodOn(BuildingAddressController.class)
+                .readAll())
+                .withSelfRel());
     }
 
     @CrossOrigin

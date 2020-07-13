@@ -17,7 +17,7 @@ public class ApartmentModelAssembler implements RepresentationModelAssembler<Apa
 {
 
     @Override
-    public  EntityModel<Apartment> toModel( Apartment entity) {
+    public @NotNull EntityModel<Apartment> toModel(@NotNull Apartment entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(ApartmentController.class).readOne(entity.getApartmentID())).withSelfRel(),
                 linkTo(methodOn(ApartmentController.class).readAll()).withRel("apartments"));

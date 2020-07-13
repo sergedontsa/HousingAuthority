@@ -27,13 +27,13 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "billing")
-@Data
 @EqualsAndHashCode(callSuper = false)
-@Setter
-@Getter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Getter
+@Setter
+@ToString
 public class Billing extends AuditModel implements Serializable {
 
 
@@ -79,14 +79,5 @@ public class Billing extends AuditModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIdentityReference(alwaysAsId = true)
     private Building building;
-
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "apartmentid")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIdentityReference(alwaysAsId = true)
-//    private Tenant tenant;
-
-
-
 
 }
