@@ -10,6 +10,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.BillingModelAssembler;
 import com.housing.authority.Tuples.Billing;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +35,10 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping(value = Constant.BILLING_CONTROLLER)
+@RequiredArgsConstructor
 public class BillingController {
+
 
 
     private final BillingRepository billingRepository;
@@ -43,6 +46,8 @@ public class BillingController {
     private final TenantRepository tenantRepository;
     private final ApartmentRepository apartmentRepository;
     private final BuildingRepository buildingRepository;
+
+
 
     @CrossOrigin
     @GetMapping(value = Constant.BILLING_GET_ALL, produces = Constant.PRODUCE)

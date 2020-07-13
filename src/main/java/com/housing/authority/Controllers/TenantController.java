@@ -10,6 +10,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.TenantModelAssembler;
 import com.housing.authority.Tuples.Tenant;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -37,9 +38,13 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequiredArgsConstructor
 public class TenantController {
 
+    @Autowired
     private final TenantRepository tenantRepository;
+    @Autowired
     private final TenantModelAssembler tenantModelAssembler;
+    @Autowired
     private final BuildingRepository buildingRepository;
+    @Autowired
     private final ApartmentRepository apartmentRepository;
 
 

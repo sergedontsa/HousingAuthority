@@ -2,45 +2,37 @@ package com.housing.authority.Tuples;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "apartment")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Apartment extends AuditModel implements Serializable {
+@Data
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
+@ToString
+public class Apartment extends AuditModel {
 
     @Id
     @Column(name = "apartmentid", nullable = false, length = 50)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic
     private String apartmentID;
 
+    @Basic
     @Column(name = "buildingid", insertable = false, updatable = false)
     private String buildingid;
 
-    @Column(name = "numbedroom")
     @Basic
+    @Column(name = "apartment_number", insertable = false, updatable = false)
+    private String apartment_number;
+
+    @Basic
+    @Column(name = "numbedroom")
     private int numBedRoom;
     @Basic
     @Column(name = "numlivingroom")
@@ -67,12 +59,10 @@ public class Apartment extends AuditModel implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "buildingid", nullable = false)
     @JsonBackReference("apartment")
     private Building building;
-
-
 
 
 }

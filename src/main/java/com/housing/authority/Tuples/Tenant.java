@@ -75,15 +75,4 @@ public class Tenant extends AuditModel {
     private Apartment apartment;
 
 
-
-
-//    @ManyToOne
-//    private Billing billing;
-
-
-
-
-
-
-
 }
