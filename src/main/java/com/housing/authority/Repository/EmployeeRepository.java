@@ -20,6 +20,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
     @Modifying
     @Transactional
+    @Query("UPDATE Employee emp SET emp.addressid=:value WHERE emp.employeeId=:employeeid")
+    void setAddressId(@Param("value") String value,@Param("employeeid") String employeeid);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Employee emp SET emp.detailid=:value WHERE emp.employeeId=:employeeid")
+    void setDetailId(@Param("value") String value,@Param("employeeid") String employeeid);
+
+
+    @Modifying
+    @Transactional
     @Query("UPDATE Employee emp SET emp.addressid=:employeeid WHERE emp.employeeId=:employeeid")
     void setEmployeeAddressId(@Param("employeeid") String employeeid);
 }

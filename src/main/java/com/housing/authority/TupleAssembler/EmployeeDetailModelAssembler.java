@@ -15,7 +15,7 @@ public class EmployeeDetailModelAssembler implements RepresentationModelAssemble
     @Override
     public  EntityModel<EmployeeDetail> toModel( EmployeeDetail entity) {
         return new EntityModel<>(entity,
-                linkTo(methodOn(EmployeeDetailController.class).readOne(entity.getEmployee().getEmployeeId())).withSelfRel(),
+                linkTo(methodOn(EmployeeDetailController.class).readOne(entity.getEmployeeid())).withSelfRel(),
                 linkTo(methodOn(EmployeeDetailController.class).readAll()).withRel("detail"));
 
     }

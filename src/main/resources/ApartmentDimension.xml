@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.ApartmentDimension">
+        <table name="apartment_dimension" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="11"/>
+            </id>
+            <basic name="numberRoom">
+                <column name="number_room" precision="11"/>
+            </basic>
+            <basic name="bedroom1Size">
+                <column name="bedroom_1_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="bedroom2Size">
+                <column name="bedroom_2_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="bedroom3Size">
+                <column name="bedroom_3_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="kitchenSize">
+                <column name="kitchen_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="bathroom1Size">
+                <column name="bathroom_1_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="bathromm2Size">
+                <column name="bathromm_2_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="livingroom1Size">
+                <column name="livingroom_1_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="livingroom2Size">
+                <column name="livingroom_2_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="terrace1Size">
+                <column name="terrace_1_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="terrace2Size">
+                <column name="terrace_2_size" nullable="false" length="50"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="extra">
+                <column name="extra" nullable="false" length="500"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
