@@ -42,10 +42,11 @@ uniqueConstraints = {
 @Getter
 @Setter
 public class EmployeeDetail extends AuditModel implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+    @Basic
+    @Column(name = "employeeid", nullable = false, length = 50)
+    private String employeeid;
 
     @Basic
     @Column(name = "firstname", nullable = false, length = 50)
@@ -82,9 +83,9 @@ public class EmployeeDetail extends AuditModel implements Serializable {
     @Column(name = "nationality", nullable = false, length = 50)
     private String nationality;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "employeeid", nullable = false)
-    private Employee employee;
+//    @OneToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "employeeid", nullable = false)
+//    private Employee employee;
 
 
 }

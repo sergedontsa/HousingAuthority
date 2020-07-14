@@ -39,9 +39,11 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequestMapping(value = Constant.EMPLOYEE_DETAIL_CONTROLLER)
 public class EmployeeDetailController {
 
-
+    @Autowired
     private final EmployeeDetailRepository employeeDetailRepository;
+    @Autowired
     private final EmployeeDetailModelAssembler employeeDetailModelAssembler;
+    @Autowired
     private final EmployeeRepository employeeRepository;
 
 
@@ -69,14 +71,26 @@ public class EmployeeDetailController {
     @CrossOrigin
     @PostMapping(value = Constant.EMPLOYEE_DETAIL_SAVE, produces = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDetail create(@PathVariable String employeeid, @RequestBody EmployeeDetail object) {
+    public ResponseEntity<?> create(@PathVariable String employeeid, @RequestBody EmployeeDetail object) {
         if (!employeeRepository.existsById(employeeid)){
             throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
         }
         return this.employeeRepository.findById(employeeid).map(employee ->{
-            System.out.println(employee+"........................");
-            object.setEmployee(employee);
-            return employeeDetailRepository.save(object);
+            object.setEmployeeid(employeeid);
+
+
+            EntityModel<EmployeeDetail> entityModel = this.employeeDetailModelAssembler.toModel(this.employeeDetailRepository.save(object));
+
+            employeeRepository.setDetailId(employeeid, employeeid);
+
+
+            return ResponseEntity.created(this.employeeDetailModelAssembler.toModel(this.employeeDetailRepository.save(object))
+            .getRequiredLink(IanaLinkRelations.SELF)
+            .toUri())
+                    .body(entityModel);
+
+
+            //return employeeDetailRepository.save(object);
         }).orElseThrow(()-> new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found"));
 
     }
@@ -85,38 +99,16 @@ public class EmployeeDetailController {
     @PatchMapping(path = Constant.EMPLOYEE_DETAIL_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<?> update(@PathVariable String employeeid, @RequestBody EmployeeDetail request) {
-        if (this.employeeDetailRepository.findByEmployeeId(employeeid) == null){
-            throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
-        }else {
-            Employee employee = employeeRepository.getOne(employeeid);
-            return employeeDetailRepository.findEmployeeDetailByEmployee(employee).map(detail ->{
-                detail.setFirstname(request.getFirstname());
-                detail.setMiddlename(request.getMiddlename());
-                detail.setLastname(request.getLastname());
-                detail.setEmail(request.getEmail());
-                detail.setPhonenumber(request.getPhonenumber());
-                detail.setGender(request.getGender());
-                detail.setIdtype(request.getIdtype());
-                detail.setIdnumber(request.getIdnumber());
-                detail.setIssuedate(request.getIssuedate());
-                detail.setExpiredate(request.getExpiredate());
-                EntityModel<EmployeeDetail> entityModel = employeeDetailModelAssembler
-                        .toModel(this.employeeDetailRepository.save(detail));
-                return ResponseEntity.created(employeeDetailModelAssembler.toModel(this.employeeDetailRepository.save(detail))
-                .getRequiredLink(IanaLinkRelations.SELF)
-                .toUri()).body(entityModel);
-
-            }).orElseThrow(()-> new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found"));
-        }
+        return null;
     }
     @CrossOrigin
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.EMPLOYEE_DETAIL_DELETE_WITH_ID)
     public ResponseEntity<?> delete( @PathVariable String employeeid) {
-        if (!employeeDetailRepository.findEmployeeDetailByEmployee(employeeRepository.getOne(employeeid)).isPresent()){
+        if (!employeeDetailRepository.findEmployeeDetailByEmployee(employeeid).isPresent()){
             throw new ResourceNotFoundException("Employee id: " + employeeid+ " could not be found");
         }
-        return employeeDetailRepository.findEmployeeDetailByEmployee(employeeRepository.getOne(employeeid))
+        return employeeDetailRepository.findEmployeeDetailByEmployee(employeeid)
                 .map(detail ->{
                     employeeDetailRepository.delete(detail);
                     return ResponseEntity.ok().build();

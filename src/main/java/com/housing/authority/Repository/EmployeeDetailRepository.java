@@ -12,9 +12,10 @@ import java.util.Optional;
 @Repository
 public interface EmployeeDetailRepository extends JpaRepository<EmployeeDetail, Integer>
 {
-    @Query(value="SELECT e FROM EmployeeDetail e WHERE e.employee.employeeId=:employeeid ")
+    @Query(value="SELECT e FROM EmployeeDetail e WHERE e.employeeid=:employeeid ")
     EmployeeDetail findByEmployeeId(@Param("employeeid") String employeeid);
 
-    Optional<EmployeeDetail> findEmployeeDetailByEmployee(Employee employee);
+    @Query(value="SELECT e FROM EmployeeDetail e WHERE e.employeeid=:employeeid ")
+    Optional<EmployeeDetail> findEmployeeDetailByEmployee(@Param("employeeid") String employeeid);
 
 }

@@ -64,6 +64,22 @@ public class Constant {
     public final static String APARTMENT_UPDATE_WITH_ID = "/update/{id}";
     public final static String APARTMENT_SAVE = "/{buildingId}/save";
 
+    //Apartment Dimension
+    public final static String APARTMENT_DIMENSION_CONTROLLER = "/housing/authority/v1/apartment/dimension";
+    public final static String APARTMENT_DIMENSION_GET_ALL = "get/all";
+    public final static String APARTMENT_DIMENSION_GET_WITH_APARTMENT_ID = "/get/{apartmentId}";
+    public final static String APARTMENT_DIMENSION_DELETE_WITH_APARTMENT_ID = "/{apartmentId}/delete";
+    public final static String APARTMENT_DIMENSION_UPDATE_WITH_APARTMENT_ID = "/{apartmentId}/update";
+    public final static String APARTMENT_DIMENSION_SAVE_WITH_APARTMENT_ID = "/{apartmentId}//save";
+
+    //Apartment Fee
+    public final static String APARTMENT_FEE_CONTROLLER = "/housing/authority/v1/apartment/fee/";
+    public final static String APARTMENT_FEE_GET_ALL = "get/all";
+    public final static String APARTMENT_FEE_GET_WIT_APARTMENT_ID = "/get/{apartmentId}";
+    public final static String APARTMENT_FEE_DELETE_WITH_APARTMENT_ID = "/{apartmentId}/delete";
+    public final static String APARTMENT_FEE_UPDATE_WITH_APARTMENT_ID = "/{apartmentId}/update";
+    public final static String APARTMENT_FEE_SAVE_WITH_APARTMENT_ID = "/{apartmentId}//save";
+
     //Tenant
     public final static String TENANT_CONTROLLER = "/housing/authority/v1/tenant";
     public final static String TENANT_GET_ALL = "get/all";
@@ -147,7 +163,7 @@ public class Constant {
     //Employee address
     public final static String EMPLOYEE_ADDRESS_CONTROLLER = "/housing/authority/v1/employee/address";
     public final static String EMPLOYEE_ADDRESS_GET_ALL = "get/all";
-    public final static String EMPLOYEE_ADDRESS_GET_WITH_EMPLOYEE_ID = "/get/{employeeId}/";
+    public final static String EMPLOYEE_ADDRESS_GET_WITH_EMPLOYEE_ID = "/get/{employeeId}";
     public final static String EMPLOYEE_ADDRESS_DELETE_WITH_EMPLOYEE_ID = "/{employeeId}/delete";
     public final static String EMPLOYEE_ADDRESS_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
     public final static String EMPLOYEE_ADDRESS_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}//save";

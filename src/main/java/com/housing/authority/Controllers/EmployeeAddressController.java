@@ -5,7 +5,6 @@ import com.housing.authority.Repository.EmployeeAddressRepository;
 import com.housing.authority.Repository.EmployeeRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.EmployeeAddressModelAssembler;
-import com.housing.authority.Tuples.Employee;
 import com.housing.authority.Tuples.EmployeeAddress;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,7 @@ public class EmployeeAddressController {
         if (!this.repository.existsById(employeeId) || !this.employeeRepository.existsById(employeeId)){
             throw new ResourceNotFoundException("Resource id: " + employeeId + " could not be found");
         }
+
         return this.assembler.toModel(this.repository.getOne(employeeId));
     }
     @CrossOrigin
@@ -65,8 +65,13 @@ public class EmployeeAddressController {
 
         return this.employeeRepository.findById(employeeId).map(employee -> {
             object.setEmployeeId(employeeId);
+
+
             EntityModel<EmployeeAddress> entityModel = this.assembler.toModel(this.repository.save(object));
             this.employeeRepository.setEmployeeAddressId(employeeId);
+
+            employeeRepository.setAddressId(employeeId, employeeId);
+
             return ResponseEntity.created(assembler.toModel(this.repository.save(object))
             .getRequiredLink(IanaLinkRelations.SELF)
             .toUri())
@@ -76,7 +81,7 @@ public class EmployeeAddressController {
     }
     @CrossOrigin
     @PutMapping(value = Constant.EMPLOYEE_ADDRESS_UPDATE_WITH_EMPLOYEE_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
-    public Object update(@PathVariable int employeeId, @RequestBody EmployeeAddress address) {
+    public ResponseEntity<?> update(@PathVariable int employeeId, @RequestBody EmployeeAddress address) {
         return null;
     }
     @CrossOrigin

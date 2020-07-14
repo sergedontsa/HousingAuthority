@@ -44,7 +44,7 @@ public class IDGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "HAE-"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(3);
+        return "EMP-"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(3);
     }
 
 

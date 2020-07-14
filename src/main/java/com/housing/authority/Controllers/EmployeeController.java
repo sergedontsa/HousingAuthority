@@ -7,6 +7,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.EmployeeModelAssembler;
 import com.housing.authority.Tuples.Employee;
+import com.sun.mail.imap.protocol.ID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -76,11 +77,13 @@ public class EmployeeController implements ServiceController<Employee> {
     @Override
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = Constant.EMPLOYEE_SAVE, consumes = Constant.CONSUMES)
-    public ResponseEntity<?> create(@RequestBody Employee object) {
-        object.setEmployeeId(IDGenerator.EMPLOYEE_ID());
+    public ResponseEntity<?> create(@RequestBody Employee employee) {
+        String id = IDGenerator.EMPLOYEE_ID();
+        employee.setEmployeeId(id);
 
-        EntityModel<Employee> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(object));
-        return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(object))
+        EntityModel<Employee> entityModel = employeeModelAssembler
+                .toModel(this.employeeRepository.save(employee));
+        return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(employee))
                 .getRequiredLink(IanaLinkRelations.SELF)
                 .toUri())
                 .body(entityModel);
