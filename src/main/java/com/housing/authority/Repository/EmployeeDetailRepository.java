@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeDetailRepository extends JpaRepository<EmployeeDetail, Integer>
+public interface EmployeeDetailRepository extends JpaRepository<EmployeeDetail, String>
 {
     @Query(value="SELECT e FROM EmployeeDetail e WHERE e.employeeid=:employeeid ")
     EmployeeDetail findByEmployeeId(@Param("employeeid") String employeeid);

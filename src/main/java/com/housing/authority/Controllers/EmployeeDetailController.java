@@ -99,7 +99,14 @@ public class EmployeeDetailController {
     @PatchMapping(path = Constant.EMPLOYEE_DETAIL_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<?> update(@PathVariable String employeeid, @RequestBody EmployeeDetail request) {
-        return null;
+        if (!this.employeeDetailRepository.existsById(employeeid)){
+            throw new ResourceNotFoundException("Resource: " + employeeid + " could not be found");
+        }
+        request.setEmployeeid(employeeid);
+        EntityModel<EmployeeDetail> entityModel = this.employeeDetailModelAssembler
+                .toModel(this.employeeDetailRepository.save(request));
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF)
+        .toUri()).body(entityModel);
     }
     @CrossOrigin
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

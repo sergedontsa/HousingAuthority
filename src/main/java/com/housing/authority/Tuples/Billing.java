@@ -80,4 +80,7 @@ public class Billing extends AuditModel implements Serializable {
     @JsonIdentityReference(alwaysAsId = true)
     private Building building;
 
+    public String getBuildingId() {
+        return buildingid;
+    }
 }

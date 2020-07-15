@@ -82,20 +82,17 @@ public class ApartmentController{
         if (!this.buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
         }
+        apartment.setApartmentID(IDGenerator.APARTMENT_ID());
+        apartment.setStatus(String.valueOf(ApartmentStatus.Available));
+        //apartment.setBuildingid(buildingId);
+        apartment.setBuilding(this.buildingRepository.getOne(buildingId));
+        EntityModel<Apartment> entityModel = this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
 
-        return this.buildingRepository.findById(buildingId).map(building -> {
-            apartment.setApartmentID(IDGenerator.APARTMENT_ID());
-            apartment.setBuilding(building);
-            apartment.setStatus(String.valueOf(ApartmentStatus.Available));
-            apartment.setBuildingid(buildingId);
-            System.out.println(".........");
-            System.out.println(apartment);
-            EntityModel<Apartment> entityModel = apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
-            return ResponseEntity.created(apartmentModelAssembler
-                    .toModel(this.apartmentTupleRepository.save(apartment))
-            .getRequiredLink(IanaLinkRelations.SELF)
-            .toUri()).body(entityModel);
-        }).orElseThrow(()-> new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found"));
+        return ResponseEntity.created(apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment))
+        .getRequiredLink(IanaLinkRelations.SELF)
+        .toUri())
+                .body(entityModel);
+
 
 
     }
