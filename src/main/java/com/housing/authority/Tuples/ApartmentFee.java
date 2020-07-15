@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "apartment_fee", schema = "housingauthority", catalog = "")
@@ -27,10 +27,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public class ApartmentFee extends AuditModel implements Serializable {
-    @Id
-    @Column(name = "id", nullable = false)
-    private int id;
 
+    @Id
     @Basic
     @Column(name = "apartmentid", nullable = false)
     private String apartmentId;
@@ -40,11 +38,6 @@ public class ApartmentFee extends AuditModel implements Serializable {
     @Basic
     @Column(name = "currency", nullable = false, length = 50)
     private String currency;
-    @Basic
-    @Column(name = "registerdate", nullable = false)
-    private Timestamp registerdate;
-    @Basic
-    @Column(name = "lastupdate", nullable = false)
-    private Timestamp lastupdate;
+
 
 }

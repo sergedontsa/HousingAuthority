@@ -38,13 +38,15 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RequestMapping(value = Constant.BILLING_CONTROLLER)
 @RequiredArgsConstructor
 public class BillingController {
-
-
-
+    @Autowired
     private final BillingRepository billingRepository;
+    @Autowired
     private final BillingModelAssembler billingModelAssembler;
+    @Autowired
     private final TenantRepository tenantRepository;
+    @Autowired
     private final ApartmentRepository apartmentRepository;
+    @Autowired
     private final BuildingRepository buildingRepository;
 
 
@@ -99,17 +101,17 @@ public class BillingController {
         if (!buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
         }
-        return tenantRepository.findById(tenantId).map(tenant -> {
-            object.setBillingid(IDGenerator.RECORD_ID());
-            object.setTenant(tenantRepository.getOne(tenantId));
-            object.setBuilding(buildingRepository.getOne(buildingId));
+        object.setBillingid(IDGenerator.RECORD_ID());
+        object.setTenantid(tenantId);
+        object.setBuildingid(buildingId);
+        object.setApartmentid(apartmentId);
 
-            EntityModel<Billing> entityModel = billingModelAssembler.toModel(this.billingRepository.save(object));
-            return ResponseEntity.created(billingModelAssembler.toModel(this.billingRepository.save(object))
-            .getRequiredLink(IanaLinkRelations.SELF)
-            .toUri()).body(entityModel);
-            //return billingRepository.save(object);
-        }).orElseThrow(()-> new ResourceNotFoundException("TENANT ID: " + tenantId+ " could not be found"));
+        EntityModel<Billing> entityModel = billingModelAssembler.toModel(this.billingRepository.save(object));
+        return ResponseEntity.created(billingModelAssembler.toModel(this.billingRepository.save(object))
+                .getRequiredLink(IanaLinkRelations.SELF)
+                .toUri()).body(entityModel);
+
+
     }
 
     public Object update(String id, String tenantId, Billing object) {

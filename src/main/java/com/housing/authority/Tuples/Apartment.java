@@ -10,7 +10,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 
 @Entity
@@ -22,7 +31,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class Apartment extends AuditModel {
+public class Apartment extends AuditModel implements Serializable {
 
     @Id
     @Column(name = "apartmentid", nullable = false, length = 50)
@@ -32,6 +41,13 @@ public class Apartment extends AuditModel {
     @Basic
     @Column(name = "buildingid", insertable = false, updatable = false)
     private String buildingid;
+
+    @Basic
+    @Column(name = "dimensionid", insertable = false, updatable = false)
+    private String dimensionid;
+    @Basic
+    @Column(name = "feeid", insertable = false, updatable = false)
+    private String feeid;
 
     @Basic
     @Column(name = "apartment_number", length = 50, nullable = true)
@@ -70,6 +86,12 @@ public class Apartment extends AuditModel {
     @JsonBackReference("apartment")
     private Building building;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dimensionid")
+    private ApartmentDimension apartmentDimension;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "feeid")
+    private ApartmentFee apartmentFee;
 
 }

@@ -131,8 +131,13 @@ public class ComplainController implements ServiceController<Complain> {
             existingComplain.setAssignto(complain.getAssignto());
 
 
-            EntityModel<Complain> entityModel = this.complainModelAssembler.toModel(this.complainRepository.save(existingComplain));
-            return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+            EntityModel<Complain> entityModel = this.complainModelAssembler
+                    .toModel(this.complainRepository.save(existingComplain));
+
+            return ResponseEntity.created(entityModel
+                    .getRequiredLink(IanaLinkRelations.SELF)
+                    .toUri())
+                    .body(entityModel);
 
 
 

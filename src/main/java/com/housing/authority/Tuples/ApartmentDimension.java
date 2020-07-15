@@ -30,8 +30,6 @@ import java.io.Serializable;
 @Setter
 public class ApartmentDimension extends AuditModel implements Serializable {
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
     @Basic
     @Column(name = "apartmentid", nullable = false)
     private String apartmentId;
@@ -74,5 +72,7 @@ public class ApartmentDimension extends AuditModel implements Serializable {
     @Basic
     @Column(name = "extra", nullable = true, length = 500)
     private String extra;
+
+
 
 }
