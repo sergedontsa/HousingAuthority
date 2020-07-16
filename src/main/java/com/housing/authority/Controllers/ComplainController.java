@@ -7,6 +7,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ComplainModelAssembler;
 import com.housing.authority.Tuples.Complain;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -31,11 +32,17 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.COMPLAIN_CONTROLLER)
-@RequiredArgsConstructor
 public class ComplainController implements ServiceController<Complain> {
 
+    @Autowired
     private final ComplainRepository complainRepository;
+    @Autowired
     private final ComplainModelAssembler complainModelAssembler;
+
+    public ComplainController(ComplainRepository complainRepository, ComplainModelAssembler complainModelAssembler) {
+        this.complainRepository = complainRepository;
+        this.complainModelAssembler = complainModelAssembler;
+    }
 
     /**
      * This method return the collection of all entity

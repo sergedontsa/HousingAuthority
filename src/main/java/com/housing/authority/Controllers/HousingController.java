@@ -26,7 +26,6 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping(value = Constant.HOUSING_CONTROLLER)
-@RequiredArgsConstructor
 public class HousingController {
 
 

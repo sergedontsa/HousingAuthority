@@ -6,6 +6,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.SubscriberModelAssembler;
 import com.housing.authority.Tuples.Subscriber;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -29,12 +30,18 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.SUBSCRIBER_CONTROLLER)
 public class SubscriberController implements ServiceController<Subscriber> {
 
+    @Autowired
     private final SubscriberRepository subscriberRepository;
+    @Autowired
     private final SubscriberModelAssembler subscriberModelAssembler;
+
+    public SubscriberController(SubscriberRepository subscriberRepository, SubscriberModelAssembler subscriberModelAssembler) {
+        this.subscriberRepository = subscriberRepository;
+        this.subscriberModelAssembler = subscriberModelAssembler;
+    }
 
     @Override
     @GetMapping(value = Constant.SUBSCRIBER_GET_ALL, produces = Constant.PRODUCE)

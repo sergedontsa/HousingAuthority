@@ -83,7 +83,102 @@ public class EmployeeDetail extends AuditModel implements Serializable {
     @Column(name = "nationality", nullable = false, length = 50)
     private String nationality;
 
+    //------------------------------------
 
 
+    public String getEmployeeid() {
+        return employeeid;
+    }
 
+    public void setEmployeeid(String employeeid) {
+        this.employeeid = employeeid;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIdtype() {
+        return idtype;
+    }
+
+    public void setIdtype(String idtype) {
+        this.idtype = idtype;
+    }
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    public String getIssuedate() {
+        return issuedate;
+    }
+
+    public void setIssuedate(String issuedate) {
+        this.issuedate = issuedate;
+    }
+
+    public String getExpiredate() {
+        return expiredate;
+    }
+
+    public void setExpiredate(String expiredate) {
+        this.expiredate = expiredate;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 }

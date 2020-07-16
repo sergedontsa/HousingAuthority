@@ -56,7 +56,95 @@ public class Personinformation extends AuditModel implements Comparable, Seriali
     @Column(name = "country", nullable = false, length = 50)
     private String country;
 
+    //-----------------------------------------
 
+    public String getDataid() {
+        return dataid;
+    }
+
+    public void setDataid(String dataid) {
+        this.dataid = dataid;
+    }
+
+    public String getPersonid() {
+        return personid;
+    }
+
+    public void setPersonid(String personid) {
+        this.personid = personid;
+    }
+
+    public String getPersonstatus() {
+        return personstatus;
+    }
+
+    public void setPersonstatus(String personstatus) {
+        this.personstatus = personstatus;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIdtype() {
+        return idtype;
+    }
+
+    public void setIdtype(String idtype) {
+        this.idtype = idtype;
+    }
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    public String getIdissuedate() {
+        return idissuedate;
+    }
+
+    public void setIdissuedate(String idissuedate) {
+        this.idissuedate = idissuedate;
+    }
+
+    public String getIdexpireddate() {
+        return idexpireddate;
+    }
+
+    public void setIdexpireddate(String idexpireddate) {
+        this.idexpireddate = idexpireddate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     /**
      * Compares this object with the specified object for order.  Returns a

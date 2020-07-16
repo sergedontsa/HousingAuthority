@@ -74,6 +74,123 @@ public class Building extends AuditModel {
     @Column(nullable = true)
     private List<Apartment> apartments;
 
+    ///-------------
+
+    public String getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(String buildingId) {
+        this.buildingId = buildingId;
+    }
+
+    public String getAddressid() {
+        return addressid;
+    }
+
+    public void setAddressid(String addressid) {
+        this.addressid = addressid;
+    }
+
+    public int getNumLevel() {
+        return numLevel;
+    }
+
+    public void setNumLevel(int numLevel) {
+        this.numLevel = numLevel;
+    }
+
+    public int getNumBedRoom() {
+        return numBedRoom;
+    }
+
+    public void setNumBedRoom(int numBedRoom) {
+        this.numBedRoom = numBedRoom;
+    }
+
+    public int getNumBathRoom() {
+        return numBathRoom;
+    }
+
+    public void setNumBathRoom(int numBathRoom) {
+        this.numBathRoom = numBathRoom;
+    }
+
+    public int getNumLivingRoom() {
+        return numLivingRoom;
+    }
+
+    public void setNumLivingRoom(int numLivingRoom) {
+        this.numLivingRoom = numLivingRoom;
+    }
+
+    public int getNumKitchen() {
+        return numKitchen;
+    }
+
+    public void setNumKitchen(int numKitchen) {
+        this.numKitchen = numKitchen;
+    }
+
+    public int getNumDoor() {
+        return numDoor;
+    }
+
+    public void setNumDoor(int numDoor) {
+        this.numDoor = numDoor;
+    }
+
+    public int getNumWindows() {
+        return numWindows;
+    }
+
+    public void setNumWindows(int numWindows) {
+        this.numWindows = numWindows;
+    }
+
+    public int getNumApartment() {
+        return numApartment;
+    }
+
+    public void setNumApartment(int numApartment) {
+        this.numApartment = numApartment;
+    }
+
+    public int getNumStudio() {
+        return numStudio;
+    }
+
+    public void setNumStudio(int numStudio) {
+        this.numStudio = numStudio;
+    }
+
+    public int getNumParkingSpace() {
+        return numParkingSpace;
+    }
+
+    public void setNumParkingSpace(int numParkingSpace) {
+        this.numParkingSpace = numParkingSpace;
+    }
+
+    public BuildingAddress getBuildingAddress() {
+        return buildingAddress;
+    }
+
+    public void setBuildingAddress(BuildingAddress buildingAddress) {
+        this.buildingAddress = buildingAddress;
+    }
+
+    public List<Apartment> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(List<Apartment> apartments) {
+        this.apartments = apartments;
+    }
+
+
+    ///-------------
+
 
 
     public boolean isWithPool() {

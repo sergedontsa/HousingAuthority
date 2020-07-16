@@ -1,13 +1,6 @@
 package com.housing.authority.Tuples;
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,13 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "subscriber")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode(callSuper = false)
-@Getter
-@Setter
 public class Subscriber extends AuditModel {
     @Id
     @Column(name = "id", nullable = false)
@@ -36,11 +22,40 @@ public class Subscriber extends AuditModel {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
-
+    public Subscriber(int id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+    public Subscriber(){}
 
     public Subscriber(String name, String email) {
         this.name = name;
         this.email = email;
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

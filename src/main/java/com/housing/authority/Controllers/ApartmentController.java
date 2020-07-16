@@ -40,7 +40,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.APARTMENT_CONTROLLER)
-@RequiredArgsConstructor
 public class ApartmentController{
     @Autowired
     private final ApartmentRepository apartmentTupleRepository;
@@ -48,6 +47,12 @@ public class ApartmentController{
     private final ApartmentModelAssembler apartmentModelAssembler;
     @Autowired
     private final BuildingRepository buildingRepository;
+
+    public ApartmentController(ApartmentRepository apartmentTupleRepository, ApartmentModelAssembler apartmentModelAssembler, BuildingRepository buildingRepository) {
+        this.apartmentTupleRepository = apartmentTupleRepository;
+        this.apartmentModelAssembler = apartmentModelAssembler;
+        this.buildingRepository = buildingRepository;
+    }
 
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
@@ -81,18 +86,18 @@ public class ApartmentController{
 
         if (!this.buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
+        }else {
+            apartment.setApartmentID(IDGenerator.APARTMENT_ID());
+            apartment.setStatus(String.valueOf(ApartmentStatus.Available));
+
+            apartment.setBuilding(this.buildingRepository.getOne(buildingId));
+            EntityModel<Apartment> entityModel = this.apartmentModelAssembler
+                    .toModel(this.apartmentTupleRepository.save(apartment));
+
+            return ResponseEntity.created(apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment))
+                    .getRequiredLink(IanaLinkRelations.SELF)
+                    .toUri()).body(entityModel);
         }
-        apartment.setApartmentID(IDGenerator.APARTMENT_ID());
-        apartment.setStatus(String.valueOf(ApartmentStatus.Available));
-        //apartment.setBuildingid(buildingId);
-        apartment.setBuilding(this.buildingRepository.getOne(buildingId));
-        EntityModel<Apartment> entityModel = this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment));
-
-        return ResponseEntity.created(apartmentModelAssembler.toModel(this.apartmentTupleRepository.save(apartment))
-        .getRequiredLink(IanaLinkRelations.SELF)
-        .toUri())
-                .body(entityModel);
-
 
 
     }
@@ -112,27 +117,13 @@ public class ApartmentController{
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
     public ResponseEntity<?> update(@PathVariable String id, @RequestBody Apartment apartment){
-        if (this.apartmentTupleRepository.findById(id).isPresent()){
-            Apartment existingApartment = this.apartmentTupleRepository.findById(id).get();
-            existingApartment.setNumBedRoom(apartment.getNumBedRoom());
-            existingApartment.setBuildingid(apartment.getBuildingid());
-            existingApartment.setNumLivingRoom(apartment.getNumLivingRoom());
-            existingApartment.setNumBathRoom(apartment.getNumBathRoom());
-            existingApartment.setNumKitchen(apartment.getNumKitchen());
-            existingApartment.setNumCloset(apartment.getNumCloset());
-            existingApartment.setNumWindows(apartment.getNumWindows());
-            existingApartment.setWithBath(apartment.isWithBath());
-            existingApartment.setWithWaterBoiler(apartment.isWithWaterBoiler());
-            if (apartment.getStatus() == null){
-                existingApartment.setStatus("Available");
-            }else {
-                existingApartment.setStatus(apartment.getStatus());
-            }
-
-            this.apartmentTupleRepository.save(existingApartment);
-            return new ResponseEntity<Apartment>(HttpStatus.OK);
+        if(!this.apartmentTupleRepository.existsById(id)){
+            throw new ResourceNotFoundException("Resource Id: " + id+ " could not be found");
         }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            apartment.setApartmentID(id);
+            this.apartmentTupleRepository.save(apartment);
+            return new ResponseEntity<Apartment>(HttpStatus.OK);
         }
+
     }
 }
