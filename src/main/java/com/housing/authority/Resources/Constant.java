@@ -61,7 +61,7 @@ public class Constant {
     public final static String APARTMENT_GET_ALL = "get/all";
     public final static String APARTMENT_GET_WITH_ID = "get/{id}";
     public final static String APARTMENT_DELETE_WITH_ID = "/delete/{id}";
-    public final static String APARTMENT_UPDATE_WITH_ID = "/update/{id}";
+    public final static String APARTMENT_UPDATE_WITH_ID = "/update/{buildingId}/{id}";
     public final static String APARTMENT_SAVE = "/{buildingId}/save";
 
     //Apartment Dimension
