@@ -2,12 +2,17 @@ package com.housing.authority.Controllers;
 
 import com.housing.authority.Enum.ApartmentStatus;
 import com.housing.authority.Exception.ResourceNotFoundException;
+import com.housing.authority.Repository.ApartmentDimensionRepository;
+import com.housing.authority.Repository.ApartmentFeeRepository;
 import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
 import com.housing.authority.Tuples.Apartment;
+import com.housing.authority.Tuples.ApartmentDimension;
+import com.housing.authority.Tuples.ApartmentFee;
+import com.housing.authority.Tuples.Building;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +53,17 @@ public class ApartmentController{
     @Autowired
     private final BuildingRepository buildingRepository;
 
-    public ApartmentController(ApartmentRepository apartmentTupleRepository, ApartmentModelAssembler apartmentModelAssembler, BuildingRepository buildingRepository) {
+    @Autowired
+    private final ApartmentDimensionRepository apartmentDimensionRepository;
+    @Autowired
+    private final ApartmentFeeRepository apartmentFeeRepository;
+
+    public ApartmentController(ApartmentRepository apartmentTupleRepository, ApartmentModelAssembler apartmentModelAssembler, BuildingRepository buildingRepository, ApartmentDimensionRepository apartmentDimensionRepository, ApartmentFeeRepository apartmentFeeRepository) {
         this.apartmentTupleRepository = apartmentTupleRepository;
         this.apartmentModelAssembler = apartmentModelAssembler;
         this.buildingRepository = buildingRepository;
+        this.apartmentDimensionRepository = apartmentDimensionRepository;
+        this.apartmentFeeRepository = apartmentFeeRepository;
     }
 
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
@@ -116,11 +128,16 @@ public class ApartmentController{
     @PatchMapping(path = Constant.APARTMENT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
-    public ResponseEntity<?> update(@PathVariable String id, @RequestBody Apartment apartment){
-        if(!this.apartmentTupleRepository.existsById(id)){
+    public ResponseEntity<?> update(@PathVariable String id, @PathVariable String buildingId, @RequestBody Apartment apartment){
+        if(!this.apartmentTupleRepository.existsById(id) || !this.buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("Resource Id: " + id+ " could not be found");
         }else {
+
+            apartment.setBuilding(this.buildingRepository.getOne(buildingId));
+            apartment.setApartmentFee(this.apartmentFeeRepository.getOne(id));
+            apartment.setApartmentDimension(this.apartmentDimensionRepository.getOne(id));
             apartment.setApartmentID(id);
+
             this.apartmentTupleRepository.save(apartment);
             return new ResponseEntity<Apartment>(HttpStatus.OK);
         }

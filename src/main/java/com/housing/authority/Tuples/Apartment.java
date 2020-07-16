@@ -2,13 +2,6 @@ package com.housing.authority.Tuples;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,9 +17,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "apartment")
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 public class Apartment extends AuditModel implements Serializable {
 
     @Id

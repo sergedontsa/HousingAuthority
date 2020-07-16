@@ -28,7 +28,7 @@ class ApartmentTest implements Service {
 
     private String idForCreate;
     private String idForTest;
-    private String buildingIdForTest;
+
     private int numBath;
     private int numBedRoom;
     private int numCloset;
@@ -44,7 +44,7 @@ class ApartmentTest implements Service {
     void init(){
         this.idForCreate= IDGenerator.APARTMENT_ID();
         this.idForTest = "APT-8845623-3";
-        this.buildingIdForTest = "IMAH-47091-7";
+
         this.numBath = 10;
         this.numBedRoom = 10;
         this.numCloset = 10;
@@ -85,7 +85,7 @@ class ApartmentTest implements Service {
     public void createTest() {
         Apartment apartment = new Apartment();
         apartment.setApartmentID(this.idForCreate);
-        apartment.setBuildingid(this.buildingIdForTest);
+
         apartment.setNumBathRoom(this.numBath);
         apartment.setNumBedRoom(this.numBedRoom);
         apartment.setNumCloset(this.numCloset);
@@ -107,9 +107,7 @@ class ApartmentTest implements Service {
     public void updateTest() {
         Apartment apartment = this.apartmentRepository.getOne(this.idForTest);
         assertNotNull(apartment);
-        assertEquals(this.buildingIdForTest, apartment.getBuildingid());
-        apartment.setApartmentID(this.idForCreate);
-        apartment.setBuildingid(this.buildingIdForTest);
+
         apartment.setNumBathRoom(this.numBath);
         apartment.setNumBedRoom(this.numBedRoom);
         apartment.setNumCloset(this.numCloset);
