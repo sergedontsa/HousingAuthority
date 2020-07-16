@@ -10,11 +10,6 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
 import com.housing.authority.Tuples.Apartment;
-import com.housing.authority.Tuples.ApartmentDimension;
-import com.housing.authority.Tuples.ApartmentFee;
-import com.housing.authority.Tuples.Building;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -121,6 +116,8 @@ public class ApartmentController{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         this.apartmentTupleRepository.deleteById(id);
+        this.apartmentDimensionRepository.deleteById(id);
+        this.apartmentFeeRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
@@ -132,7 +129,6 @@ public class ApartmentController{
         if(!this.apartmentTupleRepository.existsById(id) || !this.buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("Resource Id: " + id+ " could not be found");
         }else {
-
             apartment.setBuilding(this.buildingRepository.getOne(buildingId));
             apartment.setApartmentFee(this.apartmentFeeRepository.getOne(id));
             apartment.setApartmentDimension(this.apartmentDimensionRepository.getOne(id));
