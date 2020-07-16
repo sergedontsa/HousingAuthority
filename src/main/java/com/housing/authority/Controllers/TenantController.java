@@ -35,7 +35,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.TENANT_CONTROLLER)
-@RequiredArgsConstructor
 public class TenantController {
 
     @Autowired
@@ -47,6 +46,12 @@ public class TenantController {
     @Autowired
     private final ApartmentRepository apartmentRepository;
 
+    public TenantController(TenantRepository tenantRepository, TenantModelAssembler tenantModelAssembler, BuildingRepository buildingRepository, ApartmentRepository apartmentRepository) {
+        this.tenantRepository = tenantRepository;
+        this.tenantModelAssembler = tenantModelAssembler;
+        this.buildingRepository = buildingRepository;
+        this.apartmentRepository = apartmentRepository;
+    }
 
     @GetMapping(value = Constant.TENANT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin

@@ -7,6 +7,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.BuildingModelAssembler;
 import com.housing.authority.Tuples.Building;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -31,11 +32,17 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.BUILDING_CONTROLLER)
-@RequiredArgsConstructor
 public class BuildingController implements ServiceController<Building> {
 
+    @Autowired
     private final BuildingRepository buildingRepository;
+    @Autowired
     private final BuildingModelAssembler buildingModelAssembler;
+
+    public BuildingController(BuildingRepository buildingRepository, BuildingModelAssembler buildingModelAssembler) {
+        this.buildingRepository = buildingRepository;
+        this.buildingModelAssembler = buildingModelAssembler;
+    }
 
     @Override
     @CrossOrigin

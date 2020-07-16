@@ -44,5 +44,54 @@ public class BuildingAddress extends AuditModel implements Serializable {
     @Column(name = "country", nullable = false, length = 50)
     private String country;
 
+    //-------------------
 
+
+    public String getBuildingid() {
+        return buildingid;
+    }
+
+    public void setBuildingid(String buildingid) {
+        this.buildingid = buildingid;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

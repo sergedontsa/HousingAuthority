@@ -53,6 +53,62 @@ public class Complaindone extends AuditModel implements Serializable {
     private Complain complain;
 
 
+    //-------------
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getConfirmationid() {
+        return confirmationid;
+    }
+
+    public void setConfirmationid(String confirmationid) {
+        this.confirmationid = confirmationid;
+    }
+
+    public String getTimespend() {
+        return timespend;
+    }
+
+    public void setTimespend(String timespend) {
+        this.timespend = timespend;
+    }
+
+    public String getEmployeeid() {
+        return employeeid;
+    }
+
+    public void setEmployeeid(String employeeid) {
+        this.employeeid = employeeid;
+    }
+
+    public String getComplainId() {
+        return complainId;
+    }
+
+    public void setComplainId(String complainId) {
+        this.complainId = complainId;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public Complain getComplain() {
+        return complain;
+    }
+
+    public void setComplain(Complain complain) {
+        this.complain = complain;
+    }
 }

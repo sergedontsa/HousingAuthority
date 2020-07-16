@@ -6,6 +6,7 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.UserModelAssembler;
 import com.housing.authority.Tuples.Users;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -30,12 +31,18 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.USER_CONTROLLER)
 public class UsersController implements ServiceController<Users> {
 
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final UserModelAssembler userModelAssembler;
+
+    public UsersController(UserRepository userRepository, UserModelAssembler userModelAssembler) {
+        this.userRepository = userRepository;
+        this.userModelAssembler = userModelAssembler;
+    }
 
     @Override
     @GetMapping(value = Constant.USER_GET_ALL, produces = Constant.PRODUCE)

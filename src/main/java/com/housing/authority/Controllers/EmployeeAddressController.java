@@ -22,7 +22,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.EMPLOYEE_ADDRESS_CONTROLLER)
-@RequiredArgsConstructor
 public class EmployeeAddressController {
 
     @Autowired
@@ -31,6 +30,12 @@ public class EmployeeAddressController {
     private final EmployeeAddressModelAssembler assembler;
     @Autowired
     private final EmployeeRepository employeeRepository;
+
+    public EmployeeAddressController(EmployeeAddressRepository repository, EmployeeAddressModelAssembler assembler, EmployeeRepository employeeRepository) {
+        this.repository = repository;
+        this.assembler = assembler;
+        this.employeeRepository = employeeRepository;
+    }
 
     @CrossOrigin
     @GetMapping(value = Constant.EMPLOYEE_ADDRESS_GET_ALL, produces = Constant.PRODUCE)

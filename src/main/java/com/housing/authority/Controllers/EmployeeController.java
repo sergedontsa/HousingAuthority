@@ -34,12 +34,17 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.EMPLOYEE_CONTROLLER)
-@RequiredArgsConstructor
 public class EmployeeController implements ServiceController<Employee> {
 
-
+    @Autowired
     private final EmployeeRepository employeeRepository;
+    @Autowired
     private final EmployeeModelAssembler employeeModelAssembler;
+
+    public EmployeeController(EmployeeRepository employeeRepository, EmployeeModelAssembler employeeModelAssembler) {
+        this.employeeRepository = employeeRepository;
+        this.employeeModelAssembler = employeeModelAssembler;
+    }
 
     @Override
     @GetMapping(value = Constant.EMPLOYEE_GET_ALL, produces = Constant.PRODUCE)
@@ -81,8 +86,7 @@ public class EmployeeController implements ServiceController<Employee> {
         String id = IDGenerator.EMPLOYEE_ID();
         employee.setEmployeeId(id);
 
-        EntityModel<Employee> entityModel = employeeModelAssembler
-                .toModel(this.employeeRepository.save(employee));
+        EntityModel<Employee> entityModel = employeeModelAssembler.toModel(this.employeeRepository.save(employee));
         return ResponseEntity.created(employeeModelAssembler.toModel(this.employeeRepository.save(employee))
                 .getRequiredLink(IanaLinkRelations.SELF)
                 .toUri())

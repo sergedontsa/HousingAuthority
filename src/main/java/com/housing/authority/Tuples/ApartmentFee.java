@@ -39,5 +39,30 @@ public class ApartmentFee extends AuditModel implements Serializable {
     @Column(name = "currency", nullable = false, length = 50)
     private String currency;
 
+    //-----------------
 
+
+    public String getApartmentId() {
+        return apartmentId;
+    }
+
+    public void setApartmentId(String apartmentId) {
+        this.apartmentId = apartmentId;
+    }
+
+    public String getFee() {
+        return fee;
+    }
+
+    public void setFee(String fee) {
+        this.fee = fee;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

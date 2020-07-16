@@ -32,7 +32,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.BUILDING_ADDRESS_CONTROLLER)
-@RequiredArgsConstructor
 public class BuildingAddressController {
 
     @Autowired
@@ -41,6 +40,12 @@ public class BuildingAddressController {
     private final BuildingAddressModelAssembler buildingAddressModelAssembler;
     @Autowired
     private final BuildingRepository buildingRepository;
+
+    public BuildingAddressController(BuildingAddressRepository buildingAddressRepository, BuildingAddressModelAssembler buildingAddressModelAssembler, BuildingRepository buildingRepository) {
+        this.buildingAddressRepository = buildingAddressRepository;
+        this.buildingAddressModelAssembler = buildingAddressModelAssembler;
+        this.buildingRepository = buildingRepository;
+    }
 
     @CrossOrigin
     @GetMapping(value = Constant.BUILDING_ADDRESS_GET_ALL, produces = Constant.PRODUCE)

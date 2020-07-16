@@ -35,7 +35,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 
 @RestController
-@AllArgsConstructor
 @RequestMapping(value = Constant.EMPLOYEE_DETAIL_CONTROLLER)
 public class EmployeeDetailController {
 
@@ -46,6 +45,11 @@ public class EmployeeDetailController {
     @Autowired
     private final EmployeeRepository employeeRepository;
 
+    public EmployeeDetailController(EmployeeDetailRepository employeeDetailRepository, EmployeeDetailModelAssembler employeeDetailModelAssembler, EmployeeRepository employeeRepository) {
+        this.employeeDetailRepository = employeeDetailRepository;
+        this.employeeDetailModelAssembler = employeeDetailModelAssembler;
+        this.employeeRepository = employeeRepository;
+    }
 
     @CrossOrigin
     @GetMapping(value = Constant.EMPLOYEE_DETAIL_GET_ALL, produces = Constant.PRODUCE)

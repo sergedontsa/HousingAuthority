@@ -83,4 +83,93 @@ public class Billing extends AuditModel implements Serializable {
     public String getBuildingId() {
         return buildingid;
     }
+    //----------------------------------------------------
+
+    public String getBillingid() {
+        return billingid;
+    }
+
+    public void setBillingid(String billingid) {
+        this.billingid = billingid;
+    }
+
+    public String getTenantid() {
+        return tenantid;
+    }
+
+    public void setTenantid(String tenantid) {
+        this.tenantid = tenantid;
+    }
+
+    public String getBuildingid() {
+        return buildingid;
+    }
+
+    public void setBuildingid(String buildingid) {
+        this.buildingid = buildingid;
+    }
+
+    public String getApartmentid() {
+        return apartmentid;
+    }
+
+    public void setApartmentid(String apartmentid) {
+        this.apartmentid = apartmentid;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
+
+    public String getDuedate() {
+        return duedate;
+    }
+
+    public void setDuedate(String duedate) {
+        this.duedate = duedate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
 }

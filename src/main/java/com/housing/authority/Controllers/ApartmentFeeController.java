@@ -31,7 +31,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.APARTMENT_FEE_CONTROLLER)
 public class ApartmentFeeController {
     @Autowired
@@ -40,6 +39,12 @@ public class ApartmentFeeController {
     private final ApartmentFeeAssembler apartmentFeeAssembler;
     @Autowired
     private final ApartmentRepository apartmentRepository;
+
+    public ApartmentFeeController(ApartmentFeeRepository apartmentFeeRepository, ApartmentFeeAssembler apartmentFeeAssembler, ApartmentRepository apartmentRepository) {
+        this.apartmentFeeRepository = apartmentFeeRepository;
+        this.apartmentFeeAssembler = apartmentFeeAssembler;
+        this.apartmentRepository = apartmentRepository;
+    }
 
     @GetMapping(value = Constant.APARTMENT_FEE_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
@@ -58,11 +63,7 @@ public class ApartmentFeeController {
     @GetMapping(value = Constant.APARTMENT_FEE_GET_WIT_APARTMENT_ID)
     @CrossOrigin
     public EntityModel<ApartmentFee> readOne(@PathVariable String apartmentId){
-//        if (!this.apartmentRepository.existsById(apartmentId) || this.apartmentFeeRepository.existsById(apartmentId)){
-//            throw new ResourceNotFoundException("Resource Id: " + apartmentId + " could not be found");
-//        }else {
-//            return this.apartmentFeeAssembler.toModel(this.apartmentFeeRepository.findById(apartmentId).get());
-//        }
+
         ApartmentFee apartmentFee = this.apartmentFeeRepository.findById(apartmentId)
                 .orElseThrow(()-> new ResourceNotFoundException("Resource Id: " + apartmentId + " could not be found"));
         return this.apartmentFeeAssembler.toModel(apartmentFee);

@@ -10,6 +10,7 @@ import com.housing.authority.TupleAssembler.ComplainDoneModelAssembler;
 import com.housing.authority.Tuples.Complain;
 import com.housing.authority.Tuples.Complaindone;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -32,15 +33,24 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.COMPLAIN_DONE_CONTROLLER)
 public class ComplainDoneController implements ServiceController<Complaindone> {
 
+    @Autowired
     private final ComplainDoneRepository complainDoneRepository;
+    @Autowired
     private final ComplainDoneModelAssembler complainDoneModelAssembler;
+    @Autowired
     private final EmployeeRepository employeeRepository;
+    @Autowired
     private final ComplainRepository complainRepository;
 
+    public ComplainDoneController(ComplainDoneRepository complainDoneRepository, ComplainDoneModelAssembler complainDoneModelAssembler, EmployeeRepository employeeRepository, ComplainRepository complainRepository) {
+        this.complainDoneRepository = complainDoneRepository;
+        this.complainDoneModelAssembler = complainDoneModelAssembler;
+        this.employeeRepository = employeeRepository;
+        this.complainRepository = complainRepository;
+    }
 
     /**
      * This method return the collection of all entity

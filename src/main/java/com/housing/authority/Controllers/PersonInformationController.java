@@ -7,6 +7,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.PersonInformationModelAssembler;
 import com.housing.authority.Tuples.Personinformation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -30,12 +31,18 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.PERSONAL_INFORMATION_CONTROLLER)
 public class PersonInformationController implements ServiceController<Personinformation> {
 
+    @Autowired
     private final PersonInformationRepository personInformationRepository;
+    @Autowired
     private final PersonInformationModelAssembler personInformationModelAssembler;
+
+    public PersonInformationController(PersonInformationRepository personInformationRepository, PersonInformationModelAssembler personInformationModelAssembler) {
+        this.personInformationRepository = personInformationRepository;
+        this.personInformationModelAssembler = personInformationModelAssembler;
+    }
 
     /**
      * This method return the collection of all entity

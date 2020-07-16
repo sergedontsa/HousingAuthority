@@ -23,12 +23,18 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.LISTENING_CONTROLLER)
 public class ListeningController implements ServiceController<Listening> {
 
+    @Autowired
     private final ListeningRepository listeningRepository;
+    @Autowired
     private final ListeningAssembler listeningAssembler;
+
+    public ListeningController(ListeningRepository listeningRepository, ListeningAssembler listeningAssembler) {
+        this.listeningRepository = listeningRepository;
+        this.listeningAssembler = listeningAssembler;
+    }
 
     /**
      * This method return the collection of all entity

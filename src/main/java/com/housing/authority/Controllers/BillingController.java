@@ -36,7 +36,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.BILLING_CONTROLLER)
-@RequiredArgsConstructor
 public class BillingController {
     @Autowired
     private final BillingRepository billingRepository;
@@ -49,7 +48,13 @@ public class BillingController {
     @Autowired
     private final BuildingRepository buildingRepository;
 
-
+    public BillingController(BillingRepository billingRepository, BillingModelAssembler billingModelAssembler, TenantRepository tenantRepository, ApartmentRepository apartmentRepository, BuildingRepository buildingRepository) {
+        this.billingRepository = billingRepository;
+        this.billingModelAssembler = billingModelAssembler;
+        this.tenantRepository = tenantRepository;
+        this.apartmentRepository = apartmentRepository;
+        this.buildingRepository = buildingRepository;
+    }
 
     @CrossOrigin
     @GetMapping(value = Constant.BILLING_GET_ALL, produces = Constant.PRODUCE)
@@ -81,13 +86,7 @@ public class BillingController {
     @PostMapping(value = Constant.BILLING_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
-    public ResponseEntity<EntityModel<Billing>> create(
-            @PathVariable String tenantId,
-            @PathVariable String apartmentId,
-            @PathVariable String buildingId,
-            @RequestBody Billing object) {
-
-
+    public ResponseEntity<EntityModel<Billing>> create( @PathVariable String tenantId, @PathVariable String apartmentId, @PathVariable String buildingId, @RequestBody Billing object) {
 
         if (!this.tenantRepository.findByIdAndApartmentIdAndBuildingId(tenantId, apartmentId, buildingId).isPresent()){
             throw new ResourceNotFoundException("Error resource could not be found check IDs");

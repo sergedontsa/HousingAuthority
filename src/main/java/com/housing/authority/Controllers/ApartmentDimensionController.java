@@ -31,7 +31,6 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.APARTMENT_DIMENSION_CONTROLLER)
 public class ApartmentDimensionController {
 
@@ -41,6 +40,15 @@ public class ApartmentDimensionController {
     private final ApartmentDimensionAssembler apartmentDimensionAssembler;
     @Autowired
     private final ApartmentRepository apartmentRepository;
+
+    public ApartmentDimensionController(
+            ApartmentDimensionRepository apartmentDimensionRepository,
+            ApartmentDimensionAssembler apartmentDimensionAssembler,
+            ApartmentRepository apartmentRepository) {
+        this.apartmentDimensionAssembler = apartmentDimensionAssembler;
+        this.apartmentDimensionRepository = apartmentDimensionRepository;
+        this.apartmentRepository = apartmentRepository;
+    }
 
     @GetMapping(value = Constant.APARTMENT_DIMENSION_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin

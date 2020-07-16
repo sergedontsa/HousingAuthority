@@ -8,6 +8,7 @@ import com.housing.authority.Resources.Utilities;
 import com.housing.authority.TupleAssembler.ScheduleModelAssembler;
 import com.housing.authority.Tuples.Schedule;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -31,13 +32,21 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = Constant.SCHEDULE_CONTROLLER)
 public class ScheduleController implements ServiceController<Schedule> {
 
+    @Autowired
     private final ScheduleModelAssembler scheduleModelAssembler;
+    @Autowired
     private final ScheduleRepository scheduleRepository;
+    @Autowired
     private final EmployeeRepository employeeRepository;
+
+    public ScheduleController(ScheduleModelAssembler scheduleModelAssembler, ScheduleRepository scheduleRepository, EmployeeRepository employeeRepository) {
+        this.scheduleModelAssembler = scheduleModelAssembler;
+        this.scheduleRepository = scheduleRepository;
+        this.employeeRepository = employeeRepository;
+    }
 
     /**
      * This method return the collection of all entity

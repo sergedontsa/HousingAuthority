@@ -26,11 +26,7 @@ import java.io.Serializable;
 @Table(name = "apartment")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = false)
-@ToString
 public class Apartment extends AuditModel implements Serializable {
 
     @Id
@@ -94,4 +90,141 @@ public class Apartment extends AuditModel implements Serializable {
     @JoinColumn(name = "feeid")
     private ApartmentFee apartmentFee;
 
+    //-----------------------------------------------------------------------------------------
+
+    public String getApartmentID() {
+        return apartmentID;
+    }
+
+    public void setApartmentID(String apartmentID) {
+        this.apartmentID = apartmentID;
+    }
+
+    public String getBuildingid() {
+        return buildingid;
+    }
+
+    public void setBuildingid(String buildingid) {
+        this.buildingid = buildingid;
+    }
+
+    public String getDimensionid() {
+        return dimensionid;
+    }
+
+    public void setDimensionid(String dimensionid) {
+        this.dimensionid = dimensionid;
+    }
+
+    public String getFeeid() {
+        return feeid;
+    }
+
+    public void setFeeid(String feeid) {
+        this.feeid = feeid;
+    }
+
+    public String getApartment_number() {
+        return apartment_number;
+    }
+
+    public void setApartment_number(String apartment_number) {
+        this.apartment_number = apartment_number;
+    }
+
+    public int getNumBedRoom() {
+        return numBedRoom;
+    }
+
+    public void setNumBedRoom(int numBedRoom) {
+        this.numBedRoom = numBedRoom;
+    }
+
+    public int getNumLivingRoom() {
+        return numLivingRoom;
+    }
+
+    public void setNumLivingRoom(int numLivingRoom) {
+        this.numLivingRoom = numLivingRoom;
+    }
+
+    public int getNumBathRoom() {
+        return numBathRoom;
+    }
+
+    public void setNumBathRoom(int numBathRoom) {
+        this.numBathRoom = numBathRoom;
+    }
+
+    public int getNumKitchen() {
+        return numKitchen;
+    }
+
+    public void setNumKitchen(int numKitchen) {
+        this.numKitchen = numKitchen;
+    }
+
+    public int getNumCloset() {
+        return numCloset;
+    }
+
+    public void setNumCloset(int numCloset) {
+        this.numCloset = numCloset;
+    }
+
+    public int getNumWindows() {
+        return numWindows;
+    }
+
+    public void setNumWindows(int numWindows) {
+        this.numWindows = numWindows;
+    }
+
+    public boolean isWithBath() {
+        return isWithBath;
+    }
+
+    public void setWithBath(boolean withBath) {
+        isWithBath = withBath;
+    }
+
+    public boolean isWithWaterBoiler() {
+        return isWithWaterBoiler;
+    }
+
+    public void setWithWaterBoiler(boolean withWaterBoiler) {
+        isWithWaterBoiler = withWaterBoiler;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public ApartmentDimension getApartmentDimension() {
+        return apartmentDimension;
+    }
+
+    public void setApartmentDimension(ApartmentDimension apartmentDimension) {
+        this.apartmentDimension = apartmentDimension;
+    }
+
+    public ApartmentFee getApartmentFee() {
+        return apartmentFee;
+    }
+
+    public void setApartmentFee(ApartmentFee apartmentFee) {
+        this.apartmentFee = apartmentFee;
+    }
 }
