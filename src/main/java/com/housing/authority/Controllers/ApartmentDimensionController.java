@@ -6,7 +6,6 @@ import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.ApartmentDimensionAssembler;
 import com.housing.authority.Tuples.ApartmentDimension;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -41,10 +40,7 @@ public class ApartmentDimensionController {
     @Autowired
     private final ApartmentRepository apartmentRepository;
 
-    public ApartmentDimensionController(
-            ApartmentDimensionRepository apartmentDimensionRepository,
-            ApartmentDimensionAssembler apartmentDimensionAssembler,
-            ApartmentRepository apartmentRepository) {
+    public ApartmentDimensionController(ApartmentDimensionRepository apartmentDimensionRepository, ApartmentDimensionAssembler apartmentDimensionAssembler, ApartmentRepository apartmentRepository) {
         this.apartmentDimensionAssembler = apartmentDimensionAssembler;
         this.apartmentDimensionRepository = apartmentDimensionRepository;
         this.apartmentRepository = apartmentRepository;
@@ -88,14 +84,16 @@ public class ApartmentDimensionController {
         .getRequiredLink(IanaLinkRelations.SELF)
         .toUri()).body(entityModel);
     }
-    @DeleteMapping(value = Constant.APARTMENT_DIMENSION_DELETE_WITH_APARTMENT_ID, produces = Constant.PRODUCE)
-    @CrossOrigin
-    public ResponseEntity<?> delete(@PathVariable String apartmentId){
-        return  null;
-    }
+
     @PatchMapping(path = Constant.APARTMENT_DIMENSION_UPDATE_WITH_APARTMENT_ID, consumes = Constant.CONSUMES)
     @CrossOrigin
-    public ResponseEntity<?> update(@PathVariable String apartmentId){
-        return null;
+    public ResponseEntity<?> update(@PathVariable String apartmentId, @RequestBody ApartmentDimension apartmentDimension){
+        if (!this.apartmentRepository.existsById(apartmentId) || !this.apartmentDimensionRepository.existsById(apartmentId)){
+            throw new ResourceNotFoundException("Resource Id: " + apartmentId + " could not be found");
+        }else {
+            apartmentDimension.setApartmentId(apartmentId);
+            this.apartmentDimensionRepository.save(apartmentDimension);
+            return new ResponseEntity<ApartmentDimension>(HttpStatus.OK);
+        }
     }
 }
