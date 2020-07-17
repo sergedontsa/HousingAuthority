@@ -1,7 +1,7 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.BillingController;
-import com.housing.authority.Tuples.Billing;
+import com.housing.authority.Controllers.Billing.BillingController;
+import com.housing.authority.Tuples.Billing.Billing;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

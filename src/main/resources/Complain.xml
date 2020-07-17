@@ -2,7 +2,7 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
 
-    <entity class="com.housing.authority.Tuples.Complain">
+    <entity class="com.housing.authority.Tuples.Complain.Complain">
         <table name="complain" schema="housingauthority" catalog=""/>
         <attributes>
             <id name="complainid">

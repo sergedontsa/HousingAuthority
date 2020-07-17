@@ -76,7 +76,7 @@ public class Constant {
     public final static String APARTMENT_FEE_CONTROLLER = "/housing/authority/v1/apartment/fee/";
     public final static String APARTMENT_FEE_GET_ALL = "get/all";
     public final static String APARTMENT_FEE_GET_WIT_APARTMENT_ID = "/get/{apartmentId}";
-    public final static String APARTMENT_FEE_DELETE_WITH_APARTMENT_ID = "/{apartmentId}/delete";
+    //public final static String APARTMENT_FEE_DELETE_WITH_APARTMENT_ID = "/{apartmentId}/delete";
     public final static String APARTMENT_FEE_UPDATE_WITH_APARTMENT_ID = "/{apartmentId}/update";
     public final static String APARTMENT_FEE_SAVE_WITH_APARTMENT_ID = "/{apartmentId}/save";
 

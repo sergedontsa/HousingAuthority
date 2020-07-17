@@ -1,7 +1,8 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.EmployeeAddressController;
-import com.housing.authority.Tuples.EmployeeAddress;
+import com.housing.authority.Controllers.Employee.EmployeeAddressController;
+
+import com.housing.authority.Tuples.Employee.EmployeeAddress;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -14,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @Component
 public class EmployeeAddressModelAssembler implements RepresentationModelAssembler<EmployeeAddress, EntityModel<EmployeeAddress>> {
     @Override
-    public  EntityModel<EmployeeAddress> toModel( EmployeeAddress entity) {
+    public  EntityModel<EmployeeAddress> toModel(EmployeeAddress entity) {
         return new EntityModel<>(entity, linkTo(methodOn(EmployeeAddressController.class).readOne(entity.getEmployeeId())).withSelfRel(),
                 linkTo(methodOn(EmployeeAddressController.class).readAll()).withRel("Address"));
     }

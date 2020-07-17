@@ -1,7 +1,7 @@
 package com.housing.authority.TupleAssembler;
 
 import com.housing.authority.Controllers.SubscriberController;
-import com.housing.authority.Tuples.Subscriber;
+import com.housing.authority.Tuples.User.Subscriber;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

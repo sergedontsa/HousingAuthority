@@ -1,6 +1,6 @@
 package com.housing.authority.Repository;
 
-import com.housing.authority.Tuples.Billing;
+import com.housing.authority.Tuples.Billing.Billing;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
