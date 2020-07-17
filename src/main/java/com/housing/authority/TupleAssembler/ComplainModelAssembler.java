@@ -1,7 +1,7 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.ComplainController;
-import com.housing.authority.Tuples.Complain;
+import com.housing.authority.Controllers.Complain.ComplainController;
+import com.housing.authority.Tuples.Complain.Complain;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

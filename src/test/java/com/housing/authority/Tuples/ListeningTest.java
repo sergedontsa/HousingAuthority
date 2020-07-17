@@ -4,11 +4,13 @@ import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.ListeningRepository;
 import com.housing.authority.Services.Service;
+import com.housing.authority.Tuples.Apartment.Apartment;
+import com.housing.authority.Tuples.Building.Building;
+import com.housing.authority.Tuples.Listening.Listening;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
 
 import java.util.List;
 

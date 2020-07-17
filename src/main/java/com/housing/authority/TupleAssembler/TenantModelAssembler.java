@@ -1,7 +1,7 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.TenantController;
-import com.housing.authority.Tuples.Tenant;
+import com.housing.authority.Controllers.Tenant.TenantController;
+import com.housing.authority.Tuples.Tenant.Tenant;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

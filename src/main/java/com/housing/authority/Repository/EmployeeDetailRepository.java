@@ -1,7 +1,6 @@
 package com.housing.authority.Repository;
 
-import com.housing.authority.Tuples.Employee;
-import com.housing.authority.Tuples.EmployeeDetail;
+import com.housing.authority.Tuples.Employee.EmployeeDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

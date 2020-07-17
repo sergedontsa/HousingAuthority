@@ -4,6 +4,7 @@ import com.housing.authority.Repository.UserRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.Services.Service;
+import com.housing.authority.Tuples.User.Users;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

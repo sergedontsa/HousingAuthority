@@ -2,7 +2,7 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
 
-    <entity class="com.housing.authority.Tuples.Listening">
+    <entity class="com.housing.authority.Tuples.Listening.Listening">
         <table name="listening" schema="housingauthority" catalog=""/>
         <attributes>
             <basic name="apartmentId">

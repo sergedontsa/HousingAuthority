@@ -3,6 +3,7 @@ package com.housing.authority.Tuples;
 import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.Services.Service;
+import com.housing.authority.Tuples.Building.Building;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

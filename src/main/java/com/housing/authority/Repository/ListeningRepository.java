@@ -1,6 +1,6 @@
 package com.housing.authority.Repository;
 
-import com.housing.authority.Tuples.Listening;
+import com.housing.authority.Tuples.Listening.Listening;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

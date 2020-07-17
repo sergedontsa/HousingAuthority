@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
-    <entity class="com.housing.authority.Tuples.Employee">
+    <entity class="com.housing.authority.Tuples.Employee.Employee">
         <table name="employee" schema="housingauthority" catalog=""/>
         <attributes>
             <id name="employeeId">

@@ -1,8 +1,8 @@
 package com.housing.authority.Tuples;
 
 import com.housing.authority.Repository.SubscriberRepository;
-import com.housing.authority.Resources.Constant;
 import com.housing.authority.Services.Service;
+import com.housing.authority.Tuples.User.Subscriber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

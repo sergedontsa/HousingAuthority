@@ -1,7 +1,7 @@
 package com.housing.authority.TupleAssembler;
 
-import com.housing.authority.Controllers.ApartmentController;
-import com.housing.authority.Tuples.Apartment;
+import com.housing.authority.Controllers.Apartment.ApartmentController;
+import com.housing.authority.Tuples.Apartment.Apartment;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
