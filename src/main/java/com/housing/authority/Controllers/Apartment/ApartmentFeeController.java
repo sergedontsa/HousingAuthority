@@ -85,7 +85,13 @@ public class ApartmentFeeController {
 
     @PatchMapping(path = Constant.APARTMENT_FEE_UPDATE_WITH_APARTMENT_ID, consumes = Constant.CONSUMES)
     @CrossOrigin
-    public ResponseEntity<?> update(@PathVariable String apartmentId){
-        return null;
+    public ResponseEntity<?> update(@PathVariable String apartmentId, @RequestBody ApartmentFee apartmentFee){
+        if (!this.apartmentFeeRepository.existsById(apartmentId) || !this.apartmentRepository.existsById(apartmentId)){
+            throw new ResourceNotFoundException("Resource Id: " + apartmentId + " could not be found");
+        }else {
+            apartmentFee.setApartmentId(apartmentId);
+            this.apartmentFeeRepository.save(apartmentFee);
+        return new ResponseEntity<ApartmentFee>(HttpStatus.OK);
+        }
     }
 }
