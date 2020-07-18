@@ -11,6 +11,7 @@ import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.TenantModelAssembler;
 import com.housing.authority.Tuples.Tenant.Tenant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -80,10 +81,20 @@ public class TenantController {
         if (!this.apartmentRepository.existsById(apartmentid)){
             throw new ResourceNotFoundException("APARTMENT ID" + apartmentid + " could not be found");
         }
+//        if (this.tenantRepository.findTenantByEmailAndPhoneNumber(tenant.getEmail(), tenant.getEmail()).isPresent()){
+//            throw new ResourceNotFoundException("Tenant with Email: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
+//        }
+        if (this.tenantRepository.checkIfTenantExist(tenant.getEmail(), tenant.getPhonenumber())){
+            throw new ResourceNotFoundException("Tenant with Email: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
+        }
+        if (this.apartmentRepository.findById(apartmentid).isPresent()){
+                if (this.apartmentRepository.findById(apartmentid).get().getStatus().equals(String.valueOf(ApartmentStatus.Occupied))) {
+                    throw  new ResourceNotFoundException("APARTMENT ID: " + apartmentid + " is occupied");
+                }
+        }
+
+
         return this.apartmentRepository.findById(apartmentid).map(apartment -> {
-            if (apartment.getStatus().equals(String.valueOf(ApartmentStatus.Occupied))){
-                throw new ResourceNotFoundException("APARTMENT ID: "+ apartmentid + " is occupied");
-            }
             tenant.setTenantid(IDGenerator.TENANT_ID());
             tenant.setApartment(this.apartmentRepository.getOne(apartmentid));
             tenant.setBuildingid(buildingId);
@@ -97,6 +108,8 @@ public class TenantController {
             .getRequiredLink(IanaLinkRelations.SELF)
             .toUri()).body(entityModel);
         }).orElseThrow(()-> new ResourceNotFoundException("APARTMENT ID " + apartmentid+ " could not be found"));
+
+
 
     }
 
@@ -129,5 +142,25 @@ public class TenantController {
         }else {
             return HttpStatus.NOT_FOUND;
         }
+    }
+    @PatchMapping(path = Constant.TENANT_ACTIVATE, consumes = Constant.CONSUMES)
+    @ResponseStatus(code = HttpStatus.OK)
+    @CrossOrigin
+    public Object updateTenantStatus(@PathVariable String tenantId, @PathVariable String apartmentId, @PathVariable String buildingId){
+        if (!this.tenantRepository.existsById(tenantId)){
+            throw new ResourceNotFoundException("TENANT ID" + tenantId + " could not be found");
+        }
+        if (!this.apartmentRepository.existsById(apartmentId)){
+            throw new ResourceNotFoundException("APARTMENT ID" + apartmentId + " could not be found");
+        }
+        if (!this.buildingRepository.existsById(buildingId)){
+            throw new ResourceNotFoundException("BUILDING ID" + buildingId + " could not be found");
+        }
+        if (!this.tenantRepository.findByIdAndAAndApartmentIdAndAndBuildingId(tenantId, apartmentId, buildingId).isPresent()){
+            throw new ResourceNotFoundException("TENANT ID" + tenantId + " could not be found. Check apartment Id, building Id and tenant id");
+        }
+        this.tenantRepository.activateByIdAndAndApartmentIdAndAndBuildingId(String.valueOf(TenantStatus.Active), tenantId);
+        return HttpStatus.OK;
+
     }
 }
