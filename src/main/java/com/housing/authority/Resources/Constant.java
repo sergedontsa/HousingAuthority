@@ -1,5 +1,7 @@
 package com.housing.authority.Resources;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Calendar;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Calendar;
  * Montreal, Canada
  */
 
+@Component
 public class Constant {
 
     //SendGrid
@@ -45,7 +48,7 @@ public class Constant {
     public final static String BUILDING_GET_ALL = "get/all";
     public final static String BUILDING_GET_WITH_ID = "get/{id}";
     public final static String BUILDING_DELETE_WITH_ID = "/delete/{id}";
-    public final static String BUILDING_UPDATE_WITH_ID = "/update/{id}";
+    public final static String BUILDING_UPDATE_WITH_ID = "/update/{buildingId}";
     public final static String BUILDING_SAVE = "/save";
 
     //Users
@@ -60,7 +63,7 @@ public class Constant {
     public final static String APARTMENT_CONTROLLER = "/housing/authority/v1/apartment";
     public final static String APARTMENT_GET_ALL = "get/all";
     public final static String APARTMENT_GET_WITH_ID = "get/{id}";
-    public final static String APARTMENT_DELETE_WITH_ID = "/delete/{id}";
+    public final static String APARTMENT_DELETE_WITH_ID = "/delete/{apartmentId}";
     public final static String APARTMENT_UPDATE_WITH_ID = "/update/{buildingId}/{id}";
     public final static String APARTMENT_SAVE = "/{buildingId}/save";
 

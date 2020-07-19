@@ -111,13 +111,13 @@ public class ApartmentController{
 
     @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
-    public ResponseEntity<?> delete(@PathVariable String id){
-        if (!apartmentTupleRepository.existsById(id)){
+    public ResponseEntity<?> delete(@PathVariable String apartmentId){
+        if (!apartmentTupleRepository.existsById(apartmentId)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        this.apartmentTupleRepository.deleteById(id);
-        this.apartmentDimensionRepository.deleteById(id);
-        this.apartmentFeeRepository.deleteById(id);
+        this.apartmentTupleRepository.deleteById(apartmentId);
+        this.apartmentDimensionRepository.deleteById(apartmentId);
+        this.apartmentFeeRepository.deleteById(apartmentId);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }

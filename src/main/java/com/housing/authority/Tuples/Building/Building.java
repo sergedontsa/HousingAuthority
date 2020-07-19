@@ -4,20 +4,13 @@ package com.housing.authority.Tuples.Building;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
-import lombok.*;
+
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "building")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ToString(includeFieldNames = true)
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class Building extends AuditModel {
 
     @Id

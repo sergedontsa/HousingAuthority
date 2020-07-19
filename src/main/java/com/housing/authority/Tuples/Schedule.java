@@ -2,30 +2,13 @@ package com.housing.authority.Tuples;
 
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "schedule")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class Schedule extends AuditModel {
+public class Schedule extends AuditModel implements Serializable {
     @Id
     @Column(name = "scheduleid", nullable = false)
     private int scheduleid;

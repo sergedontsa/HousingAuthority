@@ -1,8 +1,6 @@
 package com.housing.authority.Tuples.Complain;
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,12 +11,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "complain")
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@ToString
-@DynamicUpdate
-@Data
 public class Complain extends AuditModel implements Comparable, Serializable {
     @Id
     @Column(name = "complainid", nullable = false, length = 50)

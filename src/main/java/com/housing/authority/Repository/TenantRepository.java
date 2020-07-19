@@ -28,7 +28,7 @@ public interface TenantRepository extends JpaRepository<Tenant, String>
     @Query(value="UPDATE Tenant t SET t.status=:value WHERE t.tenantid=:tenantId")
     void activateByIdAndAndApartmentIdAndAndBuildingId(@Param("value")String value, @Param("tenantId") String tenantId);
 
-    @Query(value="SELECT t FROM Tenant t WHERE t.tenantid=:tenantId AND t.apartmentid=:apartmentId AND t.buildingid=:buildingId")
+    @Query(value="SELECT t FROM Tenant t WHERE t.tenantid=:tenantId OR t.apartmentid=:apartmentId OR t.buildingid=:buildingId")
     Optional<Tenant> findByIdAndAAndApartmentIdAndAndBuildingId(@Param("tenantId") String tenantId,@Param("apartmentId") String apartmentId, @Param("buildingId") String buildingId);
 
 

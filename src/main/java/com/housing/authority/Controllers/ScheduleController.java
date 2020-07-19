@@ -7,7 +7,6 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.Utilities;
 import com.housing.authority.TupleAssembler.ScheduleModelAssembler;
 import com.housing.authority.Tuples.Schedule;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

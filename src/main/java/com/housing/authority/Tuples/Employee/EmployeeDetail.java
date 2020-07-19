@@ -2,25 +2,8 @@ package com.housing.authority.Tuples.Employee;
 
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -34,13 +17,7 @@ uniqueConstraints = {
         @UniqueConstraint(columnNames = "phonenumber"),
         @UniqueConstraint(columnNames = "idnumber")
 })
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+
 public class EmployeeDetail extends AuditModel implements Serializable {
 
     @Id

@@ -91,23 +91,11 @@ public class BuildingController implements ServiceController<Building> {
     @PatchMapping(path = Constant.BUILDING_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
-    public Object update(@PathVariable String id, @RequestBody Building building) {
-        if (this.buildingRepository.findById(id).isPresent()){
-            Building existingBuilding = this.buildingRepository.findById(id).get();
-
-            existingBuilding.setNumLevel(building.getNumLevel());
-            existingBuilding.setNumBedRoom(building.getNumBedRoom());
-            existingBuilding.setNumBathRoom(building.getNumBathRoom());
-            existingBuilding.setNumLivingRoom(building.getNumLivingRoom());
-            existingBuilding.setNumKitchen(building.getNumKitchen());
-            existingBuilding.setNumDoor(building.getNumDoor());
-            existingBuilding.setNumWindows(building.getNumWindows());
-            existingBuilding.setNumApartment(building.getNumApartment());
-            existingBuilding.setNumStudio(building.getNumStudio());
-            existingBuilding.setNumParkingSpace(building.getNumParkingSpace());
-            existingBuilding.setWithElevator(building.isWithElevator());
-            existingBuilding.setWithPool(building.isWithPool());
-            this.buildingRepository.save(existingBuilding);
+    public Object update(@PathVariable String buildingId, @RequestBody Building building) {
+        if (this.buildingRepository.findById(buildingId).isPresent()){
+            building.setBuildingId(buildingId);
+            this.buildingRepository.save(building);
+            
             return HttpStatus.OK;
         }else {
             return HttpStatus.NOT_FOUND;

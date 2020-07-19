@@ -1,13 +1,6 @@
 package com.housing.authority.Tuples.Complain;
 
 import com.housing.authority.AuditModel.AuditModel;
-import com.housing.authority.Tuples.Complain.Complain;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,11 +13,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "complaindone")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@ToString
 public class Complaindone extends AuditModel implements Serializable {
     @Id
     @Column(name = "id", nullable = false)

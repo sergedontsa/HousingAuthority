@@ -3,13 +3,7 @@ package com.housing.authority.Tuples.Tenant;
 
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
 
 import javax.persistence.*;
 
@@ -18,13 +12,6 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "phonenumber")
 })
-@AllArgsConstructor
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@ToString
-@Getter
-@Setter
 public class Tenant extends AuditModel {
 
     @Id
