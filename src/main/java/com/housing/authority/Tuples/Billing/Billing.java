@@ -4,13 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Building.Building;
 import com.housing.authority.Tuples.Tenant.Tenant;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -28,13 +21,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "billing")
-@EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Getter
-@Setter
-@ToString
 public class Billing extends AuditModel implements Serializable {
 
 

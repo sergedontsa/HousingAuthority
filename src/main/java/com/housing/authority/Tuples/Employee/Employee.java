@@ -1,20 +1,13 @@
 package com.housing.authority.Tuples.Employee;
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.*;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "Employee")
 @Table(name = "employee")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Getter
-@Setter
-@EqualsAndHashCode(callSuper = false)
 public class Employee extends AuditModel implements Serializable {
     @Id
     @Column(name = "employeeid", nullable = false, length = 50)

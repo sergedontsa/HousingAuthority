@@ -1,7 +1,6 @@
 package com.housing.authority.Tuples.Employee;
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.*;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -12,13 +11,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "employee_address", schema = "housingauthority", catalog = "")
-@EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Getter
-@Setter
-@ToString
 public class EmployeeAddress extends AuditModel implements Serializable {
     @Id
     @Basic

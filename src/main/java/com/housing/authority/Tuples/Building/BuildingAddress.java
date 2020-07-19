@@ -1,12 +1,7 @@
 package com.housing.authority.Tuples.Building;
 
 import com.housing.authority.AuditModel.AuditModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,10 +13,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "building_address", schema = "housingauthority", catalog = "")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
-@NoArgsConstructor
 public class BuildingAddress extends AuditModel implements Serializable {
 
     @Id

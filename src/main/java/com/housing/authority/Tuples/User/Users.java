@@ -3,12 +3,6 @@ package com.housing.authority.Tuples.User;
 
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,16 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@Data
+
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "phonenumber")
 })
-@ToString
-@EqualsAndHashCode
-@Getter
-@Setter
 public class Users implements Comparable {
 
     @Id
