@@ -47,4 +47,12 @@ public abstract class AuditModel implements Serializable {
     public void setLastupdate(Date lastupdate) {
         this.lastupdate = lastupdate;
     }
+
+    @Override
+    public String toString() {
+        return "AuditModel{" +
+                "registerdate=" + registerdate +
+                ", lastupdate=" + lastupdate +
+                '}';
+    }
 }

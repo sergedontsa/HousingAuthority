@@ -1,9 +1,11 @@
 package com.housing.authority.Tuples.Building;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
+import com.housing.authority.Tuples.Expensive.GeneralExpense;
 
 
 import javax.persistence.*;
@@ -67,6 +69,11 @@ public class Building extends AuditModel {
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Column(nullable = true)
     private List<Apartment> apartments;
+
+    @JsonBackReference("expensive")
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Column(nullable = false)
+    private List<GeneralExpense> expens;
 
     ///-------------
 
@@ -203,5 +210,11 @@ public class Building extends AuditModel {
         isWithElevator = withElevator;
     }
 
+    public List<GeneralExpense> getExpens() {
+        return expens;
+    }
 
+    public void setExpens(List<GeneralExpense> expens) {
+        this.expens = expens;
+    }
 }

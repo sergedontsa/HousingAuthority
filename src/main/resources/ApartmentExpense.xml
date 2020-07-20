@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Apartment.ApartmentExpense">
+        <table name="apartment_expense" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="expenseId">
+                <column name="expenseId" length="50"/>
+            </id>
+            <basic name="employeeRole">
+                <column name="employee_role" length="50"/>
+            </basic>
+            <basic name="apartmentId">
+                <column name="apartmentId" length="50"/>
+            </basic>
+            <basic name="item">
+                <column name="item" length="50"/>
+            </basic>
+            <basic name="supplier">
+                <column name="supplier" nullable="false" length="50"/>
+            </basic>
+            <basic name="quantity">
+                <column name="quantity" precision="11"/>
+            </basic>
+            <basic name="unitPrice">
+                <column name="unit_price" nullable="false" length="50"/>
+            </basic>
+            <basic name="totalPrice">
+                <column name="total_price" length="50"/>
+            </basic>
+            <basic name="currency">
+                <column name="currency" nullable="false" length="50"/>
+            </basic>
+            <basic name="description">
+                <column name="description" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" precision="-1"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
