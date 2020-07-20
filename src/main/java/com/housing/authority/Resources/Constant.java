@@ -83,6 +83,14 @@ public class Constant {
     public final static String APARTMENT_FEE_UPDATE_WITH_APARTMENT_ID = "/{apartmentId}/update";
     public final static String APARTMENT_FEE_SAVE_WITH_APARTMENT_ID = "/{apartmentId}/save";
 
+    //Apartment Expense
+    public final static String APARTMENT_EXPENSE_CONTROLLER = "/housing/authority/v1/apartment/expense";
+    public final static String APARTMENT_EXPENSE_GET_ALL = "get/all";
+    public final static String APARTMENT_EXPENSE_GET_WITH_ID = "/get/{expenseId}";
+    public final static String APARTMENT_EXPENSE_DELETE_WITH_ID = "/{employeeId}/{expenseId}/{apartmentId}/{buildingId}/delete";
+    public final static String APARTMENT_EXPENSE_UPDATE_WITH_ID = "/{employeeId}/{expenseId}/{apartmentId}/{buildingId}/update";
+    public final static String APARTMENT_EXPENSE_CREATE = "/{employeeId}/{apartmentId}/{buildingId}/save";
+
     //Tenant
     public final static String TENANT_CONTROLLER = "/housing/authority/v1/tenant";
     public final static String TENANT_GET_ALL = "get/all";

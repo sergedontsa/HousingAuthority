@@ -1,35 +1,27 @@
-package com.housing.authority.Tuples.Apartment;
+package com.housing.authority.Tuples.Tenant;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
+import com.housing.authority.Tuples.Apartment.Apartment;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
-@Table(name = "apartment_expense", schema = "housingauthority", catalog = "")
-public class ApartmentExpense extends AuditModel implements Serializable, Comparable {
+@Table(name = "tenant_expense", schema = "housingauthority", catalog = "")
+public class TenantExpense extends AuditModel implements Serializable, Comparable {
     @Id
-    @Column(name = "expenseid", nullable = false, length = 50)
+    @Column(name = "expenseId", nullable = false, length = 50)
     private String expenseId;
     @Basic
     @Column(name = "employee_role", nullable = false, length = 50)
     private String employeeRole;
     @Basic
-    @Column(name = "apartmentid", updatable = false, insertable = false)
+    @Column(name = "apartmentId", nullable = false, length = 50)
     private String apartmentId;
-
-    @Basic
-    @Column(name = "employeeid", nullable = false, length = 50)
-    private String employeeId;
-
-    @Basic
-    @Column(name = "buildingid", nullable = false, length = 50)
-    private String buildingId;
-
     @Basic
     @Column(name = "item", nullable = false, length = 50)
     private String item;
@@ -53,9 +45,9 @@ public class ApartmentExpense extends AuditModel implements Serializable, Compar
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "apartmentid", nullable =   false)
-    @JsonBackReference("apartment_expense")
-    private Apartment apartment;
+    @JoinColumn(name = "tenantId", nullable = false)
+    @JsonBackReference("tenant_expense")
+    private Tenant tenant;
 
 
 
@@ -148,34 +140,16 @@ public class ApartmentExpense extends AuditModel implements Serializable, Compar
         this.description = description;
     }
 
-
-    public Apartment getApartment() {
-        return apartment;
+    public Tenant getTenant() {
+        return tenant;
     }
 
-    public void setApartment(Apartment apartment) {
-        this.apartment = apartment;
-    }
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getBuildingId() {
-        return buildingId;
-    }
-
-    public void setBuildingId(String buildingId) {
-        this.buildingId = buildingId;
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     @Override
     public int compareTo(@NotNull Object o) {
-
         return 0;
     }
 }

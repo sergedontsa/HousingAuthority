@@ -1,11 +1,13 @@
 package com.housing.authority.Tuples.Tenant;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tenant", uniqueConstraints = {
@@ -57,6 +59,11 @@ public class Tenant extends AuditModel {
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "apartmentid")
     private Apartment apartment;
+
+    @JsonBackReference("tenant_expense")
+    @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Column(nullable = true)
+    private List<TenantExpense> tenantExpenses;
 
     //-------------------
 
@@ -163,5 +170,13 @@ public class Tenant extends AuditModel {
 
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
+    }
+
+    public List<TenantExpense> getTenantExpenses() {
+        return tenantExpenses;
+    }
+
+    public void setTenantExpenses(List<TenantExpense> tenantExpenses) {
+        this.tenantExpenses = tenantExpenses;
     }
 }
