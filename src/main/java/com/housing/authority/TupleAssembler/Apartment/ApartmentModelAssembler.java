@@ -1,4 +1,4 @@
-package com.housing.authority.TupleAssembler;
+package com.housing.authority.TupleAssembler.Apartment;
 
 import com.housing.authority.Controllers.Apartment.ApartmentController;
 import com.housing.authority.Tuples.Apartment.Apartment;

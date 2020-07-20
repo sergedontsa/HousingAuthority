@@ -4,7 +4,7 @@ import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.ApartmentDimensionRepository;
 import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.TupleAssembler.ApartmentDimensionAssembler;
+import com.housing.authority.TupleAssembler.Apartment.ApartmentDimensionAssembler;
 import com.housing.authority.Tuples.Apartment.ApartmentDimension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;

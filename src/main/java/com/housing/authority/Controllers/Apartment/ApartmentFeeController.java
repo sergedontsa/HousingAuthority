@@ -4,7 +4,7 @@ import com.housing.authority.Exception.ResourceNotFoundException;
 import com.housing.authority.Repository.ApartmentFeeRepository;
 import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.TupleAssembler.ApartmentFeeAssembler;
+import com.housing.authority.TupleAssembler.Apartment.ApartmentFeeAssembler;
 import com.housing.authority.Tuples.Apartment.ApartmentFee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;

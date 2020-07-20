@@ -8,7 +8,7 @@ import com.housing.authority.Repository.ApartmentRepository;
 import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
-import com.housing.authority.TupleAssembler.ApartmentModelAssembler;
+import com.housing.authority.TupleAssembler.Apartment.ApartmentModelAssembler;
 import com.housing.authority.Tuples.Apartment.Apartment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;

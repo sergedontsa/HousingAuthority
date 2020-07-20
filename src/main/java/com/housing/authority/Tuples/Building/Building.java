@@ -70,7 +70,7 @@ public class Building extends AuditModel {
     @Column(nullable = true)
     private List<Apartment> apartments;
 
-    @JsonBackReference("expensive")
+    @JsonBackReference("general_expense")
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Column(nullable = false)
     private List<GeneralExpense> expens;
