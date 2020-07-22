@@ -8,10 +8,9 @@ import com.housing.authority.Repository.BuildingRepository;
 import com.housing.authority.Repository.TenantRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
-import com.housing.authority.TupleAssembler.TenantModelAssembler;
+import com.housing.authority.TupleAssembler.Tenant.TenantModelAssembler;
 import com.housing.authority.Tuples.Tenant.Tenant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -127,7 +126,6 @@ public class TenantController {
     @CrossOrigin
     public Object update(@PathVariable String id, @RequestBody Tenant tenant){
         if (this.tenantRepository.findById(id).isPresent()){
-
                 Tenant existingTenant = this.tenantRepository.findById(id).get();
                 existingTenant.setFirstname(tenant.getFirstname());
                 existingTenant.setMiddlename(tenant.getMiddlename());

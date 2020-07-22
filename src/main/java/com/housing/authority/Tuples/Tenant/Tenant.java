@@ -2,8 +2,11 @@ package com.housing.authority.Tuples.Tenant;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 import javax.persistence.*;
@@ -60,12 +63,14 @@ public class Tenant extends AuditModel {
     @JoinColumn(name = "apartmentid")
     private Apartment apartment;
 
-    @JsonBackReference("tenant_expense")
+    @JsonManagedReference("tenant_expense")
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Column(nullable = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<TenantExpense> tenantExpenses;
 
     //-------------------
+
 
 
     public String getTenantid() {
@@ -171,6 +176,7 @@ public class Tenant extends AuditModel {
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
+
 
     public List<TenantExpense> getTenantExpenses() {
         return tenantExpenses;

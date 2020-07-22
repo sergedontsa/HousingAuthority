@@ -2,26 +2,38 @@ package com.housing.authority.Tuples.Tenant;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
-import com.housing.authority.Tuples.Apartment.Apartment;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 
 @Entity
 @Table(name = "tenant_expense", schema = "housingauthority", catalog = "")
 public class TenantExpense extends AuditModel implements Serializable, Comparable {
     @Id
-    @Column(name = "expenseId", nullable = false, length = 50)
+    @Column(name = "expenseid", nullable = false, length = 50)
     private String expenseId;
+
     @Basic
-    @Column(name = "employee_role", nullable = false, length = 50)
-    private String employeeRole;
+    @Column(name = "buildingid", nullable = false, length = 50)
+    private String buildingId;
+
     @Basic
-    @Column(name = "apartmentId", nullable = false, length = 50)
+    @Column(name = "apartmentid", nullable = false, length = 50)
     private String apartmentId;
+
+    @Basic
+    @Column(name = "tenantid", insertable = false, updatable = false)
+    private String tenantid;
+
     @Basic
     @Column(name = "item", nullable = false, length = 50)
     private String item;
@@ -45,7 +57,7 @@ public class TenantExpense extends AuditModel implements Serializable, Comparabl
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tenantId", nullable = false)
+    @JoinColumn(name = "tenantid", nullable = false)
     @JsonBackReference("tenant_expense")
     private Tenant tenant;
 
@@ -59,15 +71,21 @@ public class TenantExpense extends AuditModel implements Serializable, Comparabl
         this.expenseId = expenseId;
     }
 
-
-    public String getEmployeeRole() {
-        return employeeRole;
+    public String getBuildingId() {
+        return buildingId;
     }
 
-    public void setEmployeeRole(String employeeRole) {
-        this.employeeRole = employeeRole;
+    public void setBuildingId(String buildingId) {
+        this.buildingId = buildingId;
     }
 
+    public String getTenantid() {
+        return tenantid;
+    }
+
+    public void setTenantid(String tenantid) {
+        this.tenantid = tenantid;
+    }
 
     public String getApartmentId() {
         return apartmentId;

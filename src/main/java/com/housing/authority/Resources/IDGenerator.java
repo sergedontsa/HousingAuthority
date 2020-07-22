@@ -21,8 +21,8 @@ public class IDGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "APT-"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
-                +"-"+Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        return "APT"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
+                +Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
     }
 
 
@@ -32,7 +32,7 @@ public class IDGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "HAB-"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
+        return "HAB"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
                 +"-"+Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
     }
@@ -44,7 +44,7 @@ public class IDGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "EMP-"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(3);
+        return "EMP"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(3);
     }
 
 
@@ -65,6 +65,15 @@ public class IDGenerator {
         }
 
         return "AEX"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(4);
+    }
+    public static String TENANT_EXPENSE_ID(){
+        try {
+            Thread.sleep(100);
+        }catch (InterruptedException exception){
+            exception.printStackTrace();
+        }
+
+        return "TEX"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(4);
     }
 
     public static String USER_ID() {
@@ -92,7 +101,7 @@ public class IDGenerator {
         }catch (InterruptedException exception){
             exception.printStackTrace();
         }
-        return "CD"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
+        return "CMD"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
                 +Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
     }
 

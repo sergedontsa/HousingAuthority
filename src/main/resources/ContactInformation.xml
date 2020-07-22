@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.ContactInformation.ContactInformation">
+        <table name="contact_information" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="contactId">
+                <column name="contactId" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="100"/>
+            </basic>
+            <basic name="email">
+                <column name="email" length="50"/>
+            </basic>
+            <basic name="phonenumber">
+                <column name="phonenumber" length="50"/>
+            </basic>
+            <basic name="message">
+                <column name="message"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
