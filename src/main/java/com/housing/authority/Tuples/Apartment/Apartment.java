@@ -18,22 +18,18 @@ public class Apartment extends AuditModel implements Serializable {
     @Column(name = "apartmentid", nullable = false, length = 50)
     @Basic
     private String apartmentID;
-
     @Basic
     @Column(name = "buildingid", insertable = false, updatable = false)
     private String buildingid;
-
     @Basic
     @Column(name = "dimensionid", insertable = false, updatable = false)
     private String dimensionid;
     @Basic
     @Column(name = "feeid", insertable = false, updatable = false)
     private String feeid;
-
     @Basic
     @Column(name = "apartment_number", length = 50, nullable = true)
     private String apartment_number;
-
     @Basic
     @Column(name = "numbedroom")
     private int numBedRoom;

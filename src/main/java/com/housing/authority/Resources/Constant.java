@@ -100,6 +100,15 @@ public class Constant {
     public final static String TENANT_SAVE = "/{buildingId}/{apartmentid}/save";
     public final static String TENANT_ACTIVATE = "/{tenantId}/{apartmentId}/{buildingId}/active";
 
+    //Tenant Expense
+    public final static String TENANT_EXPENSE_CONTROLLER = "/housing/authority/v1/tenant/expense";
+    public final static String TENANT_EXPENSE_GET_ALL = "get/all";
+    public final static String TENANT_EXPENSE_GET_WITH_ID = "get/{expenseId}";
+    public final static String TENANT_EXPENSE_DELETE_WITH_ID = "/delete/{expenseId}/{tenantId}/{apartmentId}/{buildingId}";
+    public final static String TENANT_EXPENSE_UPDATE_WITH_ID = "/update/{expenseId}/{tenantId}/{apartmentId}/{buildingId}";
+    public final static String TENANT_EXPENSE_SAVE = "/{tenantId}/{buildingId}/{apartmentId}/save";
+
+
     //Complain
     public final static String COMPLAIN_CONTROLLER = "/housing/authority/v1/complain";
     public final static String COMPLAIN_GET_ALL = "get/all";
@@ -170,7 +179,7 @@ public class Constant {
     public final static String BUILDING_ADDRESS_GET_WITH_BUILDING_ID = "/get/{buildingId}/";
     public final static String BUILDING_ADDRESS_DELETE_WITH_BUILDING_ID = "/{buildingId}/delete";
     public final static String BUILDING_ADDRESS_UPDATE_WITH_BUILDING_ID = "/{buildingId}/update";
-    public final static String BUILDING_ADDRESS_SAVE_WITH_BUILDING_ID = "/{buildingId}//save";
+    public final static String BUILDING_ADDRESS_SAVE_WITH_BUILDING_ID = "/{buildingId}/save";
 
     //Employee address
     public final static String EMPLOYEE_ADDRESS_CONTROLLER = "/housing/authority/v1/employee/address";
@@ -178,5 +187,13 @@ public class Constant {
     public final static String EMPLOYEE_ADDRESS_GET_WITH_EMPLOYEE_ID = "/get/{employeeId}";
     public final static String EMPLOYEE_ADDRESS_DELETE_WITH_EMPLOYEE_ID = "/{employeeId}/delete";
     public final static String EMPLOYEE_ADDRESS_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
-    public final static String EMPLOYEE_ADDRESS_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}//save";
+    public final static String EMPLOYEE_ADDRESS_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}/save";
+
+    //Contact Information
+    public final static String CONTACT_INFORMATION_CONTROLLER = "/housing/authority/v1/contact/information";
+    public final static String CONTACT_INFORMATION_GET_ALL = "get/all";
+    public final static String CONTACT_INFORMATION_GET_ONE = "/get/{phoneNumber}";
+    public final static String CONTACT_INFORMATION_DELETE = "/{phoneNumber}/delete";
+    public final static String CONTACT_INFORMATION_UPDATE = "/{phoneNumber}/update";
+    public final static String CONTACT_INFORMATION_SAVE = "/{phoneNumber}/save";
 }

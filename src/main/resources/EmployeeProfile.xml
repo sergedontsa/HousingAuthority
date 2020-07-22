@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Employee.EmployeeDocument">
+        <table name="employee_profile" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="documentId">
+                <column name="documentId" precision="11"/>
+            </id>
+            <basic name="employeeId">
+                <column name="employeeId" length="50"/>
+            </basic>
+            <basic name="fileName">
+                <column name="fileName" length="100"/>
+            </basic>
+            <basic name="documentType">
+                <column name="documentType" length="500"/>
+            </basic>
+            <basic name="documentFormat">
+                <column name="documentFormat" length="500"/>
+            </basic>
+            <basic name="uploadDir">
+                <column name="uploadDir" length="500"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

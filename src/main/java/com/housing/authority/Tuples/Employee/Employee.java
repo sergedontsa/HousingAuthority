@@ -42,7 +42,6 @@ public class Employee extends AuditModel implements Serializable {
     @JoinColumn(name = "detailid")
     private EmployeeDetail employeeDetail;
 
-    ///---------
 
 
     public String getEmployeeId() {

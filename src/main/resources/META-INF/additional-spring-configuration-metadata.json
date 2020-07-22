@@ -4,5 +4,10 @@
       "name": "app.sendgrid.key",
       "type": "java.lang.String",
       "description": "Description for app.sendgrid.key."
-  }
-] }
+    },
+    {
+      "name": "file.upload.dir",
+      "type": "java.lang.String",
+      "description": "Description for file.upload.dir."
+    }
+  ] }

@@ -31,10 +31,8 @@ public class ApartmentExpenseController {
     private final ApartmentRepository apartmentRepository;
     @Autowired
     private final ApartmentExpenseRepository apartmentExpenseRepository;
-
     @Autowired
     private final ApartmentExpenseAssembler apartmentExpenseAssembler;
-
     @Autowired
     private final EmployeeRepository employeeRepository;
     @Autowired
