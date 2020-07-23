@@ -26,18 +26,16 @@ public class EmployeeDocumentStorageService
 {
     private final Path fileStorageLocation;
 
-    @Autowired
-    EmployeeDocumentRepository docStorageRepo;
+    @Autowired private final EmployeeDocumentRepository docStorageRepo;
+    @Autowired private final EmployeeRepository employeeRepository;
 
     @Autowired
-    private final EmployeeRepository employeeRepository;
-
-    @Autowired
-    public EmployeeDocumentStorageService(EmployeeDocument fileStorageProperties, EmployeeRepository employeeRepository){
+    public EmployeeDocumentStorageService(EmployeeDocument fileStorageProperties, EmployeeRepository employeeRepository, EmployeeDocumentRepository employeeDocumentRepository){
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath()
                 .normalize();
         this.employeeRepository = employeeRepository;
+        this.docStorageRepo = employeeDocumentRepository;
         try {
             Files.createDirectories(this.fileStorageLocation);
         }catch (Exception ex){
@@ -105,6 +103,9 @@ public class EmployeeDocumentStorageService
         }
     }
     public String getDocumentName(String employeeId, String docType){
+        if (!this.employeeRepository.existsById(employeeId)){
+            throw new ResourceNotFoundException("Employee Id " + employeeId + " could not be found");
+        }
         return docStorageRepo.getUploadDocumentPath(employeeId, docType);
     }
 

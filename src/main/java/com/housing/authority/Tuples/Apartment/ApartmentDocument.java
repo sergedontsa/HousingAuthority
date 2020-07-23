@@ -1,22 +1,27 @@
-package com.housing.authority.Tuples.Employee;
+package com.housing.authority.Tuples.Apartment;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@ConfigurationProperties(prefix = "file")
+
 @Entity
-@Table(name = "employee_document", schema = "housingauthority", catalog = "")
-public class EmployeeDocument extends AuditModel {
+@Table(name = "apartment_document", schema = "housingauthority", catalog = "")
+public class ApartmentDocument extends AuditModel {
     @Id
     @Column(name = "documentid", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int documentId;
     @Basic
-    @Column(name = "employeeid", insertable = false, updatable = false)
-    private String employeeId;
+    @Column(name = "apartmentid", insertable = false, updatable = false)
+    private String apartmentId;
     @Basic
     @Column(name = "filename", nullable = false, length = 100)
     private String fileName;
@@ -27,20 +32,28 @@ public class EmployeeDocument extends AuditModel {
     @Column(name = "documentformat", nullable = false, length = 500)
     private String documentFormat;
     @Basic
-    @Column(name = "uploaddir", nullable = false, length = 500)
+    @Column(name = "uploaddir", nullable = true, length = 500)
     private String uploadDir;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employeeid")
-    @JsonBackReference("employee_document")
-    private Employee employee;
+    @JoinColumn(name = "apartmentid")
+    @JsonBackReference("apartment_document")
+    private Apartment apartment;
 
-    public Employee getEmployee() {
-        return employee;
+    public String getApartmentId() {
+        return apartmentId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setApartmentId(String apartmentId) {
+        this.apartmentId = apartmentId;
+    }
+
+    public Apartment getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     public int getDocumentId() {
@@ -49,15 +62,6 @@ public class EmployeeDocument extends AuditModel {
 
     public void setDocumentId(int documentId) {
         this.documentId = documentId;
-    }
-
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
     }
 
 
@@ -95,4 +99,5 @@ public class EmployeeDocument extends AuditModel {
     public void setUploadDir(String uploadDir) {
         this.uploadDir = uploadDir;
     }
+
 }

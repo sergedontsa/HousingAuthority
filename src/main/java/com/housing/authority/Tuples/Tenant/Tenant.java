@@ -69,9 +69,22 @@ public class Tenant extends AuditModel {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<TenantExpense> tenantExpenses;
 
+    @JsonManagedReference("tenant_document")
+    @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Column(nullable = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<TenantDocument> tenantDocuments;
+
     //-------------------
 
 
+    public List<TenantDocument> getTenantDocuments() {
+        return tenantDocuments;
+    }
+
+    public void setTenantDocuments(List<TenantDocument> tenantDocuments) {
+        this.tenantDocuments = tenantDocuments;
+    }
 
     public String getTenantid() {
         return tenantid;

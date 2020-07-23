@@ -1,5 +1,6 @@
 package com.housing.authority.Controllers.Employee;
 
+import com.housing.authority.Resources.Constant;
 import com.housing.authority.Tuples.Employee.EmployeeDocumentResponse;
 import com.housing.authority.Service.EmployeeDocumentStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,11 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
+@RequestMapping(value = Constant.EMPLOYEE_DOCUMENT_CONTROLLER)
 public class EmployeeDocumentController {
     @Autowired
     private EmployeeDocumentStorageService employeeDocumentStorageService;
-    @PostMapping("/uploadFile")
-    public EmployeeDocumentResponse uploadFile(@RequestParam("file")MultipartFile file, @RequestParam("employeeId") String employeeId, @RequestParam("docType") String docType){
+
+    @CrossOrigin
+    @PostMapping(value = Constant.EMPLOYEE_DOCUMENT_SAVE_WITH_EMPLOYEE_ID)
+    public EmployeeDocumentResponse uploadFile(@RequestParam("file")MultipartFile file, @PathVariable String employeeId, @PathVariable String docType){
         String fileName = employeeDocumentStorageService.storeFile(file, employeeId, docType);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -31,8 +32,9 @@ public class EmployeeDocumentController {
                 .toUriString();
         return new EmployeeDocumentResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
-    @GetMapping("/downloadFile")
-    public ResponseEntity<Resource> downloadFile(@RequestParam("employeeId") String employeeId, @RequestParam("docType") String docType, HttpServletRequest request){
+
+    @GetMapping(value = Constant.EMPLOYEE_DOCUMENT_GET_WITH_EMPLOYEE_ID)
+    public ResponseEntity<Resource> downloadFile(@PathVariable String employeeId, @PathVariable String docType, HttpServletRequest request){
         String filname = employeeDocumentStorageService.getDocumentName(employeeId, docType);
         Resource resource = null;
         if (filname != null && !filname.isEmpty()){
