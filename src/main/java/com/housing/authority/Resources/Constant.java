@@ -189,6 +189,14 @@ public class Constant {
     public final static String EMPLOYEE_ADDRESS_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
     public final static String EMPLOYEE_ADDRESS_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}/save";
 
+    //Employee Document
+    public final static String EMPLOYEE_DOCUMENT_CONTROLLER = "/housing/authority/v1/employee/doc";
+    public final static String EMPLOYEE_DOCUMENT_GET_ALL = "get/all";
+    public final static String EMPLOYEE_DOCUMENT_GET_WITH_EMPLOYEE_ID = "/{employeeId}/{docType}/get";
+    public final static String EMPLOYEE_DOCUMENT_DELETE_WITH_EMPLOYEE_ID = "/{employeeId}/delete";
+    public final static String EMPLOYEE_DOCUMENT_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
+    public final static String EMPLOYEE_DOCUMENT_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}/{docType}/save";
+
     //Contact Information
     public final static String CONTACT_INFORMATION_CONTROLLER = "/housing/authority/v1/contact/information";
     public final static String CONTACT_INFORMATION_GET_ALL = "get/all";

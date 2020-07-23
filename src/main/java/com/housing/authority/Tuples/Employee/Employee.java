@@ -1,10 +1,13 @@
 package com.housing.authority.Tuples.Employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "Employee")
 @Table(name = "employee")
@@ -42,7 +45,10 @@ public class Employee extends AuditModel implements Serializable {
     @JoinColumn(name = "detailid")
     private EmployeeDetail employeeDetail;
 
-
+    @JsonManagedReference("employee_document")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Column(nullable = true)
+    private List<EmployeeDocument> employeeDocuments;
 
     public String getEmployeeId() {
         return employeeId;
@@ -106,5 +112,13 @@ public class Employee extends AuditModel implements Serializable {
 
     public void setEmployeeDetail(EmployeeDetail employeeDetail) {
         this.employeeDetail = employeeDetail;
+    }
+
+    public List<EmployeeDocument> getEmployeeDocuments() {
+        return employeeDocuments;
+    }
+
+    public void setEmployeeDocuments(List<EmployeeDocument> employeeDocuments) {
+        this.employeeDocuments = employeeDocuments;
     }
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Building.Building;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -76,6 +78,19 @@ public class Apartment extends AuditModel implements Serializable {
     @Column(nullable = true)
     private List<ApartmentExpense> apartmentExpenses;
 
+    @JsonManagedReference("apartment_document")
+    @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Column(nullable = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ApartmentDocument> apartmentDocuments;
+
+    public List<ApartmentDocument> getApartmentDocuments() {
+        return apartmentDocuments;
+    }
+
+    public void setApartmentDocuments(List<ApartmentDocument> apartmentDocuments) {
+        this.apartmentDocuments = apartmentDocuments;
+    }
 
     //-----------------------------------------------------------------------------------------
 
