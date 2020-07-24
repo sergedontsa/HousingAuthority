@@ -2,6 +2,7 @@ package com.housing.authority.Tuples.Tenant;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
+@ConfigurationProperties(prefix = "tenant")
 @Entity
 @Table(name = "tenant_document", schema = "housingauthority", catalog = "")
 public class TenantDocument extends AuditModel {

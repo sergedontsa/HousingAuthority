@@ -1,12 +1,12 @@
 package com.housing.authority.Tuples.Employee;
 
-public class EmployeeDocumentResponse {
+public class DocumentResponse {
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
     private long size;
 
-    public EmployeeDocumentResponse(String fileName, String fileDownloadUri, String fileType, long size) {
+    public DocumentResponse(String fileName, String fileDownloadUri, String fileType, long size) {
 
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;

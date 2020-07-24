@@ -1,7 +1,7 @@
 package com.housing.authority.Service;
 
+import com.housing.authority.Exception.DocumentStorageException;
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Exception.EmployeeDocumentStorageException;
 import com.housing.authority.Repository.EmployeeDocumentRepository;
 import com.housing.authority.Repository.EmployeeRepository;
 import com.housing.authority.Tuples.Employee.EmployeeDocument;
@@ -24,22 +24,24 @@ import java.util.Objects;
 @Service
 public class EmployeeDocumentStorageService
 {
-    private final Path fileStorageLocation;
+    private final Path location;
 
-    @Autowired private final EmployeeDocumentRepository docStorageRepo;
+    @Autowired private final EmployeeDocumentRepository employeeDocumentRepository;
     @Autowired private final EmployeeRepository employeeRepository;
 
+
     @Autowired
-    public EmployeeDocumentStorageService(EmployeeDocument fileStorageProperties, EmployeeRepository employeeRepository, EmployeeDocumentRepository employeeDocumentRepository){
-        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
-                .toAbsolutePath()
-                .normalize();
+    public EmployeeDocumentStorageService(EmployeeDocument employeeDocument,
+                                          EmployeeRepository employeeRepository,
+                                          EmployeeDocumentRepository employeeDocumentRepository){
+        this.location = Paths.get(employeeDocument.getUploadDir()).toAbsolutePath().normalize();
         this.employeeRepository = employeeRepository;
-        this.docStorageRepo = employeeDocumentRepository;
+        this.employeeDocumentRepository = employeeDocumentRepository;
+
         try {
-            Files.createDirectories(this.fileStorageLocation);
+            Files.createDirectories(this.location);
         }catch (Exception ex){
-            throw new EmployeeDocumentStorageException("Could not create directory where the uploaded file will be store" , ex);
+            throw new DocumentStorageException("Could not create directory where the uploaded file will be store" , ex);
         }
     }
     public String storeFile(MultipartFile file, String employeeId, String docType){
@@ -52,7 +54,7 @@ public class EmployeeDocumentStorageService
         String fileName = "";
         try {
             if (originalFileName.contains("..")){
-                throw new EmployeeDocumentStorageException("Sorry! file name contains invalid path sequence "+ originalFileName);
+                throw new DocumentStorageException("Sorry! file name contains invalid path sequence "+ originalFileName);
             }
             String fileExtension = "";
             try {
@@ -62,14 +64,14 @@ public class EmployeeDocumentStorageService
             }
             fileName = employeeId+"_"+docType+fileExtension;
             //copy file to the target location(replacing existing file with the same name
-            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Path targetLocation = this.location.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-            EmployeeDocument doc = docStorageRepo.checkDocumentByEmployeeId(employeeId, docType);
+            EmployeeDocument doc = employeeDocumentRepository.checkDocumentByEmployeeId(employeeId, docType);
             if (doc != null){
                 doc.setDocumentFormat(file.getContentType());
                 doc.setFileName(fileName);
                 doc.setEmployee(this.employeeRepository.getOne(employeeId));
-                docStorageRepo.save(doc);
+                employeeDocumentRepository.save(doc);
             }else {
                 EmployeeDocument newDoc = new EmployeeDocument();
                 newDoc.setEmployeeId(employeeId);
@@ -77,12 +79,12 @@ public class EmployeeDocumentStorageService
                 newDoc.setFileName(fileName);
                 newDoc.setDocumentType(docType);
                 newDoc.setEmployee(this.employeeRepository.getOne(employeeId));
-                docStorageRepo.save(newDoc);
+                employeeDocumentRepository.save(newDoc);
             }
             return fileName;
 
         }catch (IOException ex){
-            throw new EmployeeDocumentStorageException("Could not store file " + fileName + " Please try again!", ex);
+            throw new DocumentStorageException("Could not store file " + fileName + " Please try again!", ex);
         }
     }
     public Resource loadFileAsResources(String fileName, String employeeId) throws Exception{
@@ -91,7 +93,7 @@ public class EmployeeDocumentStorageService
             throw new ResourceNotFoundException("Employee Id " + employeeId + " could not be found");
         }
         try {
-            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Path filePath = this.location.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists()){
                 return resource;
@@ -106,7 +108,7 @@ public class EmployeeDocumentStorageService
         if (!this.employeeRepository.existsById(employeeId)){
             throw new ResourceNotFoundException("Employee Id " + employeeId + " could not be found");
         }
-        return docStorageRepo.getUploadDocumentPath(employeeId, docType);
+        return employeeDocumentRepository.getUploadDocumentPath(employeeId, docType);
     }
 
 }
