@@ -91,6 +91,14 @@ public class Constant {
     public final static String APARTMENT_EXPENSE_UPDATE_WITH_ID = "/{employeeId}/{expenseId}/{apartmentId}/{buildingId}/update";
     public final static String APARTMENT_EXPENSE_CREATE = "/{employeeId}/{apartmentId}/{buildingId}/save";
 
+    //Apartment Document
+    public final static String APARTMENT_DOCUMENT_CONTROLLER = "/housing/authority/v1/apartment/doc";
+    public final static String APARTMENT_DOCUMENT_GET_ALL = "get/all";
+    public final static String APARTMENT_DOCUMENT_GET_WITH_APARTMENT_ID = "/{apartmentId}/{docType}/get";
+    public final static String APARTMENT_DOCUMENT_DELETE_WITH_APARTMENT_ID = "/{apartmentId}/delete";
+    public final static String APARTMENT_DOCUMENT_UPDATE_WITH_APARTMENT_ID = "/{apartmentId}/update";
+    public final static String APARTMENT_DOCUMENT_SAVE_WITH_APARTMENT_ID = "/{apartmentId}/{docType}/save";
+
     //Tenant
     public final static String TENANT_CONTROLLER = "/housing/authority/v1/tenant";
     public final static String TENANT_GET_ALL = "get/all";

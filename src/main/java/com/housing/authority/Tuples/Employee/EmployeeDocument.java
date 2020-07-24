@@ -39,7 +39,7 @@ public class EmployeeDocument extends AuditModel {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(final Employee employee) {
         this.employee = employee;
     }
 
@@ -47,52 +47,47 @@ public class EmployeeDocument extends AuditModel {
         return documentId;
     }
 
-    public void setDocumentId(int documentId) {
+    public void setDocumentId(final int documentId) {
         this.documentId = documentId;
     }
-
 
     public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId) {
+    public void setEmployeeId(final String employeeId) {
         this.employeeId = employeeId;
     }
-
 
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
+    public void setFileName(final String fileName) {
         this.fileName = fileName;
     }
-
 
     public String getDocumentType() {
         return documentType;
     }
 
-    public void setDocumentType(String documentType) {
+    public void setDocumentType(final String documentType) {
         this.documentType = documentType;
     }
-
 
     public String getDocumentFormat() {
         return documentFormat;
     }
 
-    public void setDocumentFormat(String documentFormat) {
+    public void setDocumentFormat(final String documentFormat) {
         this.documentFormat = documentFormat;
     }
-
 
     public String getUploadDir() {
         return uploadDir;
     }
 
-    public void setUploadDir(String uploadDir) {
+    public void setUploadDir(final String uploadDir) {
         this.uploadDir = uploadDir;
     }
 }

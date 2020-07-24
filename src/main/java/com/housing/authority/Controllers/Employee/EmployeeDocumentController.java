@@ -1,7 +1,7 @@
 package com.housing.authority.Controllers.Employee;
 
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.Tuples.Employee.EmployeeDocumentResponse;
+import com.housing.authority.Tuples.Employee.DocumentResponse;
 import com.housing.authority.Service.EmployeeDocumentStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -23,14 +23,14 @@ public class EmployeeDocumentController {
 
     @CrossOrigin
     @PostMapping(value = Constant.EMPLOYEE_DOCUMENT_SAVE_WITH_EMPLOYEE_ID)
-    public EmployeeDocumentResponse uploadFile(@RequestParam("file")MultipartFile file, @PathVariable String employeeId, @PathVariable String docType){
+    public DocumentResponse uploadFile(@RequestParam("file")MultipartFile file, @PathVariable String employeeId, @PathVariable String docType){
         String fileName = employeeDocumentStorageService.storeFile(file, employeeId, docType);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)
                 .toUriString();
-        return new EmployeeDocumentResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        return new DocumentResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
 
     @GetMapping(value = Constant.EMPLOYEE_DOCUMENT_GET_WITH_EMPLOYEE_ID)
