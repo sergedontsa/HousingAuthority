@@ -14,13 +14,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-@ConfigurationProperties(prefix = "tenant")
+@ConfigurationProperties(prefix = "file")
 @Entity
 @Table(name = "tenant_document", schema = "housingauthority", catalog = "")
 public class TenantDocument extends AuditModel {
     @Id
     @Column(name = "documentid", nullable = false)
     private int documentId;
+
+    @Basic
+    @Column(name = "tenantid", insertable = false, updatable = false)
+    private String tenantId;
+
     @Basic
     @Column(name = "filename", nullable = false, length = 100)
     private String fileName;
@@ -39,14 +44,6 @@ public class TenantDocument extends AuditModel {
     @JsonBackReference("tenant_documnet")
     private Tenant tenant;
 
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
-    }
-
     public int getDocumentId() {
         return documentId;
     }
@@ -55,6 +52,13 @@ public class TenantDocument extends AuditModel {
         this.documentId = documentId;
     }
 
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 
     public String getFileName() {
         return fileName;
@@ -64,7 +68,6 @@ public class TenantDocument extends AuditModel {
         this.fileName = fileName;
     }
 
-
     public String getDocumentType() {
         return documentType;
     }
@@ -72,7 +75,6 @@ public class TenantDocument extends AuditModel {
     public void setDocumentType(String documentType) {
         this.documentType = documentType;
     }
-
 
     public String getDocumentFormat() {
         return documentFormat;
@@ -82,7 +84,6 @@ public class TenantDocument extends AuditModel {
         this.documentFormat = documentFormat;
     }
 
-
     public String getUploadDir() {
         return uploadDir;
     }
@@ -91,4 +92,11 @@ public class TenantDocument extends AuditModel {
         this.uploadDir = uploadDir;
     }
 
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 }
