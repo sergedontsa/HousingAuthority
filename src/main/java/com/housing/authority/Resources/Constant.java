@@ -116,6 +116,14 @@ public class Constant {
     public final static String TENANT_EXPENSE_UPDATE_WITH_ID = "/update/{expenseId}/{tenantId}/{apartmentId}/{buildingId}";
     public final static String TENANT_EXPENSE_SAVE = "/{tenantId}/{buildingId}/{apartmentId}/save";
 
+    //Tenant Document
+    public final static String TENANT_DOCUMENT_CONTROLLER = "/housing/authority/v1/tenant/doc";
+    public final static String TENANT_DOCUMENT_GET_ALL = "get/all";
+    public final static String TENANT_DOCUMENT_GET_WITH_TENANT_ID = "/{tenantId}/{docType}/get";
+    public final static String TENANT_DOCUMENT_DELETE_WITH_TENANT_ID = "/{tenantId}/delete";
+    public final static String TENANT_DOCUMENT_UPDATE_WITH_TENANT_ID = "/{tenantId}/update";
+    public final static String TENANT_DOCUMENT_SAVE_WITH_TENANT_ID = "/{tenantId}/{docType}/save";
+
 
     //Complain
     public final static String COMPLAIN_CONTROLLER = "/housing/authority/v1/complain";
