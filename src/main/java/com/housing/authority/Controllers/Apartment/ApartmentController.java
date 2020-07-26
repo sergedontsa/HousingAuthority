@@ -10,6 +10,8 @@ import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.Apartment.ApartmentModelAssembler;
 import com.housing.authority.Tuples.Apartment.Apartment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -41,13 +43,13 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 @RestController
 @RequestMapping(value = Constant.APARTMENT_CONTROLLER)
 public class ApartmentController{
+    private static final Logger logger = LoggerFactory.getLogger(ApartmentController.class);
     @Autowired
     private final ApartmentRepository apartmentTupleRepository;
     @Autowired
     private final ApartmentModelAssembler apartmentModelAssembler;
     @Autowired
     private final BuildingRepository buildingRepository;
-
     @Autowired
     private final ApartmentDimensionRepository apartmentDimensionRepository;
     @Autowired
@@ -64,6 +66,7 @@ public class ApartmentController{
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Apartment>> readAll(){
+        logger.info("Read All: " + Constant.APARTMENT_GET_ALL);
         List<EntityModel<Apartment>> apartments = this.apartmentTupleRepository
                 .findAll()
                 .stream()
@@ -78,7 +81,7 @@ public class ApartmentController{
     @GetMapping(value = Constant.APARTMENT_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Apartment> readOne(@PathVariable String id){
-
+        logger.info("Read One: " + id);
         if (this.apartmentTupleRepository.findById(id).isPresent()) {
             return this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.findById(id).get());
         }else {
@@ -90,7 +93,8 @@ public class ApartmentController{
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
     public ResponseEntity<?> create(@PathVariable String buildingId,@RequestBody Apartment apartment){
-
+        logger.info("[Create]: Building Id" + buildingId);
+        logger.info("[Object]: " + apartment);
         if (!this.buildingRepository.existsById(buildingId)){
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
         }else {
@@ -105,13 +109,12 @@ public class ApartmentController{
                     .getRequiredLink(IanaLinkRelations.SELF)
                     .toUri()).body(entityModel);
         }
-
-
     }
 
     @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public ResponseEntity<?> delete(@PathVariable String apartmentId){
+        logger.warn("[DELETE]: ID" + apartmentId);
         if (!apartmentTupleRepository.existsById(apartmentId)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -126,7 +129,11 @@ public class ApartmentController{
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
     public ResponseEntity<?> update(@PathVariable String id, @PathVariable String buildingId, @RequestBody Apartment apartment){
+        logger.info("[UPDATE]: Apartment ID" + id );
+        logger.info("[UPDATE]: Building ID" + buildingId );
+        logger.info("[UPDATE]: Apartment" + apartment );
         if(!this.apartmentTupleRepository.existsById(id) || !this.buildingRepository.existsById(buildingId)){
+            logger.error("Resource Id: " + id+ " could not be found");
             throw new ResourceNotFoundException("Resource Id: " + id+ " could not be found");
         }else {
             apartment.setBuilding(this.buildingRepository.getOne(buildingId));
@@ -135,6 +142,7 @@ public class ApartmentController{
             apartment.setApartmentID(id);
 
             this.apartmentTupleRepository.save(apartment);
+            logger.info("[UPDATE]: Status" + HttpStatus.OK.toString());
             return new ResponseEntity<Apartment>(HttpStatus.OK);
         }
 

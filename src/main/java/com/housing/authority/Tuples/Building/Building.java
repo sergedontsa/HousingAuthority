@@ -6,10 +6,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
 import com.housing.authority.Tuples.Expensive.GeneralExpense;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "building")
@@ -68,14 +71,37 @@ public class Building extends AuditModel {
     @JsonManagedReference("apartment")
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Column(nullable = true)
-    private List<Apartment> apartments;
+    private Set<Apartment> apartments;
 
     @JsonBackReference("general_expense")
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Column(nullable = false)
-    private List<GeneralExpense> expens;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<GeneralExpense> expense;
+
+    @JsonManagedReference("building_document")
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<BuildingDocument> buildingDocument;
 
     ///-------------
+
+
+    public List<GeneralExpense> getExpense() {
+        return expense;
+    }
+
+    public void setExpense(List<GeneralExpense> expense) {
+        this.expense = expense;
+    }
+
+    public List<BuildingDocument> getBuildingDocument() {
+        return buildingDocument;
+    }
+
+    public void setBuildingDocument(List<BuildingDocument> buildingDocument) {
+        this.buildingDocument = buildingDocument;
+    }
 
     public String getBuildingId() {
         return buildingId;
@@ -181,13 +207,14 @@ public class Building extends AuditModel {
         this.buildingAddress = buildingAddress;
     }
 
-    public List<Apartment> getApartments() {
+    public Set<Apartment> getApartments() {
         return apartments;
     }
 
-    public void setApartments(List<Apartment> apartments) {
+    public void setApartments(Set<Apartment> apartments) {
         this.apartments = apartments;
     }
+
 
 
     ///-------------
@@ -211,10 +238,10 @@ public class Building extends AuditModel {
     }
 
     public List<GeneralExpense> getExpens() {
-        return expens;
+        return expense;
     }
 
     public void setExpens(List<GeneralExpense> expens) {
-        this.expens = expens;
+        this.expense = expens;
     }
 }

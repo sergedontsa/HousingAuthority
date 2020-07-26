@@ -51,6 +51,14 @@ public class Constant {
     public final static String BUILDING_UPDATE_WITH_ID = "/update/{buildingId}";
     public final static String BUILDING_SAVE = "/save";
 
+    //Building document
+    public final static String BUILDING_DOCUMENT_CONTROLLER = "/housing/authority/v1/building/doc";
+    public final static String BUILDING_DOCUMENT_GET_ALL = "get/all";
+    public final static String BUILDING_DOCUMENT_GET_WITH_BUILDING_ID = "/{buildingId}/{docType}/get";
+    public final static String BUILDING_DOCUMENT_DELETE_WITH_BUILDING_ID = "/{buildingId}/delete";
+    public final static String BUILDING_DOCUMENT_UPDATE_WITH_BUILDING_ID = "/{buildingId}/update";
+    public final static String BUILDING_DOCUMENT_SAVE_WITH_BUILDING_ID = "/{buildingId}/{docType}/save";
+
     //Users
     public final static String USER_CONTROLLER = "/housing/authority/v1/user";
     public final static String USER_GET_ALL = "get/all";

@@ -2,6 +2,7 @@ package com.housing.authority;
 
 
 import com.housing.authority.Tuples.Apartment.ApartmentDocument;
+import com.housing.authority.Tuples.Building.BuildingDocument;
 import com.housing.authority.Tuples.Employee.EmployeeDocument;
 import com.housing.authority.Tuples.Tenant.TenantDocument;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +16,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableJpaAuditing
-@EnableConfigurationProperties({EmployeeDocument.class, ApartmentDocument.class, TenantDocument.class})
+@EnableConfigurationProperties({
+        EmployeeDocument.class,
+        ApartmentDocument.class,
+        TenantDocument.class,
+        BuildingDocument.class
+})
 @ConfigurationPropertiesScan("com.housing.authority")
 public class HousingAuthorityApplication {
 

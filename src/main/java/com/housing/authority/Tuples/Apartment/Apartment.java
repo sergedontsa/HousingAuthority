@@ -7,7 +7,17 @@ import com.housing.authority.Tuples.Building.Building;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
@@ -236,5 +246,30 @@ public class Apartment extends AuditModel implements Serializable {
 
     public void setApartmentExpenses(List<ApartmentExpense> apartmentExpenses) {
         this.apartmentExpenses = apartmentExpenses;
+    }
+
+    @Override
+    public String toString() {
+        return "Apartment{" +
+                "apartmentID='" + apartmentID + '\'' +
+                ", buildingid='" + buildingid + '\'' +
+                ", dimensionid='" + dimensionid + '\'' +
+                ", feeid='" + feeid + '\'' +
+                ", apartment_number='" + apartment_number + '\'' +
+                ", numBedRoom=" + numBedRoom +
+                ", numLivingRoom=" + numLivingRoom +
+                ", numBathRoom=" + numBathRoom +
+                ", numKitchen=" + numKitchen +
+                ", numCloset=" + numCloset +
+                ", numWindows=" + numWindows +
+                ", isWithBath=" + isWithBath +
+                ", isWithWaterBoiler=" + isWithWaterBoiler +
+                ", status='" + status + '\'' +
+                ", building=" + building +
+                ", apartmentDimension=" + apartmentDimension +
+                ", apartmentFee=" + apartmentFee +
+                ", apartmentExpenses=" + apartmentExpenses +
+                ", apartmentDocuments=" + apartmentDocuments +
+                '}';
     }
 }
