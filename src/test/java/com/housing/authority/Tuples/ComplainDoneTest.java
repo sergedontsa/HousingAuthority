@@ -1,6 +1,6 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.ComplainDoneRepository;
+import com.housing.authority.Repository.Complain.ComplainDoneRepository;
 import com.housing.authority.Services.Service;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

@@ -1,7 +1,7 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.EmployeeRepository;
-import com.housing.authority.Repository.ScheduleRepository;
+import com.housing.authority.Repository.Employee.EmployeeRepository;
+import com.housing.authority.Repository.Schedule.ScheduleRepository;
 import com.housing.authority.Services.Service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

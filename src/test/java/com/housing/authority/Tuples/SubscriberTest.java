@@ -1,6 +1,6 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.SubscriberRepository;
+import com.housing.authority.Repository.Subscriber.SubscriberRepository;
 import com.housing.authority.Services.Service;
 import com.housing.authority.Tuples.User.Subscriber;
 import org.junit.jupiter.api.BeforeEach;

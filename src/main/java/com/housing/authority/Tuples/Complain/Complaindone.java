@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class Complaindone extends AuditModel implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private String id;
     @Basic
     @Column(name = "confirmationid", nullable = false, length = 50)
     private String confirmationid;
@@ -43,11 +43,11 @@ public class Complaindone extends AuditModel implements Serializable {
     //-------------
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

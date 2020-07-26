@@ -1,7 +1,6 @@
 package com.housing.authority.Controllers;
 
-import com.housing.authority.Repository.ServiceController;
-import com.housing.authority.Repository.SubscriberRepository;
+import com.housing.authority.Repository.Subscriber.SubscriberRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.SubscriberModelAssembler;
 import com.housing.authority.Tuples.User.Subscriber;
@@ -30,7 +29,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.SUBSCRIBER_CONTROLLER)
-public class SubscriberController implements ServiceController<Subscriber> {
+public class SubscriberController {
 
     @Autowired
     private final SubscriberRepository subscriberRepository;
@@ -42,7 +41,7 @@ public class SubscriberController implements ServiceController<Subscriber> {
         this.subscriberModelAssembler = subscriberModelAssembler;
     }
 
-    @Override
+
     @GetMapping(value = Constant.SUBSCRIBER_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Subscriber>> readAll() {
@@ -52,12 +51,7 @@ public class SubscriberController implements ServiceController<Subscriber> {
         return new CollectionModel<>(subscribers, linkTo(methodOn(SubscriberController.class).readAll()).withSelfRel());
     }
 
-    @Override
-    public EntityModel<Subscriber> readOne(String id) {
-        return null;
-    }
 
-    @Override
     @CrossOrigin
     @GetMapping(value = Constant.SUBSCRIBER_GET_WITH_ID, produces = Constant.PRODUCE)
     public EntityModel<Subscriber> readOne(@PathVariable int id) {
@@ -68,7 +62,6 @@ public class SubscriberController implements ServiceController<Subscriber> {
         }
     }
 
-    @Override
     @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = Constant.SUBSCRIBER_SAVE, consumes = Constant.CONSUMES)
@@ -82,7 +75,7 @@ public class SubscriberController implements ServiceController<Subscriber> {
         }
     }
 
-    @Override
+
     @CrossOrigin
     @PatchMapping(path = Constant.SUBSCRIBER_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
@@ -104,7 +97,7 @@ public class SubscriberController implements ServiceController<Subscriber> {
         return null;
     }
 
-    @Override
+
     @CrossOrigin
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.SUBSCRIBER_DELETE_WITH_ID)

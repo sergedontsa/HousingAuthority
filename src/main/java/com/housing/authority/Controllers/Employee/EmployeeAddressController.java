@@ -1,8 +1,8 @@
 package com.housing.authority.Controllers.Employee;
 
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.EmployeeAddressRepository;
-import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.Employee.EmployeeAddressRepository;
+import com.housing.authority.Repository.Employee.EmployeeRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.EmployeeAddressModelAssembler;
 

@@ -1,6 +1,6 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.Employee.EmployeeRepository;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.Services.Service;
 import com.housing.authority.Tuples.Employee.Employee;

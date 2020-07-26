@@ -1,6 +1,6 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.PersonInformationRepository;
+import com.housing.authority.Repository.PersonInformation.PersonInformationRepository;
 import com.housing.authority.Services.Service;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

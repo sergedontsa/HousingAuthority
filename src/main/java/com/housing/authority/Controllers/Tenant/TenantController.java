@@ -3,9 +3,9 @@ package com.housing.authority.Controllers.Tenant;
 import com.housing.authority.Enum.ApartmentStatus;
 import com.housing.authority.Enum.TenantStatus;
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.ApartmentRepository;
-import com.housing.authority.Repository.BuildingRepository;
-import com.housing.authority.Repository.TenantRepository;
+import com.housing.authority.Repository.Apartment.ApartmentRepository;
+import com.housing.authority.Repository.Building.BuildingRepository;
+import com.housing.authority.Repository.Tenant.TenantRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.Tenant.TenantModelAssembler;
@@ -81,10 +81,10 @@ public class TenantController {
             throw new ResourceNotFoundException("APARTMENT ID" + apartmentid + " could not be found");
         }
 //        if (this.tenantRepository.findTenantByEmailAndPhoneNumber(tenant.getEmail(), tenant.getEmail()).isPresent()){
-//            throw new ResourceNotFoundException("Tenant with Email: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
+//            throw new ResourceNotFoundException("Tenant with Message: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
 //        }
         if (this.tenantRepository.checkIfTenantExist(tenant.getEmail(), tenant.getPhonenumber())){
-            throw new ResourceNotFoundException("Tenant with Email: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
+            throw new ResourceNotFoundException("Tenant with Message: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
         }
         if (this.apartmentRepository.findById(apartmentid).isPresent()){
                 if (this.apartmentRepository.findById(apartmentid).get().getStatus().equals(String.valueOf(ApartmentStatus.Occupied))) {

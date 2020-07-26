@@ -1,7 +1,6 @@
 package com.housing.authority.Controllers.Building;
 
-import com.housing.authority.Repository.BuildingRepository;
-import com.housing.authority.Repository.ServiceController;
+import com.housing.authority.Repository.Building.BuildingRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.BuildingModelAssembler;
@@ -31,7 +30,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.BUILDING_CONTROLLER)
-public class BuildingController implements ServiceController<Building> {
+public class BuildingController {
 
     @Autowired
     private final BuildingRepository buildingRepository;
@@ -43,7 +42,7 @@ public class BuildingController implements ServiceController<Building> {
         this.buildingModelAssembler = buildingModelAssembler;
     }
 
-    @Override
+
     @CrossOrigin
     @GetMapping(value = Constant.BUILDING_GET_ALL, produces = Constant.PRODUCE)
     public CollectionModel<EntityModel<Building>> readAll() {
@@ -55,7 +54,7 @@ public class BuildingController implements ServiceController<Building> {
         return new CollectionModel<>(buildings, linkTo(methodOn(BuildingController.class).readAll()).withSelfRel());
     }
 
-    @Override
+
     @GetMapping(value = Constant.BUILDING_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Building> readOne(@PathVariable String id) {
@@ -66,12 +65,7 @@ public class BuildingController implements ServiceController<Building> {
         }
     }
 
-    @Override
-    public EntityModel<Building> readOne(int id) {
-        return null;
-    }
 
-    @Override
     @CrossOrigin
     @PostMapping(value = Constant.BUILDING_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
@@ -87,7 +81,7 @@ public class BuildingController implements ServiceController<Building> {
 
     }
 
-    @Override
+
     @PatchMapping(path = Constant.BUILDING_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
@@ -103,7 +97,7 @@ public class BuildingController implements ServiceController<Building> {
 
     }
 
-    @Override
+
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.BUILDING_DELETE_WITH_ID)
     @CrossOrigin

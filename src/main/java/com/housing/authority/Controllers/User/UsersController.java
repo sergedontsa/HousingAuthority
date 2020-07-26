@@ -1,7 +1,6 @@
 package com.housing.authority.Controllers.User;
 
-import com.housing.authority.Repository.ServiceController;
-import com.housing.authority.Repository.UserRepository;
+import com.housing.authority.Repository.User.UserRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.UserModelAssembler;
 import com.housing.authority.Tuples.User.Users;
@@ -31,7 +30,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.USER_CONTROLLER)
-public class UsersController implements ServiceController<Users> {
+public class UsersController {
 
     @Autowired
     private final UserRepository userRepository;
@@ -43,7 +42,7 @@ public class UsersController implements ServiceController<Users> {
         this.userModelAssembler = userModelAssembler;
     }
 
-    @Override
+
     @GetMapping(value = Constant.USER_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Users>> readAll() {
@@ -53,7 +52,7 @@ public class UsersController implements ServiceController<Users> {
 
     }
 
-    @Override
+
     @CrossOrigin
     @GetMapping(value = Constant.USER_GET_WITH_ID, produces = Constant.PRODUCE)
     public EntityModel<Users> readOne(@PathVariable String id) {
@@ -64,19 +63,6 @@ public class UsersController implements ServiceController<Users> {
         }
     }
 
-    /**
-     * In case the entity is referred with the id with type integer
-     * Return the entity with id if found in the  server
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Override
-    public EntityModel<Users> readOne(int id) {
-        return null;
-    }
-
-    @Override
     @CrossOrigin
     @PostMapping(value = Constant.USER_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
@@ -94,7 +80,7 @@ public class UsersController implements ServiceController<Users> {
         }
     }
 
-    @Override
+
     @PatchMapping(path = Constant.USER_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
@@ -115,7 +101,7 @@ public class UsersController implements ServiceController<Users> {
         }
     }
 
-    @Override
+
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.USER_DELETE_WITH_ID)
     @CrossOrigin
