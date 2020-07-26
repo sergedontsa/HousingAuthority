@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Table(name = "general_expense")
 public class GeneralExpense extends AuditModel implements Serializable {
     @Id
-    @Column(name = "expenseId", nullable = false, length = 50)
+    @Column(name = "expenseid", nullable = false, length = 50)
     private String expenseId;
     @Basic
     @Column(name = "buildingid", insertable = false, updatable = false)
