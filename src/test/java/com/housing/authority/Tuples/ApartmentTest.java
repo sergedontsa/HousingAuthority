@@ -1,7 +1,7 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.ApartmentRepository;
-import com.housing.authority.Repository.BuildingRepository;
+import com.housing.authority.Repository.Apartment.ApartmentRepository;
+import com.housing.authority.Repository.Building.BuildingRepository;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.Services.Service;
 import com.housing.authority.Tuples.Apartment.Apartment;

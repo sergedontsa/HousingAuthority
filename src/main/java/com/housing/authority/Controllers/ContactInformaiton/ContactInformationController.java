@@ -1,6 +1,6 @@
 package com.housing.authority.Controllers.ContactInformaiton;
 
-import com.housing.authority.Repository.ContactInformationRepository;
+import com.housing.authority.Repository.ContactInformation.ContactInformationRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.ContactInformation.ContactInformationAssembler;
 import com.housing.authority.Tuples.ContactInformation.ContactInformation;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 
 @RestController

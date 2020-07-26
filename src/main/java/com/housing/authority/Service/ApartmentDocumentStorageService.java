@@ -2,8 +2,8 @@ package com.housing.authority.Service;
 
 import com.housing.authority.Exception.DocumentStorageException;
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.ApartmentDocumentRepository;
-import com.housing.authority.Repository.ApartmentRepository;
+import com.housing.authority.Repository.Apartment.ApartmentDocumentRepository;
+import com.housing.authority.Repository.Apartment.ApartmentRepository;
 import com.housing.authority.Tuples.Apartment.ApartmentDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;

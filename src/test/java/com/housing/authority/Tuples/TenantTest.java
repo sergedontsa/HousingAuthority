@@ -1,6 +1,6 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Repository.TenantRepository;
+import com.housing.authority.Repository.Tenant.TenantRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;

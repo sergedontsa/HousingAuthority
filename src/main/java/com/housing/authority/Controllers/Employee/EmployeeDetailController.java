@@ -3,8 +3,8 @@ package com.housing.authority.Controllers.Employee;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.EmployeeDetailRepository;
-import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.Employee.EmployeeDetailRepository;
+import com.housing.authority.Repository.Employee.EmployeeRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.EmployeeDetailModelAssembler;
 import com.housing.authority.Tuples.Employee.EmployeeDetail;

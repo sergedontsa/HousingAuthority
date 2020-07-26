@@ -1,7 +1,6 @@
 package com.housing.authority.Controllers.Complain;
 
-import com.housing.authority.Repository.ComplainRepository;
-import com.housing.authority.Repository.ServiceController;
+import com.housing.authority.Repository.Complain.ComplainRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.ComplainModelAssembler;
@@ -31,7 +30,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.COMPLAIN_CONTROLLER)
-public class ComplainController implements ServiceController<Complain> {
+public class ComplainController {
 
     @Autowired
     private final ComplainRepository complainRepository;
@@ -43,12 +42,7 @@ public class ComplainController implements ServiceController<Complain> {
         this.complainModelAssembler = complainModelAssembler;
     }
 
-    /**
-     * This method return the collection of all entity
-     *
-     * @return the collection
-     */
-    @Override
+
     @GetMapping(value = Constant.COMPLAIN_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<Complain>> readAll() {
@@ -60,13 +54,7 @@ public class ComplainController implements ServiceController<Complain> {
         return new CollectionModel<>(complains, linkTo(methodOn(ComplainController.class).readAll()).withSelfRel());
     }
 
-    /**
-     * Return the entity with id if found in the  server
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Override
+
     @GetMapping(value = Constant.COMPLAIN_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Complain> readOne(@PathVariable String id) {
@@ -77,25 +65,6 @@ public class ComplainController implements ServiceController<Complain> {
         }
     }
 
-    /**
-     * In case the entity is referred with the id with type integer
-     * Return the entity with id if found in the  server
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Override
-    public EntityModel<Complain> readOne(int id) {
-        return null;
-    }
-
-    /**
-     * Create the new entity in server
-     *
-     * @param complain the entity
-     * @return the create entity
-     */
-    @Override
     @PostMapping(value = Constant.COMPLAIN_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
@@ -108,14 +77,6 @@ public class ComplainController implements ServiceController<Complain> {
 
     }
 
-    /**
-     * Update the entity in the server
-     *
-     * @param id       the id of the entity
-     * @param complain the updated data
-     * @return the updated one
-     */
-    @Override
     @PatchMapping(path = Constant.COMPLAIN_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
@@ -152,12 +113,7 @@ public class ComplainController implements ServiceController<Complain> {
         }
     }
 
-    /**
-     * Delete the value in the database
-     *
-     * @param id the id of the entity to updated
-     */
-    @Override
+
     @DeleteMapping(value = Constant.COMPLAIN_DELETE_WITH_ID)
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @CrossOrigin

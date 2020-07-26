@@ -1,8 +1,8 @@
 package com.housing.authority.Controllers.Apartment;
 
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.ApartmentDimensionRepository;
-import com.housing.authority.Repository.ApartmentRepository;
+import com.housing.authority.Repository.Apartment.ApartmentDimensionRepository;
+import com.housing.authority.Repository.Apartment.ApartmentRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.Apartment.ApartmentDimensionAssembler;
 import com.housing.authority.Tuples.Apartment.ApartmentDimension;

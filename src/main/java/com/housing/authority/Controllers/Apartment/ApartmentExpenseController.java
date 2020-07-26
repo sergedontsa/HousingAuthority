@@ -1,10 +1,10 @@
 package com.housing.authority.Controllers.Apartment;
 
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.ApartmentExpenseRepository;
-import com.housing.authority.Repository.ApartmentRepository;
-import com.housing.authority.Repository.BuildingRepository;
-import com.housing.authority.Repository.EmployeeRepository;
+import com.housing.authority.Repository.Apartment.ApartmentExpenseRepository;
+import com.housing.authority.Repository.Apartment.ApartmentRepository;
+import com.housing.authority.Repository.Building.BuildingRepository;
+import com.housing.authority.Repository.Employee.EmployeeRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.Apartment.ApartmentExpenseAssembler;

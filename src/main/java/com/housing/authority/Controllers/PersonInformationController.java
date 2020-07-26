@@ -1,7 +1,6 @@
 package com.housing.authority.Controllers;
 
-import com.housing.authority.Repository.PersonInformationRepository;
-import com.housing.authority.Repository.ServiceController;
+import com.housing.authority.Repository.PersonInformation.PersonInformationRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.IDGenerator;
 import com.housing.authority.TupleAssembler.PersonInformationModelAssembler;
@@ -32,7 +31,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.PERSONAL_INFORMATION_CONTROLLER)
-public class PersonInformationController implements ServiceController<Personinformation> {
+public class PersonInformationController {
 
     @Autowired
     private final PersonInformationRepository personInformationRepository;
@@ -50,7 +49,6 @@ public class PersonInformationController implements ServiceController<Personinfo
      */
     @GetMapping(value = Constant.PERSONAL_INFORMATION_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
-    @Override
     public CollectionModel<EntityModel<Personinformation>> readAll(){
        List<EntityModel<Personinformation>> personInformations = this.personInformationRepository.findAll().stream()
                .map(this.personInformationModelAssembler::toModel)
@@ -62,7 +60,6 @@ public class PersonInformationController implements ServiceController<Personinfo
      * @param id the id of the entity
      * @return the entity
      */
-    @Override
     @GetMapping(value = Constant.PERSONAL_INFORMATION_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Personinformation> readOne(@PathVariable String id) {
@@ -80,7 +77,7 @@ public class PersonInformationController implements ServiceController<Personinfo
      * @param id the id of the entity
      * @return the entity
      */
-    @Override
+
     public EntityModel<Personinformation> readOne(int id) {
         return null;
     }
@@ -90,7 +87,7 @@ public class PersonInformationController implements ServiceController<Personinfo
      * Delete the value in the database
      * @param id the id of the entity to updated
      */
-    @Override
+
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @DeleteMapping(value = Constant.PERSONAL_INFORMATION_DELETE_WITH_ID)
     @CrossOrigin
@@ -107,7 +104,7 @@ public class PersonInformationController implements ServiceController<Personinfo
      * @param personinformation the updated data
      * @return the updated one
      */
-    @Override
+
     @PatchMapping(path = Constant.PERSONAL_INFORMATION_UPDATE_WITH_ID, consumes = Constant.CONSUMES, produces = Constant.PRODUCE)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin
@@ -138,7 +135,7 @@ public class PersonInformationController implements ServiceController<Personinfo
      * @param personinformation the entity
      * @return the create entity
      */
-    @Override
+
     @PostMapping(value = Constant.PERSONAL_INFORMATION_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@org.jetbrains.annotations.NotNull @RequestBody Personinformation personinformation){

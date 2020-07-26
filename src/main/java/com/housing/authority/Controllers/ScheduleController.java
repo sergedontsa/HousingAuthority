@@ -1,8 +1,7 @@
 package com.housing.authority.Controllers;
 
-import com.housing.authority.Repository.EmployeeRepository;
-import com.housing.authority.Repository.ScheduleRepository;
-import com.housing.authority.Repository.ServiceController;
+import com.housing.authority.Repository.Employee.EmployeeRepository;
+import com.housing.authority.Repository.Schedule.ScheduleRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.Resources.Utilities;
 import com.housing.authority.TupleAssembler.ScheduleModelAssembler;
@@ -32,7 +31,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.SCHEDULE_CONTROLLER)
-public class ScheduleController implements ServiceController<Schedule> {
+public class ScheduleController {
 
     @Autowired
     private final ScheduleModelAssembler scheduleModelAssembler;
@@ -52,7 +51,7 @@ public class ScheduleController implements ServiceController<Schedule> {
      *
      * @return the collection
      */
-    @Override
+
     @CrossOrigin
     @GetMapping(value = Constant.SCHEDULE_GET_ALL, produces = Constant.PRODUCE)
     public CollectionModel<EntityModel<Schedule>> readAll() {
@@ -67,7 +66,7 @@ public class ScheduleController implements ServiceController<Schedule> {
      * @param id the id of the entity
      * @return the entity
      */
-    @Override
+
     @CrossOrigin
     @GetMapping(value = Constant.SCHEDULE_GET_WITH_ID, produces = Constant.PRODUCE)
     public EntityModel<Schedule> readOne(@PathVariable String id) {
@@ -85,7 +84,7 @@ public class ScheduleController implements ServiceController<Schedule> {
      * @param id the id of the entity
      * @return the entity
      */
-    @Override
+
     @CrossOrigin
     public EntityModel<Schedule> readOne(int id) {
         return null;
@@ -98,7 +97,7 @@ public class ScheduleController implements ServiceController<Schedule> {
      * @return the create entity
      */
 
-    @Override
+
     @CrossOrigin
     @PostMapping(value = Constant.SCHEDULE_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
@@ -137,7 +136,7 @@ public class ScheduleController implements ServiceController<Schedule> {
      * @param schedule the updated data
      * @return the updated one
      */
-    @Override
+
     @CrossOrigin
     public Object update(@PathVariable String id, @RequestBody Schedule schedule) {
         return null;
@@ -148,7 +147,7 @@ public class ScheduleController implements ServiceController<Schedule> {
      *
      * @param id the id of the entity to updated
      */
-    @Override
+
     @CrossOrigin
     public void delete(@PathVariable String id) {
 

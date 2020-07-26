@@ -2,8 +2,8 @@ package com.housing.authority.Controllers.Building;
 
 
 import com.housing.authority.Exception.ResourceNotFoundException;
-import com.housing.authority.Repository.BuildingAddressRepository;
-import com.housing.authority.Repository.BuildingRepository;
+import com.housing.authority.Repository.Building.BuildingAddressRepository;
+import com.housing.authority.Repository.Building.BuildingRepository;
 import com.housing.authority.Resources.Constant;
 import com.housing.authority.TupleAssembler.BuildingAddressModelAssembler;
 import com.housing.authority.Tuples.Building.BuildingAddress;
