@@ -1,0 +1,6 @@
+
+okta:
+  oauth2:
+    issuer: https://dev-992551.okta.com/oauth2/default
+    client-id: 0oan1r6p7omRICakw4x6
+    client-secret: gxThupRKP6f2cOcyKaX1Sry2zCdR8Bo9Ea1Hos0J

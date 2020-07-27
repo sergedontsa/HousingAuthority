@@ -18,6 +18,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 
 @RestController
 @RequestMapping(value = Constant.APARTMENT_CONTROLLER)
+@PreAuthorize("isAuthenticated()")
 public class ApartmentController{
     private static final Logger logger = LoggerFactory.getLogger(ApartmentController.class);
     @Autowired
@@ -65,6 +67,7 @@ public class ApartmentController{
 
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
+    @PreAuthorize("permitAll()")
     public CollectionModel<EntityModel<Apartment>> readAll(){
         logger.info("Read All: " + Constant.APARTMENT_GET_ALL);
         List<EntityModel<Apartment>> apartments = this.apartmentTupleRepository

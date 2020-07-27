@@ -21,6 +21,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageType;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import javax.jms.ConnectionFactory;
 
@@ -35,6 +36,7 @@ import javax.jms.ConnectionFactory;
 })
 @ConfigurationPropertiesScan("com.housing.authority")
 @EnableJms
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class HousingAuthorityApplication {
 
 
