@@ -1,7 +1,5 @@
 package com.housing.authority.Tuples.Tenant;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Apartment.Apartment;
@@ -75,7 +73,6 @@ public class Tenant extends AuditModel {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<TenantDocument> tenantDocuments;
 
-    //-------------------
 
 
     public List<TenantDocument> getTenantDocuments() {

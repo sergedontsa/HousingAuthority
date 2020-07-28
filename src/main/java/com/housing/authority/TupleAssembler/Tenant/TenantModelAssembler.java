@@ -14,6 +14,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 public class TenantModelAssembler implements RepresentationModelAssembler<Tenant, EntityModel<Tenant>> {
 
 
+
     @Override
     public EntityModel<Tenant> toModel(Tenant entity) {
         return new EntityModel<>(entity,

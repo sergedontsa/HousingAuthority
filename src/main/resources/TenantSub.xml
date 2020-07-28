@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.housing.authority.Tuples.Tenant.TenantSub">
+        <table name="tenant_sub" schema="housingauthority" catalog=""/>
+        <attributes>
+            <id name="tenantid">
+                <column name="tenantid" length="50"/>
+            </id>
+            <basic name="buildingid">
+                <column name="buildingid" length="50"/>
+            </basic>
+            <basic name="firstname">
+                <column name="firstname" length="50"/>
+            </basic>
+            <basic name="middlename">
+                <column name="middlename" nullable="false" length="50"/>
+            </basic>
+            <basic name="lastname">
+                <column name="lastname" length="50"/>
+            </basic>
+            <basic name="email">
+                <column name="email" length="50"/>
+            </basic>
+            <basic name="phonenumber">
+                <column name="phonenumber" length="50"/>
+            </basic>
+            <basic name="price">
+                <column name="price" length="20"/>
+            </basic>
+            <basic name="profession">
+                <column name="profession" length="50"/>
+            </basic>
+            <basic name="deposite">
+                <column name="deposite" nullable="false" length="50"/>
+            </basic>
+            <basic name="status">
+                <column name="status" length="20"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

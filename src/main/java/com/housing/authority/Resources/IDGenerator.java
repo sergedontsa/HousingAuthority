@@ -57,6 +57,15 @@ public class IDGenerator {
 
         return "HAT"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(4);
     }
+    public static String TENANT__SUB_ID(){
+        try {
+            Thread.sleep(100);
+        }catch (InterruptedException exception){
+            exception.printStackTrace();
+        }
+
+        return "SUB"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,3)+getSignature(4);
+    }
     public static String APARTMENT_EXPENSE_ID(){
         try {
             Thread.sleep(100);
