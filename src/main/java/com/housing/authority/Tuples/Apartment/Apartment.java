@@ -6,6 +6,7 @@ import com.housing.authority.AuditModel.AuditModel;
 import com.housing.authority.Tuples.Building.Building;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "apartment")
-public class Apartment extends AuditModel implements Serializable {
+public class Apartment extends AuditModel implements Serializable, Comparable {
 
     @Id
     @Column(name = "apartmentid", nullable = false, length = 50)
@@ -271,5 +272,10 @@ public class Apartment extends AuditModel implements Serializable {
                 ", apartmentExpenses=" + apartmentExpenses +
                 ", apartmentDocuments=" + apartmentDocuments +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NotNull Object o) {
+        return 0;
     }
 }

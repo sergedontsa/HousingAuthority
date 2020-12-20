@@ -28,6 +28,9 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
+/**
+ * This class control the apartment dimension
+ */
 @RestController
 @RequestMapping(value = Constant.APARTMENT_DIMENSION_CONTROLLER)
 public class ApartmentDimensionController {
@@ -39,12 +42,22 @@ public class ApartmentDimensionController {
     @Autowired
     private final ApartmentRepository apartmentRepository;
 
+    /**
+     * The constructor
+     * @param apartmentDimensionRepository dimension repository
+     * @param apartmentDimensionAssembler dimension assembler
+     * @param apartmentRepository apartment repository
+     */
     public ApartmentDimensionController(ApartmentDimensionRepository apartmentDimensionRepository, ApartmentDimensionAssembler apartmentDimensionAssembler, ApartmentRepository apartmentRepository) {
         this.apartmentDimensionAssembler = apartmentDimensionAssembler;
         this.apartmentDimensionRepository = apartmentDimensionRepository;
         this.apartmentRepository = apartmentRepository;
     }
 
+    /**
+     * Read all dimension
+     * @return all dimension
+     */
     @GetMapping(value = Constant.APARTMENT_DIMENSION_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     public CollectionModel<EntityModel<ApartmentDimension>> readAll(){
@@ -60,6 +73,11 @@ public class ApartmentDimensionController {
         .withSelfRel());
     }
 
+    /**
+     * Read one dimension
+     * @param apartmentId apartment id
+     * @return dimension
+     */
     @GetMapping(value = Constant.APARTMENT_DIMENSION_GET_WITH_APARTMENT_ID)
     @CrossOrigin
     public EntityModel<ApartmentDimension> readOne(@PathVariable String apartmentId){
@@ -69,6 +87,12 @@ public class ApartmentDimensionController {
         return this.apartmentDimensionAssembler.toModel(apartmentDimension);
     }
 
+    /**
+     * Creat one
+     * @param apartmentId apartment id
+     * @param dimension dimension
+     * @return return response
+     */
     @PostMapping(value = Constant.APARTMENT_DIMENSION_SAVE_WITH_APARTMENT_ID, consumes = Constant.CONSUMES)
     @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
@@ -84,6 +108,12 @@ public class ApartmentDimensionController {
         .toUri()).body(entityModel);
     }
 
+    /**
+     * Update dimension
+     * @param apartmentId apartment id
+     * @param apartmentDimension dimension
+     * @return response
+     */
     @PatchMapping(path = Constant.APARTMENT_DIMENSION_UPDATE_WITH_APARTMENT_ID, consumes = Constant.CONSUMES)
     @CrossOrigin
     public ResponseEntity<?> update(@PathVariable String apartmentId, @RequestBody ApartmentDimension apartmentDimension){

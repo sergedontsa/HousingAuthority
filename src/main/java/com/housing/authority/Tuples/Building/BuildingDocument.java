@@ -4,7 +4,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.housing.authority.AuditModel.AuditModel;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @ConfigurationProperties(prefix = "file")
 @Entity
@@ -29,6 +36,7 @@ public class BuildingDocument extends AuditModel {
     @Basic
     @Column(name = "uploaddir", nullable = true, length = 500)
     private String uploadDir;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "buildingid")
     @JsonBackReference("building_document")

@@ -18,7 +18,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +56,14 @@ public class ApartmentController{
     @Autowired
     private final ApartmentFeeRepository apartmentFeeRepository;
 
+    /**
+     * Controller
+     * @param apartmentTupleRepository apartment repository
+     * @param apartmentModelAssembler assembler
+     * @param buildingRepository building repository
+     * @param apartmentDimensionRepository dimension repository
+     * @param apartmentFeeRepository fee repository
+     */
     public ApartmentController(ApartmentRepository apartmentTupleRepository, ApartmentModelAssembler apartmentModelAssembler, BuildingRepository buildingRepository, ApartmentDimensionRepository apartmentDimensionRepository, ApartmentFeeRepository apartmentFeeRepository) {
         this.apartmentTupleRepository = apartmentTupleRepository;
         this.apartmentModelAssembler = apartmentModelAssembler;
@@ -65,6 +72,10 @@ public class ApartmentController{
         this.apartmentFeeRepository = apartmentFeeRepository;
     }
 
+    /**
+     * Read all apartment
+     * @return all apartment
+     */
     @GetMapping(value = Constant.APARTMENT_GET_ALL, produces = Constant.PRODUCE)
     @CrossOrigin
     //@PreAuthorize("permitAll()")
@@ -73,6 +84,7 @@ public class ApartmentController{
         List<EntityModel<Apartment>> apartments = this.apartmentTupleRepository
                 .findAll()
                 .stream()
+                .sorted()
                 .map(this.apartmentModelAssembler::toModel).collect(Collectors.toList());
 
         return new CollectionModel<>(apartments, linkTo(methodOn(ApartmentController.class)
@@ -80,7 +92,11 @@ public class ApartmentController{
                 .withSelfRel());
     }
 
-
+    /**
+     * Read one Apartment
+     * @param id id
+     * @return the apartment
+     */
     @GetMapping(value = Constant.APARTMENT_GET_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public EntityModel<Apartment> readOne(@PathVariable String id){
@@ -92,6 +108,12 @@ public class ApartmentController{
         }
     }
 
+    /**
+     * Save one Apartment
+     * @param buildingId building id
+     * @param apartment apartment
+     * @return the saved entity
+     */
     @PostMapping(value = Constant.APARTMENT_SAVE, consumes = Constant.CONSUMES)
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
@@ -102,7 +124,7 @@ public class ApartmentController{
             throw new ResourceNotFoundException("BUILDING ID: " + buildingId+ " could not be found");
         }else {
             apartment.setApartmentID(IDGenerator.APARTMENT_ID());
-            apartment.setStatus(String.valueOf(ApartmentStatus.Available));
+            apartment.setStatus(String.valueOf(ApartmentStatus.AVAILABLE));
 
             apartment.setBuilding(this.buildingRepository.getOne(buildingId));
             EntityModel<Apartment> entityModel = this.apartmentModelAssembler
@@ -114,6 +136,11 @@ public class ApartmentController{
         }
     }
 
+    /**
+     * Delete apartment
+     * @param apartmentId id
+     * @return response
+     */
     @DeleteMapping(value = Constant.APARTMENT_DELETE_WITH_ID, produces = Constant.PRODUCE)
     @CrossOrigin
     public ResponseEntity<?> delete(@PathVariable String apartmentId){
@@ -128,6 +155,13 @@ public class ApartmentController{
 
     }
 
+    /**
+     * Update apartment
+     * @param id id
+     * @param buildingId building id
+     * @param apartment apartment
+     * @return return the response
+     */
     @PatchMapping(path = Constant.APARTMENT_UPDATE_WITH_ID, consumes = Constant.CONSUMES)
     @ResponseStatus(code = HttpStatus.OK)
     @CrossOrigin

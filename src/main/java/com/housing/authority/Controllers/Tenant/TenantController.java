@@ -87,7 +87,7 @@ public class TenantController {
             throw new ResourceNotFoundException("Tenant with Message: " + tenant.getEmail() + " and Phone number: " + tenant.getPhonenumber() + " exist already");
         }
         if (this.apartmentRepository.findById(apartmentid).isPresent()){
-                if (this.apartmentRepository.findById(apartmentid).get().getStatus().equals(String.valueOf(ApartmentStatus.Occupied))) {
+                if (this.apartmentRepository.findById(apartmentid).get().getStatus().equals(String.valueOf(ApartmentStatus.BUSY))) {
                     throw  new ResourceNotFoundException("APARTMENT ID: " + apartmentid + " is occupied");
                 }
         }
@@ -98,7 +98,7 @@ public class TenantController {
             tenant.setApartment(this.apartmentRepository.getOne(apartmentid));
             tenant.setBuildingid(buildingId);
             tenant.setStatus(String.valueOf(TenantStatus.Pending));
-            apartment.setStatus(String.valueOf(ApartmentStatus.Occupied));
+            apartment.setStatus(String.valueOf(ApartmentStatus.BUSY));
             apartmentRepository.save(apartment);
 
 

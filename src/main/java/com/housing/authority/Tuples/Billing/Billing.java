@@ -1,7 +1,7 @@
 package com.housing.authority.Tuples.Billing;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.housing.authority.AuditModel.AuditModel;
+import com.housing.authority.AuditModel.*;
 import com.housing.authority.Tuples.Building.Building;
 import com.housing.authority.Tuples.Tenant.Tenant;
 import org.hibernate.annotations.OnDelete;
@@ -16,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -93,6 +93,9 @@ public class Billing extends AuditModel implements Serializable {
     }
 
     public void setBuildingid(String buildingid) {
+
+
+
         this.buildingid = buildingid;
     }
 

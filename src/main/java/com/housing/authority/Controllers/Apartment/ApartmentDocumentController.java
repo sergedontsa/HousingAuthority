@@ -21,12 +21,24 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * This Controller handle the file for an apartment
+ * such as picture, document, inspection...
+ */
+
 @RestController
 @RequestMapping(value = Constant.APARTMENT_DOCUMENT_CONTROLLER)
 public class ApartmentDocumentController {
     @Autowired
     private ApartmentDocumentStorageService apartmentDocumentStorageService;
 
+    /**
+     * Upload file
+     * @param file file
+     * @param apartmentId apartment id
+     * @param docType doc type
+     * @return document response
+     */
     @CrossOrigin
     @PostMapping(value = Constant.APARTMENT_DOCUMENT_SAVE_WITH_APARTMENT_ID)
     public DocumentResponse uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String apartmentId, @PathVariable String docType){
@@ -37,6 +49,14 @@ public class ApartmentDocumentController {
                 .toUriString();
         return new DocumentResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
+
+    /**
+     * Download file
+     * @param apartmentId apartment id
+     * @param docType doc type
+     * @param request request (HttpServlet)
+     * @return return response entity
+     */
 
     @GetMapping(value = Constant.APARTMENT_DOCUMENT_GET_WITH_APARTMENT_ID)
     public ResponseEntity<Resource> downloadFile(@PathVariable String apartmentId, @PathVariable String docType, HttpServletRequest request){
