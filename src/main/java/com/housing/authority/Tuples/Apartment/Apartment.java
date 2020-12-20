@@ -25,7 +25,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "apartment")
-public class Apartment extends AuditModel implements Serializable, Comparable {
+public class Apartment extends AuditModel implements Serializable, Comparable<Apartment> {
 
     @Id
     @Column(name = "apartmentid", nullable = false, length = 50)
@@ -274,8 +274,11 @@ public class Apartment extends AuditModel implements Serializable, Comparable {
                 '}';
     }
 
+
+
     @Override
-    public int compareTo(@NotNull Object o) {
+    public int compareTo(@NotNull Apartment o) {
+
         return 0;
     }
 }

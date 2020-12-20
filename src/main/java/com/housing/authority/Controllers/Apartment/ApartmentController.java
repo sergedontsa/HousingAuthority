@@ -86,7 +86,6 @@ public class ApartmentController{
                 .stream()
                 .sorted()
                 .map(this.apartmentModelAssembler::toModel).collect(Collectors.toList());
-
         return new CollectionModel<>(apartments, linkTo(methodOn(ApartmentController.class)
                 .readAll())
                 .withSelfRel());
