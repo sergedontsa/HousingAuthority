@@ -15,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.metho
 public class BuildingAddressModelAssembler implements RepresentationModelAssembler<BuildingAddress, EntityModel<BuildingAddress>> {
 
     @Override
-    public   EntityModel<BuildingAddress> toModel( BuildingAddress entity) {
+    public   EntityModel<BuildingAddress> toModel(BuildingAddress entity) {
         return new EntityModel<>(entity,
                 linkTo(methodOn(BuildingAddressController.class).readOne(entity.getBuildingid())).withSelfRel(),
                 linkTo(methodOn(BuildingAddressController.class).readAll()).withRel("buildingAddress"));

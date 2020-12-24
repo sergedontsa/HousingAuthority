@@ -33,7 +33,7 @@ public class Building extends AuditModel {
 
     @Basic
     @Column(name = "addressid", insertable = false, updatable = false)
-    private String addressid;
+    private Integer addressid;
 
     @Basic
     @Column(name = "numlevel")
@@ -74,7 +74,7 @@ public class Building extends AuditModel {
 
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "addressid")
-     private BuildingAddress buildingAddress;
+    private BuildingAddress buildingAddress;
 
 
     @JsonManagedReference("apartment")
@@ -118,14 +118,6 @@ public class Building extends AuditModel {
 
     public void setBuildingId(String buildingId) {
         this.buildingId = buildingId;
-    }
-
-    public String getAddressid() {
-        return addressid;
-    }
-
-    public void setAddressid(String addressid) {
-        this.addressid = addressid;
     }
 
     public int getNumLevel() {
@@ -252,5 +244,30 @@ public class Building extends AuditModel {
 
     public void setExpens(List<GeneralExpense> expens) {
         this.expense = expens;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Building{" +
+                       "buildingId='" + buildingId + '\'' +
+                       ", addressid=" + addressid +
+                       ", numLevel=" + numLevel +
+                       ", numBedRoom=" + numBedRoom +
+                       ", numBathRoom=" + numBathRoom +
+                       ", numLivingRoom=" + numLivingRoom +
+                       ", numKitchen=" + numKitchen +
+                       ", numDoor=" + numDoor +
+                       ", numWindows=" + numWindows +
+                       ", numApartment=" + numApartment +
+                       ", numStudio=" + numStudio +
+                       ", numParkingSpace=" + numParkingSpace +
+                       ", isWithPool=" + isWithPool +
+                       ", isWithElevator=" + isWithElevator +
+                       ", buildingAddress=" + buildingAddress +
+                       ", apartments=" + apartments +
+                       ", expense=" + expense +
+                       ", buildingDocument=" + buildingDocument +
+                       '}';
     }
 }

@@ -65,7 +65,7 @@ public class BuildingAddressController {
     public EntityModel<BuildingAddress> readOne(@PathVariable String buildingId) {
 
         if (isBuildingExist(buildingId)) {
-            return this.buildingAddressModelAssembler.toModel(this.buildingAddressRepository.getOne(buildingId));
+            return this.buildingAddressModelAssembler.toModel(this.buildingAddressRepository.queryBuildingAddressByBuildingId(buildingId));
         }else {
             throw new ResourceNotFoundException("Resource Id: " + buildingId + " could not be found");
         }
@@ -103,7 +103,7 @@ public class BuildingAddressController {
     }
     @CrossOrigin
     @DeleteMapping(value = Constant.BUILDING_ADDRESS_DELETE_WITH_BUILDING_ID)
-    public ResponseEntity<?> delete(@PathVariable String buildingId) {
+    public ResponseEntity<?> delete(@PathVariable int buildingId) {
         logger.warn("[DELETE ADDRESS] - BUILDING ID = " + buildingId);
         if (!buildingAddressRepository.existsById(buildingId)){
             logger.error("BUILDING ID: " + buildingId + " NOT FOUND");

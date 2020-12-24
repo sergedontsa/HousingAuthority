@@ -33,7 +33,7 @@ public class IDGenerator {
             e.printStackTrace();
         }
         return "HAB"+String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(5, 12)
-                +"-"+Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+                +Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
     }
 
