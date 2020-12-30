@@ -35,6 +35,10 @@ public class BuildingAddress extends AuditModel implements Serializable {
     @Column(name = "country", nullable = false, length = 50)
     private String country;
 
+
+
+
+
     //-------------------
 
 

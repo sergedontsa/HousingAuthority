@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,11 +83,12 @@ public class ApartmentController{
     @CrossOrigin
     public EntityModel<Apartment> readOne(@PathVariable String id){
         logger.info("Read One: " + id);
-        if (this.apartmentTupleRepository.findById(id).isPresent()) {
-            return this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.findById(id).get());
-        }else {
-            return null;
-        }
+            if (this.apartmentTupleRepository.findById(id).isPresent()) {
+                return this.apartmentModelAssembler.toModel(this.apartmentTupleRepository.findById(id).get());
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+
     }
 
     @PostMapping(value = Constant.APARTMENT_SAVE, consumes = Constant.CONSUMES)

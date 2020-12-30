@@ -13,42 +13,34 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PersonInformationTest implements Service {
     @Autowired
     PersonInformationRepository personInformationRepository;
 
-    @Override
+
     @Test
-    @Order(1)
     public void readAllTest() {
 
     }
 
-    @Override
+
     @Test
-    @Order(2)
     public void readOneTest() {
 
     }
 
-    @Override
     @Test
-    @Order(3)
     public void createTest() {
 
     }
 
-    @Override
     @Test
-    @Order(4)
     public void updateTest() {
 
     }
 
-    @Override
+
     @Test
-    @Order(5)
     public void deleteTest() {
 
     }
