@@ -3,13 +3,13 @@ package com.housing.authority.Tuples;
 
 import com.housing.authority.Enum.ApartmentStatus;
 import com.housing.authority.Resources.Constant;
-import com.housing.authority.Resources.IDGenerator;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 
@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -26,15 +24,12 @@ public class ApartmentTest {
 
     private Map<String, Object> sample_apartment;
     private String building_id_for_test;
-    private String sample_apartment_id;
+
 
     @BeforeAll
     public void init(){
         this.building_id_for_test =  "HAB-3275659-5";
         this.sample_apartment = new HashMap<>();
-        this.sample_apartment_id = IDGenerator.APARTMENT_ID();
-
-        sample_apartment.put("apartmentid", this.sample_apartment_id);
         sample_apartment.put("apartment_number", "1A");
         sample_apartment.put("numbedroom", 2);
         sample_apartment.put("numlivingroom", 2);
@@ -68,24 +63,19 @@ public class ApartmentTest {
         @DisplayName(">>Read One test")
         @Order(2)
         void testReadOne() throws ParseException {
-
-
-            String url = "http://localhost:1000/vertical/v1/apartment/get/APT-1529293-4";
-            Response response = RestAssured.get(url);
-            int code = response.getStatusCode();
-            JSONParser jsonParser = new JSONParser();
-            JSONObject object = (JSONObject) jsonParser.parse(response.body().asString());
-
-            assertAll(
-                    ()-> assertEquals(code, 200)
-                             );
+            String url = "http://localhost:1000/vertical/v1/apartment/get/{id}";
+            given().pathParam("id", "APT-1529293-4")
+                    .when().get(url)
+                    .then().statusCode(200)
+                    .log().all();
 
         }
     }
     @Nested class ReadAllTestClass{
         @Test
         void testReadAll(){
-            String url = "http://localhost:1000/vertical/v1/apartment/get/all";
+            String url = Constant.DOMAIN+Constant.APARTMENT_CONTROLLER+Constant.APARTMENT_GET_ALL;
+
             given()
                     .get(url)
                     .then()
@@ -97,10 +87,7 @@ public class ApartmentTest {
         String url = Constant.DOMAIN+Constant.APARTMENT_CONTROLLER+Constant.APARTMENT_DELETE_WITH_ID;
         @Test
         void testDelete(){
-            given().pathParam("apartmentId", ApartmentTest.this.sample_apartment_id)
-                    .delete(url)
-                    .then()
-                    .statusCode(404);
+
         }
     }
 
