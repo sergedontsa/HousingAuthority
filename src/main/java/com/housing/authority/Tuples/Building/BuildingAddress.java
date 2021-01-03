@@ -18,11 +18,19 @@ public class BuildingAddress {
     private Timestamp registerdate;
     private Timestamp lastupdate;
 
+<<<<<<< HEAD
     @Id
     @Column(name = "id")
     public Integer getId() {
         return id;
     }
+=======
+
+
+
+
+    //-------------------
+>>>>>>> serge-001
 
     public void setId(Integer id) {
         this.id = id;

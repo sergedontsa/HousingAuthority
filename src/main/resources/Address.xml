@@ -8,9 +8,7 @@
             <id name="id">
                 <column name="id" precision="11"/>
             </id>
-            <basic name="profileid">
-                <column name="profileid" length="50"/>
-            </basic>
+
             <basic name="number">
                 <column name="number" nullable="false" precision="20"/>
             </basic>
