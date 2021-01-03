@@ -31,6 +31,8 @@ public class Constant {
         return    String.valueOf(Calendar.getInstance().getTime());
     }
 
+    public final static String DOMAIN = "http://localhost:1000";
+
     public final static String HOUSING_CONTROLLER= "/vertical/v1";
 
     public final static String CONSUMES = MediaType.APPLICATION_JSON_VALUE;

@@ -84,12 +84,12 @@ public class Apartment extends AuditModel implements Serializable {
     private ApartmentFee apartmentFee;
 
     @JsonManagedReference("apartment_expense")
-    @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(nullable = true)
     private List<ApartmentExpense> apartmentExpenses;
 
     @JsonManagedReference("apartment_document")
-    @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(nullable = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ApartmentDocument> apartmentDocuments;
