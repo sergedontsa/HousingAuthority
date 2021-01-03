@@ -2,42 +2,45 @@ package com.housing.authority.Tuples;
 
 import com.housing.authority.Repository.Complain.ComplainDoneRepository;
 import com.housing.authority.Services.Service;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class ComplainDoneTest implements Service {
-    @Autowired
-    ComplainDoneRepository complainDoneRepository;
+@SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class ComplainDoneTest {
+    @Nested
+    class saveTestClass {
+        @Test
+        @DisplayName(">>Save One Test")
+        @Order(1)
+        void saveTest() {
 
-    @Test
-    public void readAllTest() {
-
+        }
     }
 
-    @Test
-    public void readOneTest() {
+    @Nested
+    class readOneTestClass{
+        @Test
+        @DisplayName(">>Read One Test")
+        @Order(2)
+        void testReadOne(){
+
+        }
 
     }
+    @Nested class ReadAllTestClass{
+        @Test
+        void testReadAll(){
 
-    @Test
-    public void createTest() {
-
+        }
     }
+    @Nested class DeleteTestClass{
+        @Test
+        void testDelete(){
 
-    @Test
-    public void updateTest() {
-
-    }
-
-    @Test
-    public void deleteTest() {
-
+        }
     }
 }

@@ -2,52 +2,47 @@ package com.housing.authority.Tuples;
 
 import com.housing.authority.Repository.Employee.EmployeeRepository;
 import com.housing.authority.Services.Service;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class EmployeeTest implements Service {
+@SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class EmployeeTest {
 
 
-    @BeforeEach
-    void init(){
+    @Nested
+    class saveTestClass {
+        @Test
+        @DisplayName(">>Save One Test")
+        @Order(1)
+        void saveTest() {
 
+        }
     }
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+    @Nested
+    class readOneTestClass{
+        @Test
+        @DisplayName(">>Read One Test")
+        @Order(2)
+        void testReadOne(){
 
-    @Test
-    public void readAllTest() {
-
-
-    }
-
-    @Test
-    public void readOneTest() {
+        }
 
     }
+    @Nested class ReadAllTestClass{
+        @Test
+        void testReadAll(){
 
-    @Test
-    public void createTest() {
-
+        }
     }
+    @Nested class DeleteTestClass{
+        @Test
+        void testDelete(){
 
-    @Test
-    public void updateTest() {
-
-    }
-
-    @Test
-    public void deleteTest() {
-
+        }
     }
 }

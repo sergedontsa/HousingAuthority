@@ -1,39 +1,62 @@
 package com.housing.authority.Tuples;
 
-import com.housing.authority.Services.Service;
+import org.junit.Before;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Map;
 
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class BillingTest{
 
-class BillingTest implements Service {
+    private Map<String, Object> sample_billing;
+    private String billing_id_for_test;
 
 
-    @Test
-    public void readAllTest() {
 
-    }
-
-    @Test
-    public void readOneTest() {
-
-    }
-
-    @Test
-    public void createTest() {
+    @Before
+    public void init(){
 
     }
 
-    @Test
-    public void updateTest() {
+    @Nested
+    class saveTestClass {
+        @Test
+        @DisplayName(">>Save One Test")
+        @Order(1)
+        void saveTest() {
 
+        }
     }
 
-    @Test
-    public void deleteTest() {
+    @Nested
+    class readOneTestClass{
+        @Test
+        @DisplayName(">>Read One Test")
+        @Order(2)
+        void testReadOne(){
+
+        }
 
     }
+    @Nested class ReadAllTestClass{
+        @Test
+        void testReadAll(){
+
+        }
+    }
+    @Nested class DeleteTestClass{
+        @Test
+        void testDelete(){
+
+        }
+    }
+
+
 }

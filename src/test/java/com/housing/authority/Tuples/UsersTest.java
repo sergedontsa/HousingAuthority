@@ -3,57 +3,52 @@ package com.housing.authority.Tuples;
 import com.housing.authority.Repository.User.UserRepository;
 import com.housing.authority.Services.Service;
 import com.housing.authority.Tuples.User.Users;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class UsersTest implements Service {
+@SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class UsersTest{
 
 
+    @Nested
+    class saveTestClass {
+        @Test
+        @DisplayName(">>Save One Test")
+        @Order(1)
+        void saveTest() {
 
-    @BeforeEach
-    void init(){
-
+        }
     }
 
-    @Autowired
-    UserRepository userRepository;
+    @Nested
+    class readOneTestClass{
+        @Test
+        @DisplayName(">>Read One Test")
+        @Order(2)
+        void testReadOne(){
 
-    @Test
-    public void readAllTest() {
-        List<Users> users = this.userRepository.findAll();
-        assertThat(users).size().isGreaterThanOrEqualTo(0);
-    }
-
-    @Test
-    public void readOneTest() {
-
+        }
 
     }
+    @Nested class ReadAllTestClass{
+        @Test
+        void testReadAll(){
 
-    @Test
-    public void createTest() {
-
-
+        }
     }
+    @Nested class DeleteTestClass{
+        @Test
+        void testDelete(){
 
-    @Test
-    public void updateTest() {
-
-    }
-
-
-    @Test
-    public void deleteTest() {
-
+        }
     }
 }

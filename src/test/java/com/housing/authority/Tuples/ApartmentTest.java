@@ -29,7 +29,7 @@ public class ApartmentTest {
     private String sample_apartment_id;
 
     @BeforeAll
-    public void setUp(){
+    public void init(){
         this.building_id_for_test =  "HAB-3275659-5";
         this.sample_apartment = new HashMap<>();
         this.sample_apartment_id = IDGenerator.APARTMENT_ID();

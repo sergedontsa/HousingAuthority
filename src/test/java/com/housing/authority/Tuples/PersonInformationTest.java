@@ -2,10 +2,7 @@ package com.housing.authority.Tuples;
 
 import com.housing.authority.Repository.PersonInformation.PersonInformationRepository;
 import com.housing.authority.Services.Service;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,35 +10,37 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class PersonInformationTest implements Service {
-    @Autowired
-    PersonInformationRepository personInformationRepository;
+class PersonInformationTest  {
+    @Nested
+    class saveTestClass {
+        @Test
+        @DisplayName(">>Save One Test")
+        @Order(1)
+        void saveTest() {
 
-
-    @Test
-    public void readAllTest() {
-
+        }
     }
 
+    @Nested
+    class readOneTestClass{
+        @Test
+        @DisplayName(">>Read One Test")
+        @Order(2)
+        void testReadOne(){
 
-    @Test
-    public void readOneTest() {
-
-    }
-
-    @Test
-    public void createTest() {
-
-    }
-
-    @Test
-    public void updateTest() {
+        }
 
     }
+    @Nested class ReadAllTestClass{
+        @Test
+        void testReadAll(){
 
+        }
+    }
+    @Nested class DeleteTestClass{
+        @Test
+        void testDelete(){
 
-    @Test
-    public void deleteTest() {
-
+        }
     }
 }
