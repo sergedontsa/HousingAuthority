@@ -70,23 +70,19 @@ public class ApartmentTest {
         void testReadOne() throws ParseException {
 
 
-            String url = "http://localhost:1000/vertical/v1/apartment/get/"+ ApartmentTest.this.sample_apartment.get("apartmentid");
+            String url = "http://localhost:1000/vertical/v1/apartment/get/APT-1529293-4";
             Response response = RestAssured.get(url);
             int code = response.getStatusCode();
             JSONParser jsonParser = new JSONParser();
             JSONObject object = (JSONObject) jsonParser.parse(response.body().asString());
 
             assertAll(
-                    ()-> assertEquals(code, 200),
-                    ()-> assertEquals("1A", object.get("apartment_number")),
-                    ()-> assertEquals(2, object.get("numbedroom")),
-                    ()-> assertEquals(10, object.get("numwindows")),
-                    ()-> assertEquals("Available", object.get("status"))
-            );
+                    ()-> assertEquals(code, 200)
+                             );
 
         }
     }
-    @Nested class ReadAll{
+    @Nested class ReadAllTestClass{
         @Test
         void testReadAll(){
             String url = "http://localhost:1000/vertical/v1/apartment/get/all";
@@ -94,9 +90,19 @@ public class ApartmentTest {
                     .get(url)
                     .then()
                     .statusCode(200);
-
         }
-
     }
+
+    @Nested class deleteTestClass{
+        String url = Constant.DOMAIN+Constant.APARTMENT_CONTROLLER+Constant.APARTMENT_DELETE_WITH_ID;
+        @Test
+        void testDelete(){
+            given().pathParam("apartmentId", ApartmentTest.this.sample_apartment_id)
+                    .delete(url)
+                    .then()
+                    .statusCode(404);
+        }
+    }
+
 
 }
