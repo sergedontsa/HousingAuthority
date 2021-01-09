@@ -102,7 +102,6 @@ public class ApartmentController{
         }else {
             apartment.setApartmentID(IDGenerator.APARTMENT_ID());
             apartment.setStatus(String.valueOf(ApartmentStatus.Available));
-
             apartment.setBuilding(this.buildingRepository.getOne(buildingId));
             EntityModel<Apartment> entityModel = this.apartmentModelAssembler
                     .toModel(this.apartmentTupleRepository.save(apartment));

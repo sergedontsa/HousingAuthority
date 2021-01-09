@@ -1,100 +1,78 @@
 package com.housing.authority.Tuples.Employee;
 
-
 import com.housing.authority.AuditModel.AuditModel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * By Serge Dontsa
- */
-
 @Entity
-@Table(name = "employee_detail", schema = "housingauthority", catalog = "",
-uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "phonenumber"),
-        @UniqueConstraint(columnNames = "idnumber")
-})
-
+@Table(name = "employee_detail", schema = "vertical", catalog = "")
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class EmployeeDetail extends AuditModel implements Serializable {
+    private Integer detailId;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String email;
+    private String dateOfBirth;
+    private String countryOfBirth;
+    private String cityOfBirth;
+    private String phoneNumber;
+
 
     @Id
-    @Basic
-    @Column(name = "employeeid", nullable = false, length = 50)
-    private String employeeid;
-
-    @Basic
-    @Column(name = "firstname", nullable = false, length = 50)
-    private String firstname;
-    @Basic
-    @Column(name = "middlename", nullable = true, length = 50)
-    private String middlename;
-    @Basic
-    @Column(name = "lastname", nullable = false, length = 50)
-    private String lastname;
-    @Basic
-    @Column(name = "email", nullable = false, length = 50)
-    private String email;
-    @Basic
-    @Column(name = "phonenumber", nullable = false, length = 50)
-    private String phonenumber;
-    @Basic
-    @Column(name = "gender", nullable = false, length = 50)
-    private String gender;
-
-    @Basic
-    @Column(name = "idtype", nullable = false, length = 50)
-    private String idtype;
-    @Basic
-    @Column(name = "idnumber", nullable = false, length = 50)
-    private String idnumber;
-    @Basic
-    @Column(name = "issuedate", nullable = false, length = 50)
-    private String issuedate;
-    @Basic
-    @Column(name = "expiredate", nullable = false, length = 50)
-    private String expiredate;
-    @Basic
-    @Column(name = "nationality", nullable = false, length = 50)
-    private String nationality;
-
-    //------------------------------------
-
-
-    public String getEmployeeid() {
-        return employeeid;
+    @Column(name = "detail_id", nullable = false)
+    public Integer getDetailId() {
+        return detailId;
     }
 
-    public void setEmployeeid(String employeeid) {
-        this.employeeid = employeeid;
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
     }
 
-    public String getFirstname() {
-        return firstname;
+    @Basic
+    @Column(name = "first_name", nullable = true, length = 50)
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getMiddlename() {
-        return middlename;
+    @Basic
+    @Column(name = "middle_name", nullable = true, length = 50)
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public String getLastname() {
-        return lastname;
+    @Basic
+    @Column(name = "last_name", nullable = true, length = 50)
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
+    @Basic
+    @Column(name = "email", nullable = true, length = 50)
     public String getEmail() {
         return email;
     }
@@ -103,59 +81,46 @@ public class EmployeeDetail extends AuditModel implements Serializable {
         this.email = email;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    @Basic
+    @Column(name = "date_of_birth", nullable = true, length = 50)
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getGender() {
-        return gender;
+    @Basic
+    @Column(name = "country_of_birth", nullable = true, length = 50)
+    public String getCountryOfBirth() {
+        return countryOfBirth;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setCountryOfBirth(String countryOfBirth) {
+        this.countryOfBirth = countryOfBirth;
     }
 
-    public String getIdtype() {
-        return idtype;
+    @Basic
+    @Column(name = "city_of_birth", nullable = true, length = 50)
+    public String getCityOfBirth() {
+        return cityOfBirth;
     }
 
-    public void setIdtype(String idtype) {
-        this.idtype = idtype;
+    public void setCityOfBirth(String cityOfBirth) {
+        this.cityOfBirth = cityOfBirth;
     }
 
-    public String getIdnumber() {
-        return idnumber;
+    @Basic
+    @Column(name = "phone_number", nullable = true, length = 50)
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setIdnumber(String idnumber) {
-        this.idnumber = idnumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getIssuedate() {
-        return issuedate;
-    }
 
-    public void setIssuedate(String issuedate) {
-        this.issuedate = issuedate;
-    }
 
-    public String getExpiredate() {
-        return expiredate;
-    }
-
-    public void setExpiredate(String expiredate) {
-        this.expiredate = expiredate;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
 }

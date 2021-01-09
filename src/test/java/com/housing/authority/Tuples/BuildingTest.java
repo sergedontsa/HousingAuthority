@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
 
 @SpringBootTest
@@ -66,7 +67,11 @@ class BuildingTest {
         @DisplayName(">>Read One Test")
         @Order(2)
         void testReadOne(){
-
+            String url_read = Constant.DOMAIN+Constant.BUILDING_CONTROLLER+Constant.BUILDING_GET_WITH_ID;
+            given().pathParam("id", BuildingTest.this.building_id_for_test_read)
+                    .when().get(url_read)
+                    .then().statusCode(200)
+                    .log().body();
         }
 
     }

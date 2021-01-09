@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.housing.authority.Tuples.Employee.EmployeeIdentification">
+        <table name="employee_identification" schema="vertical" catalog=""/>
+        <attributes>
+            <id name="identificationId">
+                <column name="identification_id" precision="10"/>
+            </id>
+            <basic name="employeeId">
+                <column name="employee_id" nullable="false" length="50"/>
+            </basic>
+            <basic name="identificationType">
+                <column name="identification_type" length="50"/>
+            </basic>
+            <basic name="issueDate">
+                <column name="issue_date" length="50"/>
+            </basic>
+            <basic name="expiredDate">
+                <column name="expired_date" length="50"/>
+            </basic>
+            <basic name="issueCountry">
+                <column name="issue_country" length="50"/>
+            </basic>
+            <basic name="registerdate">
+                <column name="registerdate" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="lastupdate">
+                <column name="lastupdate" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

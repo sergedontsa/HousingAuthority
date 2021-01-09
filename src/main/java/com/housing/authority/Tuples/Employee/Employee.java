@@ -1,55 +1,38 @@
 package com.housing.authority.Tuples.Employee;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.housing.authority.AuditModel.AuditModel;
-
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
-@Entity(name = "Employee")
-@Table(name = "employee")
+@Entity
+@Table(name = "employee", schema = "vertical", catalog = "")
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Employee extends AuditModel implements Serializable {
-    @Id
-    @Column(name = "employeeid", nullable = false, length = 50)
+
     private String employeeId;
-
-    @Basic
-    @Column(name = "addressid", insertable = false, updatable = false)
-    private String addressid;
-
-    @Basic
-    @Column(name = "detailid", insertable = false, updatable = false)
-    private String detailid;
-
-    @Basic
-    @Column(name = "department", nullable = true, length = 50)
     private String department;
-
-    @Basic
-    @Column(name = "role", nullable = false, length = 50)
     private String role;
-
-    @Basic
-    @Column(name = "status", nullable = false, length = 50)
     private String status;
 
+    @Basic
+    @Column(name = "id_address", insertable = false, updatable = false)
+    private Integer idAddress;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "addressid")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_address", referencedColumnName = "id_address")
     private EmployeeAddress employeeAddress;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "detailid")
-    private EmployeeDetail employeeDetail;
 
-    @JsonManagedReference("employee_document")
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @Column(nullable = true)
-    private List<EmployeeDocument> employeeDocuments;
-
+    @Id
+    @Column(name = "employee_id", nullable = false, length = 50)
     public String getEmployeeId() {
         return employeeId;
     }
@@ -58,22 +41,8 @@ public class Employee extends AuditModel implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public String getAddressid() {
-        return addressid;
-    }
-
-    public void setAddressid(String addressid) {
-        this.addressid = addressid;
-    }
-
-    public String getDetailid() {
-        return detailid;
-    }
-
-    public void setDetailid(String detailid) {
-        this.detailid = detailid;
-    }
-
+    @Basic
+    @Column(name = "department", nullable = true, length = 50)
     public String getDepartment() {
         return department;
     }
@@ -82,6 +51,8 @@ public class Employee extends AuditModel implements Serializable {
         this.department = department;
     }
 
+    @Basic
+    @Column(name = "role", nullable = true, length = 50)
     public String getRole() {
         return role;
     }
@@ -90,6 +61,8 @@ public class Employee extends AuditModel implements Serializable {
         this.role = role;
     }
 
+    @Basic
+    @Column(name = "status", nullable = true, length = 50)
     public String getStatus() {
         return status;
     }
@@ -98,27 +71,6 @@ public class Employee extends AuditModel implements Serializable {
         this.status = status;
     }
 
-    public EmployeeAddress getEmployeeAddress() {
-        return employeeAddress;
-    }
 
-    public void setEmployeeAddress(EmployeeAddress employeeAddress) {
-        this.employeeAddress = employeeAddress;
-    }
 
-    public EmployeeDetail getEmployeeDetail() {
-        return employeeDetail;
-    }
-
-    public void setEmployeeDetail(EmployeeDetail employeeDetail) {
-        this.employeeDetail = employeeDetail;
-    }
-
-    public List<EmployeeDocument> getEmployeeDocuments() {
-        return employeeDocuments;
-    }
-
-    public void setEmployeeDocuments(List<EmployeeDocument> employeeDocuments) {
-        this.employeeDocuments = employeeDocuments;
-    }
 }

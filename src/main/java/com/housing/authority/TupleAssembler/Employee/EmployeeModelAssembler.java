@@ -1,4 +1,4 @@
-package com.housing.authority.TupleAssembler;
+package com.housing.authority.TupleAssembler.Employee;
 
 import com.housing.authority.Controllers.Employee.EmployeeController;
 import com.housing.authority.Tuples.Employee.Employee;
@@ -12,15 +12,15 @@ import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.linkT
 import static org.springframework.hateoas.server.mvc.ControllerLinkBuilder.methodOn;
 
 @Component
-public class EmployeeModelAssembler implements RepresentationModelAssembler<Employee, EntityModel<Employee>> {
-
+public class EmployeeModelAssembler implements RepresentationModelAssembler<Employee, EntityModel<Employee>>{
 
 
     @Override
-    public   EntityModel<Employee> toModel( Employee employee) {
-      return new EntityModel<>(employee,
-              linkTo(methodOn(EmployeeController.class).readOne(employee.getEmployeeId())).withSelfRel(),
-              linkTo(methodOn(EmployeeController.class).readAll()).withRel("employee"));
+    public @NotNull EntityModel<Employee> toModel(@NotNull Employee entity) {
+        return new EntityModel<>(entity,
+                linkTo(methodOn(EmployeeController.class).readOneEmployee(entity.getEmployeeId())).withSelfRel(),
+                linkTo(methodOn(EmployeeController.class).readAllEmployee()).withRel("employees")
+                );
     }
 
     @Override
@@ -28,3 +28,4 @@ public class EmployeeModelAssembler implements RepresentationModelAssembler<Empl
         return null;
     }
 }
+

@@ -1,45 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
-        version="2.0">
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
 
     <entity class="com.housing.authority.Tuples.Employee.EmployeeDetail">
-        <table name="employee_detail" schema="housingauthority" catalog=""/>
+        <table name="employee_detail" schema="vertical" catalog=""/>
         <attributes>
-            <id name="id">
-                <column name="id" precision="11"/>
+            <id name="detailId">
+                <column name="detail_id" precision="10"/>
             </id>
-            <basic name="employeeid">
-                <column name="employeeid" length="50"/>
+            <basic name="firstName">
+                <column name="first_name" nullable="false" length="50"/>
             </basic>
-            <basic name="firstname">
-                <column name="firstname" length="50"/>
+            <basic name="middleName">
+                <column name="middle_name" nullable="false" length="50"/>
             </basic>
-            <basic name="middlename">
-                <column name="middlename" nullable="false" length="50"/>
-            </basic>
-            <basic name="lastname">
-                <column name="lastname" length="50"/>
+            <basic name="lastName">
+                <column name="last_name" nullable="false" length="50"/>
             </basic>
             <basic name="email">
-                <column name="email" length="50"/>
+                <column name="email" nullable="false" length="50"/>
             </basic>
-            <basic name="phonenumber">
-                <column name="phonenumber" length="50"/>
+            <basic name="dateOfBirth">
+                <column name="date_of_birth" nullable="false" length="50"/>
             </basic>
-            <basic name="idtype">
-                <column name="idtype" length="50"/>
+            <basic name="countryOfBirth">
+                <column name="country_of_birth" nullable="false" length="50"/>
             </basic>
-            <basic name="idnumber">
-                <column name="idnumber" length="50"/>
+            <basic name="cityOfBirth">
+                <column name="city_of_birth" nullable="false" length="50"/>
             </basic>
-            <basic name="issuedate">
-                <column name="issuedate" length="50"/>
+            <basic name="phoneNumber">
+                <column name="phone_number" nullable="false" length="50"/>
             </basic>
-            <basic name="expiredate">
-                <column name="expiredate" length="50"/>
+            <basic name="registerdate">
+                <column name="registerdate" nullable="false" precision="-1"/>
             </basic>
-            <basic name="nationality">
-                <column name="nationality" length="50"/>
+            <basic name="lastupdate">
+                <column name="lastupdate" nullable="false" precision="-1"/>
             </basic>
         </attributes>
     </entity>

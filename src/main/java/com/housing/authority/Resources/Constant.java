@@ -224,6 +224,14 @@ public class Constant {
     public final static String EMPLOYEE_DOCUMENT_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
     public final static String EMPLOYEE_DOCUMENT_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}/{docType}/save";
 
+    //Employee Identification
+    public final static String EMPLOYEE_IDENTIFICATION_CONTROLLER = "/vertical/v1/employee/iden";
+    public final static String EMPLOYEE_IDENTIFICATION_GET_ALL = "/get/all";
+    public final static String EMPLOYEE_IDENTIFICATION_GET_WITH_EMPLOYEE_ID = "/{employeeId}/get";
+    public final static String EMPLOYEE_IDENTIFICATION_DELETE_WITH_EMPLOYEE_ID = "/{employeeId}/delete";
+    public final static String EMPLOYEE_IDENTIFICATION_UPDATE_WITH_EMPLOYEE_ID = "/{employeeId}/update";
+    public final static String EMPLOYEE_IDENTIFICATION_SAVE_WITH_EMPLOYEE_ID = "/{employeeId}/save";
+
     //Contact Information
     public final static String CONTACT_INFORMATION_CONTROLLER = "/vertical/v1/contact/information";
     public final static String CONTACT_INFORMATION_GET_ALL = "/get/all";
